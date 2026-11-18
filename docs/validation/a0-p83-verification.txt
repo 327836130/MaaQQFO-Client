@@ -1,0 +1,8 @@
+historical samples 26..38: delta=(200, 0)
+historical samples 39..51: delta=(-200, 0)
+historical samples 52..64: delta=(200, 0)
+historical binary SHA256 matched: EasyHook32.dll
+historical binary SHA256 matched: p82.exe
+historical binary SHA256 matched: P82Hook.dll
+historical binary SHA256 matched: recovery.exe
+OFFLINE_PASS: historical evidence consistency only; no new game test

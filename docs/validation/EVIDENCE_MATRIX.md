@@ -1,0 +1,10 @@
+# Evidence matrix
+| Evidence | Result | Scope |
+|---|---|---|
+| docs/migration/legacy-assets.json | PARTIAL | SHA256 inventory of selected legacy file types, not functional validation |
+| 17.MaaQQFantasy/host_support/native_dm32/controller.cpp | PARTIAL | Source exists; review and build pending |
+| dotnet --info | BLOCKED_TECH | Runtime exists, SDK absent |
+All Windows live acceptance remains pending.
+
+| tools/verify_p83_evidence.py + a0-p83-verification.txt | OFFLINE_PASS | historical A/B/C positions and four binary SHA256 values; not new live acceptance |
+| MFAAvalonia/MFAAvalonia.csproj | VERIFIED | official tag runtime 5.14.3, binding 5.10.0, agent binary 1.2.0 |
