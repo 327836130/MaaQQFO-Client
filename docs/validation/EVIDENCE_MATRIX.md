@@ -8,3 +8,5 @@ All Windows live acceptance remains pending.
 
 | tools/verify_p83_evidence.py + a0-p83-verification.txt | OFFLINE_PASS | historical A/B/C positions and four binary SHA256 values; not new live acceptance |
 | MFAAvalonia/MFAAvalonia.csproj | VERIFIED | official tag runtime 5.14.3, binding 5.10.0, agent binary 1.2.0 |
+
+Desktop compilation: a1-desktop-build.log, exit 0, 34 warnings. Core configuration tests: a1-core-tests.log, 15/15 PASS. Neither proves live game or Agent protocol acceptance. SDK absence entry above is superseded by DEPENDENCY_BASELINE.md.

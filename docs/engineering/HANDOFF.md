@@ -8,3 +8,5 @@
 - Pending: finish build and lock files, audit C1/C2 and legacy sources, improve inventory coverage, establish GitHub fork/PR and CI.
 - No game injection, no persistent automation, no old repository changes.
 - Generated lock files/build log may remain uncommitted while build runs. No live PASS claimed.
+
+Latest: desktop build and core tests succeeded. 15 tests cover configuration/screenshot options only. CI file added but not run remotely. Locked build session pending; inspect docs/validation/a1-locked-build.log. Next primary task: native/runtime startup verification and portable GitHub CLI authentication check to establish fork/PR. No permission to create credentials or enable persistent automation.

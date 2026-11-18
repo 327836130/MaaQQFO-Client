@@ -1,0 +1,23 @@
+name: MaaQQFO Windows baseline
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.402
+      - name: Build locked Windows desktop
+        run: dotnet build MFAAvalonia.Desktop/MFAAvalonia.Desktop.csproj -c Release -r win-x64 -p:RestorePackagesWithLockFile=true -p:RestoreLockedMode=true
+      - name: Test configuration and screenshot options
+        run: dotnet test MFAAvalonia.Core.Tests/MFAAvalonia.Core.Tests.csproj -c Release --logger "trx;LogFileName=core.trx"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: baseline-test-results
+          path: '**/TestResults/*.trx'
