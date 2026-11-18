@@ -7,3 +7,5 @@ No client build, PR or live validation completed yet.
 2026-11-19: upstream v2.16.4 checkout succeeded on phase/A0-inventory. Runtime 5.14.3 / Binding 5.10.0 / AgentBinary 1.2.0 found in csproj. Baseline build running. P8.3 verifier confirms A/B/C deltas and all four historical binary hashes; see a0-p83-verification.txt. This is OFFLINE_PASS for evidence consistency only.
 
 2026-11-19: desktop build exit 0 (34 warnings); Core.Tests 15 passed, 0 failed/skipped. Added pull-request Windows build/test workflow and resolved package locks. Locked desktop build executing; native Agent and UI startup not yet accepted. Remote Fork creation still pending.
+
+2026-11-19: gh 2.105.0 downloaded from official release, SHA256 verified. auth status: not logged in. User login/Fork choice requested; local work continues. Inventory upgraded to all file types, streaming hashes, mutation detection, explicit errors and source/output separation. P8.3 and scene-object manifests generated successfully after fixing Python 3.8 compatibility.

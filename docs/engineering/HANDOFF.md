@@ -10,3 +10,5 @@
 - Generated lock files/build log may remain uncommitted while build runs. No live PASS claimed.
 
 Latest: desktop build and core tests succeeded. 15 tests cover configuration/screenshot options only. CI file added but not run remotely. Locked build session pending; inspect docs/validation/a1-locked-build.log. Next primary task: native/runtime startup verification and portable GitHub CLI authentication check to establish fork/PR. No permission to create credentials or enable persistent automation.
+
+Latest next action: review scene-assets.json raw snapshots and verify native library loading. gh is .tmp-sdk/gh/bin/gh.exe; auth status not logged in, user response pending. Locked build finished successfully (a1-locked-build.log). No active build sessions remain. New manifests cover all P8.3 and scene-object file types; original legacy-assets.json remains the earlier selected-file inventory.
