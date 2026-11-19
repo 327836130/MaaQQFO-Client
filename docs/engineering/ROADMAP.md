@@ -1,8 +1,8 @@
 # Roadmap
 | Stage | Status | Next acceptance gate |
 |---|---|---|
-| A0 | IN_PROGRESS | Complete source/license and C1/C2 audit; remote repository evidence |
-| A1 | IN_PROGRESS | Desktop startup, native/Agent smoke, clean build, Fork/PR and CI |
+| A0 | VERIFY_PENDING | Inventory and historical evidence review record ready. Independent PR review pending. |
+| A1 | IN_PROGRESS | Local baseline passed. Verify current PR CI, development archive and independent review. |
 | A2 | NOT_STARTED | Controller and coordinate contracts |
 | A3 | NOT_STARTED | Proto Input integration and native Click live test |
 | A4 | NOT_STARTED | Role selection and shared test pages |

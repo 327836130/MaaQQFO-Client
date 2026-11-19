@@ -22,6 +22,13 @@ jobs:
         run: python tools/native_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native
       - name: Test configuration and screenshot options
         run: dotnet test MFAAvalonia.Core.Tests/MFAAvalonia.Core.Tests.csproj -c Release --logger "trx;LogFileName=core.trx"
+      - name: Archive validated Windows development build
+        run: python tools/package_windows_baseline.py bin/AnyCPU/Release artifacts/baseline (git rev-parse HEAD)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64-development-build
+          path: artifacts/baseline/*
+          if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()
         with:

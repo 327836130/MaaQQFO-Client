@@ -1,0 +1,2 @@
+Checked MaaQQFO-win-x64-dev-98aa782438fb.zip SHA256 3920401caeaf2e9c918acc0600f5b6bca0a7ee07bc5b0716fc93fba399989110
+Fresh Git archive of 98aa782438fb8b1f5e7f74efbfd5d792dbfd9ea1, locked Windows x64 build exit 0, archive CRC verified.

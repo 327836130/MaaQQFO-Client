@@ -21,3 +21,5 @@ No client build, PR or live validation completed yet.
 2026-11-19: Historical C1 raw registry and three object records verified. PR #1 triggered Windows baseline Actions run 44520529533.
 
 2026-11-19: Verified 335 P3 archive hashes and ran D1 evidence verifier successfully. Updated migration inventory with actual sources, old MPE import limitation and D1 live-read denial.
+
+2026-11-19: A0/A1 review reports checked in. Built isolated Windows x64 development ZIP with embedded commit, verified its SHA256 and enabled CI artifact publication.

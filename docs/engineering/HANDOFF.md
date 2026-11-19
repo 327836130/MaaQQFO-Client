@@ -20,3 +20,5 @@ Latest checkpoint: origin 327836130/MaaQQFO-Client forks MaaXYZ/MFAAvalonia. Dra
 C1 raw verification complete. Resume by checking the latest PR #1 Windows run against current branch HEAD and completing legacy route/editor provenance review. Existing bootstrap files remain untracked.
 
 Legacy P3/D1 checkers passed. See docs/validation/a0-legacy-checks.txt. Remote Windows run 44520788470 observed in progress on 26c80f6. Check the latest head run after the updated evidence commit.
+
+Latest checkpoint: A0/A1 review records in docs/validation. Local development ZIP checksum is a1-dev-package.txt. Check the newest PR #1 Windows run for the development ZIP artifact and test results. Remaining gates are independent review and the A2 controller contract.
