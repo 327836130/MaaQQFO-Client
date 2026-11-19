@@ -16,3 +16,5 @@ Latest checkpoint: clean-source build of 0b1ab07 completed; result docs/validati
 Latest: C2-B raw verification now PASS (four historical captures), evidence a0-c2b-verification.txt. Next primary task C1 byte-level audit and GUI startup. Clean source build is already complete; do not rerun without changes requiring it. Existing remote unchanged, corrected Fork pending.
 
 Latest checkpoint: origin 327836130/MaaQQFO-Client forks MaaXYZ/MFAAvalonia. Draft PR #1 targets qqfo/stable-v2.16.4 from phase/A0-inventory. GUI startup evidence in docs/validation/a1-desktop-startup.md. Next primary task is check CI and finish C1 verification.
+
+C1 raw verification complete. Resume by checking the latest PR #1 Windows run against current branch HEAD and completing legacy route/editor provenance review. Existing bootstrap files remain untracked.

@@ -9,7 +9,7 @@ Updated 2026-11-19. All current QQ幻想 live acceptance remains pending.
 | Historical P8.3 | a0-p83-verification.txt; tools/verify_p83_evidence.py | OFFLINE_PASS: three historical position deltas and four binary hashes |
 | Historical C2-A | a0-c2a-verification.txt; tools/verify_c2a_evidence.py | OFFLINE_PASS: six snapshots, both passes checked against raw field bytes and Q membership |
 | Historical C2-B | a0-c2b-verification.txt; tools/verify_c2b_evidence.py | OFFLINE_PASS: four source hashes, Q slots, raw names/keys/vtables/types/positions/resource key and target presence/absence |
-| C1 | scene-assets.json | PARTIAL; raw registry located, detailed verification pending |
+| Historical C1 | a0-c1-verification.txt; tools/verify_c1_evidence.py | OFFLINE_PASS: three registry members, raw fields, local role and one named NPC |
 | Stable upstream | ../engineering/DEPENDENCY_BASELINE.md | v2.16.4 edfb87ac7a049a50b7921658cc206265c8b9e4e5; Runtime 5.14.3 / Binding 5.10.0 / AgentBinary 1.2.0 |
 | Build | a1-build.log; a1-desktop-build.log; a1-locked-build.log | OFFLINE_PASS: core, desktop and locked restore builds; upstream warnings remain |
 | Core tests | a1-core-tests.log | OFFLINE_PASS: 15 configuration/screenshot-option tests |

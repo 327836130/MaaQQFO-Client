@@ -17,3 +17,5 @@ No client build, PR or live validation completed yet.
 2026-11-19: C2-B four stages validated from original capture bytes and recorded SHA256. Q membership, names, query keys, kinds, vtables, world positions and item resource key match summaries. Target presence matches before/on-ground/prompt/post-pickup. Added verify_c2b_evidence.py and a0-c2b-verification.txt. Rebuilt evidence matrix to remove superseded SDK blocker and distinguish current gates.
 
 2026-11-19: Verified main window v2.16.4 and exit 0 on isolated desktop build. Set origin to verified MaaQQFO-Client Fork. Pushed stable baseline and phase branch, opened draft PR #1 via GitHub REST using the existing local Git credential after connector returned 403. No new credentials created.
+
+2026-11-19: Historical C1 raw registry and three object records verified. PR #1 triggered Windows baseline Actions run 44520529533.
