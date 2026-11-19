@@ -1,0 +1,78 @@
+  正在确定要还原的项目…
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1903: 包 "Tmds.DBus.Protocol" 0.21.2 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-xrw6-gwf8-vvr9
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Svg\Markdown.Avalonia.Svg.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\LazyStaticGenerator\LazyStaticGenerator.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\SukiUI\SukiUI.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\ColorTextBlock.Avalonia\ColorTextBlock.Avalonia.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Tight\Markdown.Avalonia.Tight.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.SyntaxHigh\Markdown.Avalonia.SyntaxHigh.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Math\Markdown.Avalonia.Math.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\ColorDocument.Avalonia\ColorDocument.Avalonia.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Html\Markdown.Avalonia.Html.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia\Markdown.Avalonia.csproj (用时 282 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj (用时 324 毫秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj (用时 324 毫秒)。
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1903: 包 "Tmds.DBus.Protocol" 0.21.2 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-xrw6-gwf8-vvr9
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+  SukiUI -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\SukiUI\bin\Release\net8.0\SukiUI.dll
+  LazyStaticGenerator -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\LazyStaticGenerator\bin\Release\netstandard2.0\LazyStaticGenerator.dll
+  ColorTextBlock.Avalonia -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\ColorTextBlock.Avalonia\bin\Release\net10.0\ColorTextBlock.Avalonia.dll
+  ColorDocument.Avalonia -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\ColorDocument.Avalonia\bin\Release\net10.0\ColorDocument.Avalonia.dll
+  Markdown.Avalonia.Tight -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Tight\bin\Release\net10.0\Markdown.Avalonia.dll
+  Markdown.Avalonia.Svg -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Svg\bin\Release\net10.0\Markdown.Avalonia.Svg.dll
+  Markdown.Avalonia.SyntaxHigh -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.SyntaxHigh\bin\Release\net10.0\Markdown.Avalonia.SyntaxHigh.dll
+F:\各类脚本\2025.12.08-qq幻想脚本开发\17.MaaQQFantasy\debug\dotnet-sdk\sdk\10.0.402\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.Sdk.targets(308,5): warning NETSDK1206: 找到了特定于版本或特定于发行版的运行时标识符: win7-x64。受影响的库: Packaging.Targets。在 .NET 8.0 及更高版本中，默认情况下找不到特定于版本和特定于发行版的运行时标识符的资产。有关详细信息，请参阅 https://aka.ms/dotnet/rid-usage。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Math\Markdown.Avalonia.Math.csproj]
+  Markdown.Avalonia.Math -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Math\bin\Release\net10.0\Markdown.Avalonia.Math.dll
+  Markdown.Avalonia.Html -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Html\bin\Release\net10.0\Markdown.Avalonia.Html.dll
+  Markdown.Avalonia -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia\bin\Release\net10.0\Markdown.Avalonia.Full.dll
+  MFAAvalonia -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\bin\Release\net10.0\win-x64\MFAAvalonia.Core.dll
+  MFAAvalonia.Desktop -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\bin\AnyCPU\Release\MFAAvalonia.dll
+
+已成功生成。
+
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1903: 包 "Tmds.DBus.Protocol" 0.21.2 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-xrw6-gwf8-vvr9
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Desktop\MFAAvalonia.Desktop.csproj : warning NU1903: 包 "Tmds.DBus.Protocol" 0.21.2 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-xrw6-gwf8-vvr9
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\17.MaaQQFantasy\debug\dotnet-sdk\sdk\10.0.402\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.Sdk.targets(308,5): warning NETSDK1206: 找到了特定于版本或特定于发行版的运行时标识符: win7-x64。受影响的库: Packaging.Targets。在 .NET 8.0 及更高版本中，默认情况下找不到特定于版本和特定于发行版的运行时标识符的资产。有关详细信息，请参阅 https://aka.ms/dotnet/rid-usage。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Math\Markdown.Avalonia.Math.csproj]
+    23 个警告
+    0 个错误
+
+已用时间 00:00:02.81

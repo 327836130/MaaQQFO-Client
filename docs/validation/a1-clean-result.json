@@ -1,0 +1,19 @@
+{
+  "commit": "0b1ab07656f10ec3d42bb225bc8b0426ba8120de",
+  "source": "F:\\各类脚本\\2025.12.08-qq幻想脚本开发\\22.MaaQQFO\\artifacts\\clean-ccbf79851f734eb691604ce872df18d5\\source",
+  "cache": "Existing user NuGet cache; no pre-existing bin/obj",
+  "checks": [
+    {
+      "name": "locked-desktop-build",
+      "exit": 0
+    },
+    {
+      "name": "core-tests",
+      "exit": 0
+    },
+    {
+      "name": "native-agent-smoke",
+      "exit": 0
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+before: hash, membership and raw fields consistent; target present=False
+on_ground: hash, membership and raw fields consistent; target present=True
+around_prompt: hash, membership and raw fields consistent; target present=False
+after_user_confirmed_pickup: hash, membership and raw fields consistent; target present=False
+OFFLINE_PASS: historical pickup evidence; exact removal time/identity permanence unproven

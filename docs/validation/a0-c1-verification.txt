@@ -1,0 +1,1 @@
+OFFLINE_PASS: 3 C1 members, raw fields, local role and NPC name match

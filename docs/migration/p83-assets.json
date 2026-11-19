@@ -1,0 +1,217 @@
+[
+  {
+    "path": "P8.3_坐标有效性验证报告.md",
+    "bytes": 5199,
+    "sha256": "7f01499b1b2d08ca7c1c3de4cc0dc316fee766d1520c21854525b070540ff3e6"
+  },
+  {
+    "path": "bin/EasyHook32.dll",
+    "bytes": 268800,
+    "sha256": "a10cf8f6ba7ce165b93621e7b22a533b5a55fd0df41c12c858535f65d3270e2c"
+  },
+  {
+    "path": "bin/P82Hook.dll",
+    "bytes": 131584,
+    "sha256": "8eae825f8a3ac1a9b14a50f2d5a41c7082d599d49d55c9f4d53b3b6fa48ffd12"
+  },
+  {
+    "path": "bin/p82.exe",
+    "bytes": 146944,
+    "sha256": "910b24174388d4bc3a6b93d2785db050837c971dbcdf260d0fab41ff49945129"
+  },
+  {
+    "path": "bin/recovery.exe",
+    "bytes": 148480,
+    "sha256": "bc7e9ba09caed8d091e55b996819defd4000ba878e6712dfceab61d4a82435fb"
+  },
+  {
+    "path": "build.cmd",
+    "bytes": 782,
+    "sha256": "e9455ebc97096a48a4031d4f5c56f46a2ceb4089929ed74354c133c87242b190"
+  },
+  {
+    "path": "licenses/EasyHook.nuspec",
+    "bytes": 2709,
+    "sha256": "cd88ee5f2aab343e737a205a2f43fad02178a734141115e77c9e0710e62bcc83"
+  },
+  {
+    "path": "licenses/EasyHook.txt",
+    "bytes": 1097,
+    "sha256": "8e158d4a00b6e6845d6c77cfc10c756ddd272162dd7b33f0c03799ff4c5f3e6f"
+  },
+  {
+    "path": "licenses/ProtoInput.txt",
+    "bytes": 1063,
+    "sha256": "d9edbbd78e3c0a983c6349cd43f2f97f451ddaf8e9eb7697fb876f82e75c08dd"
+  },
+  {
+    "path": "logs/game-1876-364062.jsonl",
+    "bytes": 48945,
+    "sha256": "a0c06f0c275192f2509f902af533c217e2fdacba6b0c0d43f88f4e8ce6c632bf"
+  },
+  {
+    "path": "logs/game-25656-243812.jsonl",
+    "bytes": 5642,
+    "sha256": "a91af81401a6177ccc8e514df7e7a1326d954caccb68944589dd30473e6dacec"
+  },
+  {
+    "path": "logs/hashes.json",
+    "bytes": 785,
+    "sha256": "6ad4d595f653a5565ef006a7cfc059b79982df1a2c40284496815d8c07438b0e"
+  },
+  {
+    "path": "logs/player-1876.jsonl",
+    "bytes": 134446,
+    "sha256": "5471a608a6377bae50cab1600b95e93cb05f70d1bb5afcf420fc8363beb99a27"
+  },
+  {
+    "path": "logs/player-25656.jsonl",
+    "bytes": 16720,
+    "sha256": "f70c25f564c4e75251bb2e47e0fa3b7126fdc0495e7e055aaaac78c6286a362e"
+  },
+  {
+    "path": "logs/recovery-child.jsonl",
+    "bytes": 832,
+    "sha256": "64daed8f06f66808660c845620eb617f66d9a391cf52830c0dffdba6df5477f3"
+  },
+  {
+    "path": "logs/recovery.jsonl",
+    "bytes": 970,
+    "sha256": "825a7529a863c78f4806d35f6f71cc2af4b95d3e02b9694797cd25584883b8e9"
+  },
+  {
+    "path": "logs/selftest-16640-361156.jsonl",
+    "bytes": 3513,
+    "sha256": "d6b8ab20daf4305d1d41ce1d78d9c877abddd9f6fb3e4cdea85421cecdd70e39"
+  },
+  {
+    "path": "logs/selftest-25688-981984.jsonl",
+    "bytes": 3504,
+    "sha256": "9aa5b8f18764766b624018d7de4fced6212f1a3f9b08e65b4b1c26e3720c835f"
+  },
+  {
+    "path": "selftest.cmd",
+    "bytes": 92,
+    "sha256": "d1dd9c8c6e9334881319107dad6f21d9d68c29dbffeb9d51a28af36717d26819"
+  },
+  {
+    "path": "src/common.h",
+    "bytes": 526,
+    "sha256": "1551dda6c2091c20f505f4fa1c4273f520ff3888b611ec10aca5c426bbd54f25"
+  },
+  {
+    "path": "src/hook.cpp",
+    "bytes": 6324,
+    "sha256": "3f40c4fca1bb6a68aa8af18506806a7b5a90a36ef5f09588cdeae2607a8e2acf"
+  },
+  {
+    "path": "src/main.cpp",
+    "bytes": 13104,
+    "sha256": "39a1a189d0841f67901e220796294ebf1ca89be836f1c0a1467577f416fcfec5"
+  },
+  {
+    "path": "src/recovery.cpp",
+    "bytes": 1362,
+    "sha256": "1ae9e9f9bd686860c91f2a2ad4a9e16922f2c8238197c73d5bca799fc54854ac"
+  },
+  {
+    "path": "src/upstream/FakeMouseKeyboard.cpp",
+    "bytes": 5124,
+    "sha256": "40f46caf353cea87cafe752669854b1751d9e4a75b4c45cf237efa4574dff501"
+  },
+  {
+    "path": "src/upstream/FakeMouseKeyboard.h",
+    "bytes": 2161,
+    "sha256": "bc75dd28b57132a816257f334dfab984c51f941fba4ca009959281d2436cd466"
+  },
+  {
+    "path": "src/upstream/FocusHook.cpp",
+    "bytes": 4199,
+    "sha256": "b3bb3ef446fa7e92dfc9e0c50c15c6c14057455ad94affc50a9872dc9ab90b96"
+  },
+  {
+    "path": "src/upstream/FocusHook.h",
+    "bytes": 1513,
+    "sha256": "fc829e26ef62564257e85967779df9ce3f1157ce51da2941bbb87e93468ab07e"
+  },
+  {
+    "path": "src/upstream/GetAsyncKeyStateHook.cpp",
+    "bytes": 558,
+    "sha256": "1b94a5c2f9eebede570253930fa08fc4c511832d4cc2633a9595b7649659b46c"
+  },
+  {
+    "path": "src/upstream/GetCursorPosHook.cpp",
+    "bytes": 618,
+    "sha256": "7defb62a9abe96e4d252b8498505ec5304550307f2507dd7ad7ba6935fa33ca7"
+  },
+  {
+    "path": "src/upstream/GetKeyStateHook.cpp",
+    "bytes": 409,
+    "sha256": "cbbb9ce708b71e27f9ca45e752a9aadaae8b92fb8f48ad4752f2fb0c8076d956"
+  },
+  {
+    "path": "src/upstream/HookInstaller.cpp",
+    "bytes": 2790,
+    "sha256": "91c27980e586a68a19f1a2af73762a96c9ea987f240f1cdd4233ee374c038fd6"
+  },
+  {
+    "path": "src/upstream/HwndSelector.h",
+    "bytes": 103,
+    "sha256": "d9446137c5a997f57a8931450910888d541f74d77a757213fdfff7006fe4ff81"
+  },
+  {
+    "path": "src/upstream/LICENSE",
+    "bytes": 1097,
+    "sha256": "8e158d4a00b6e6845d6c77cfc10c756ddd272162dd7b33f0c03799ff4c5f3e6f"
+  },
+  {
+    "path": "src/upstream/MessageFilterBase.h",
+    "bytes": 338,
+    "sha256": "3fe567f070f3e49be3c869d951b3ffaab7f7686ddd0523d7816bd3668fcc31f6"
+  },
+  {
+    "path": "src/upstream/MessageFilterHook.cpp",
+    "bytes": 5205,
+    "sha256": "b639017373977f3c088142c0b6b7b44dd43ccc57dc1a2b406a723e6a7128244d"
+  },
+  {
+    "path": "src/upstream/MessageFilterHook.h",
+    "bytes": 868,
+    "sha256": "435c4493047c2747d2d26c35fef1360376c2f566cbcba831d9e8100c907e8f0b"
+  },
+  {
+    "path": "src/upstream/MouseButtonFilter.h",
+    "bytes": 1106,
+    "sha256": "65452ad4ce2c6fe9aa120aa6515a955094583a8e241467015512c0c7e580ecf3"
+  },
+  {
+    "path": "src/upstream/MouseMoveFilter.h",
+    "bytes": 1029,
+    "sha256": "37cdee349e08f1d1450ddb44199923cfdaea7c4005b4cb1d4b8dddda7cb4f447"
+  },
+  {
+    "path": "src/upstream/SetCursorPosHook.cpp",
+    "bytes": 1054,
+    "sha256": "d07febd3d8f224ab9187da8c5382c320045f5eae5a97eb0f79f20e6138a50afa"
+  },
+  {
+    "path": "src/upstream/WindowActivateAppFilter.h",
+    "bytes": 707,
+    "sha256": "0b820e1a5a3afb9ebc987a05947701b1b20cb394047360fd0831fa2c8484cbee"
+  },
+  {
+    "path": "src/upstream/WindowActivateFilter.h",
+    "bytes": 698,
+    "sha256": "10ae188cb7aafc7edb041d448f34ac6d0108768aa78e256e3a0c30ce0116d059"
+  },
+  {
+    "path": "src/upstream/protoloader.h",
+    "bytes": 5865,
+    "sha256": "cd39e8471ed5251aa06e7050780ed66fc37f51a9f0dbfea79218e3dccac8e93a"
+  },
+  {
+    "path": "start-game-validation.ps1",
+    "bytes": 663,
+    "sha256": "616b314d71f9957fba6353b749da02308921b5beff3463680a9184e268ffa3df"
+  }
+]
