@@ -15,3 +15,7 @@ Sources are read-only. PARTIAL means located, not newly accepted.
 P8.3 report names Proto Input dd29bf8d22349605d0e1950c1c5dc4893d72670e, EasyHook 2.7.7097 x86; describes A/B/C movement and removal sequence 26. DLL residency and abnormal cleanup remain limitations. This is historical evidence, not a current MaaQQFO live PASS.
 
 GitHub connector authenticated as 327836130. Direct MaaQQFO read returned 404 (absent or inaccessible). Stable upstream v2.16.4 resolves to edfb87ac7a049a50b7921658cc206265c8b9e4e5. No existing remote was changed.
+
+2026-11-19 audit: ProtoInput.txt retains MIT notice (Ilyaki 2021); EasyHook.txt retains permission notice (Christoph Husse / Justin Stenning); upstream client LICENSE is GPL v3. Preserve these notices when migrating. No proprietary DM binary is authorized for public redistribution. Legacy IPC protocol.h inspected: packed 237-byte fixed-width packet, version/signature/request/session validation; migration must retain x86/x64 agreement and cancellation semantics.
+
+C2-A six raw snapshots cross-checked using tools/verify_c2a_evidence.py: both read passes agree with captured bytes for vtable, key, name, position and filter; Q membership and map anchors consistent. Three rabbits before versus two after user action. This validates historical evidence consistency only, not precise killed identity or universal monster support. C2-B and C1 raw cross-check remain pending.

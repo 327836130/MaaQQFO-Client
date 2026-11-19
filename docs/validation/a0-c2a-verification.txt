@@ -1,0 +1,7 @@
+C2A_after_user_kill_20261115163652895.json: raw bytes consistent, rabbits=2
+C2A_after_user_kill_repeat_20261115163658821.json: raw bytes consistent, rabbits=2
+C2A_baseline_20261115163457960.json: raw bytes consistent, rabbits=3
+C2A_natural1_20261115163522164.json: raw bytes consistent, rabbits=3
+C2A_natural2_20261115163537462.json: raw bytes consistent, rabbits=3
+C2A_natural3_20261115163545316.json: raw bytes consistent, rabbits=3
+OFFLINE_PASS: historical C2-A consistency; no current live test

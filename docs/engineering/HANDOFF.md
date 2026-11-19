@@ -10,3 +10,5 @@
 - First smoke failed due to missing resource binding and timeout; preserved in a1-native-smoke-first-failure.log. Fixed test binds a resource and avoids redundant Join (ShutDown already joins in official source).
 - Remaining: clean-room build, GUI startup, independent review, remote CI/PR, complete migration/license audit. Native same-process handshake does not prove custom C++ Agent business behavior or live controller.
 - User bootstrap copies at workspace root remain untracked and preserved. No game injection, persistent automation or credential changes authorized.
+
+Latest checkpoint: clean-source build of 0b1ab07 completed; result docs/validation/a1-clean-result.json. C2-A six-snapshot byte validation PASS. Next primary task: C1/C2-B raw verification and GUI startup. Clean build is source-isolated with reused SDK/NuGet cache, not a new machine. Corrected Fork reply remains pending. Scripts tools/verify_clean_build.ps1 and tools/verify_c2a_evidence.py are reproducible entry points.

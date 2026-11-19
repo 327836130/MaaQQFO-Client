@@ -12,3 +12,5 @@ All Windows live acceptance remains pending.
 Desktop compilation: a1-desktop-build.log, exit 0, 34 warnings. Core configuration tests: a1-core-tests.log, 15/15 PASS. Neither proves live game or Agent protocol acceptance. SDK absence entry above is superseded by DEPENDENCY_BASELINE.md.
 
 Native runtime: tools/native_smoke.py + a1-native-smoke.log OFFLINE_PASS for loaded runtime v5.14.3 and same-process resource-bound Agent handshake/cleanup. First failure retained separately. No game controller constructed. Official ABI/source: https://github.com/MaaXYZ/MaaFramework/tree/v5.14.3/include and source/MaaAgentServer/Server/AgentServer.cpp.
+
+C2-A: a0-c2a-verification.txt OFFLINE_PASS (6 snapshots, two passes, raw field bytes/map/membership). Clean source build: a1-clean-result.json documents commit and exit codes; uses existing SDK and NuGet cache, no pre-existing bin/obj.
