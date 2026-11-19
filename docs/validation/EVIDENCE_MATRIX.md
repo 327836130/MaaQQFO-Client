@@ -15,8 +15,8 @@ Updated 2026-11-19. All current QQ幻想 live acceptance remains pending.
 | Core tests | a1-core-tests.log | OFFLINE_PASS: 15 configuration/screenshot-option tests |
 | Native runtime | a1-native-smoke.log; tools/native_smoke.py | OFFLINE_PASS: actual v5.14.3 DLL and resource-bound same-process Agent connect/disconnect/cleanup |
 | Clean source build | a1-clean-result.json; a1-clean-run.txt | OFFLINE_PASS: committed 0b1ab07 archive, no old bin/obj; existing SDK/NuGet cache reused; build, 15 tests, native smoke |
-| GUI startup | none | VERIFY_PENDING |
-| Remote PR/CI/review | none | BLOCKED_USER: existing MaaQQFO forks MaaFramework; correct MFAAvalonia Fork pending |
+| GUI startup | a1-desktop-startup.md | OFFLINE_PASS: main window title v2.16.4, exit code 0 |
+| Remote PR/CI/review | https://github.com/327836130/MaaQQFO-Client/pull/1 | Draft opened on verified MFAAvalonia Fork. CI and independent review pending. |
 | Controller / route / game | none | NOT_STARTED; no current live PASS |
 
 The first native smoke failed (missing bound resource); a1-native-smoke-first-failure.log preserves it. Fixed implementation passed; it does not prove C++ custom business modules or cross-process Agent behavior. Tools require Windows/x64 where stated. SDK 10.0.402 and CMake were found outside PATH; the earlier SDK-absent diagnosis is resolved.

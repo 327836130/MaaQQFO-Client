@@ -27,4 +27,3 @@ jobs:
         with:
           name: baseline-test-results
           path: '**/TestResults/*.trx'
-

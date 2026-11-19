@@ -14,3 +14,5 @@
 Latest checkpoint: clean-source build of 0b1ab07 completed; result docs/validation/a1-clean-result.json. C2-A six-snapshot byte validation PASS. Next primary task: C1/C2-B raw verification and GUI startup. Clean build is source-isolated with reused SDK/NuGet cache, not a new machine. Corrected Fork reply remains pending. Scripts tools/verify_clean_build.ps1 and tools/verify_c2a_evidence.py are reproducible entry points.
 
 Latest: C2-B raw verification now PASS (four historical captures), evidence a0-c2b-verification.txt. Next primary task C1 byte-level audit and GUI startup. Clean source build is already complete; do not rerun without changes requiring it. Existing remote unchanged, corrected Fork pending.
+
+Latest checkpoint: origin 327836130/MaaQQFO-Client forks MaaXYZ/MFAAvalonia. Draft PR #1 targets qqfo/stable-v2.16.4 from phase/A0-inventory. GUI startup evidence in docs/validation/a1-desktop-startup.md. Next primary task is check CI and finish C1 verification.

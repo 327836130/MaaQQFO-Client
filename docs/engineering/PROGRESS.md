@@ -15,3 +15,5 @@ No client build, PR or live validation completed yet.
 2026-11-19: Added clean-source build verifier exporting committed HEAD into unique artifacts directory (no deletion, existing NuGet cache). Build/test/native results in a1-clean-result.json. Added C2-A verifier: six raw snapshots, two passes each validated against captured bytes; log a0-c2a-verification.txt. No live action performed.
 
 2026-11-19: C2-B four stages validated from original capture bytes and recorded SHA256. Q membership, names, query keys, kinds, vtables, world positions and item resource key match summaries. Target presence matches before/on-ground/prompt/post-pickup. Added verify_c2b_evidence.py and a0-c2b-verification.txt. Rebuilt evidence matrix to remove superseded SDK blocker and distinguish current gates.
+
+2026-11-19: Verified main window v2.16.4 and exit 0 on isolated desktop build. Set origin to verified MaaQQFO-Client Fork. Pushed stable baseline and phase branch, opened draft PR #1 via GitHub REST using the existing local Git credential after connector returned 403. No new credentials created.
