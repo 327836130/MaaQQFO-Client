@@ -12,3 +12,5 @@
 - User bootstrap copies at workspace root remain untracked and preserved. No game injection, persistent automation or credential changes authorized.
 
 Latest checkpoint: clean-source build of 0b1ab07 completed; result docs/validation/a1-clean-result.json. C2-A six-snapshot byte validation PASS. Next primary task: C1/C2-B raw verification and GUI startup. Clean build is source-isolated with reused SDK/NuGet cache, not a new machine. Corrected Fork reply remains pending. Scripts tools/verify_clean_build.ps1 and tools/verify_c2a_evidence.py are reproducible entry points.
+
+Latest: C2-B raw verification now PASS (four historical captures), evidence a0-c2b-verification.txt. Next primary task C1 byte-level audit and GUI startup. Clean source build is already complete; do not rerun without changes requiring it. Existing remote unchanged, corrected Fork pending.
