@@ -10,3 +10,5 @@ All Windows live acceptance remains pending.
 | MFAAvalonia/MFAAvalonia.csproj | VERIFIED | official tag runtime 5.14.3, binding 5.10.0, agent binary 1.2.0 |
 
 Desktop compilation: a1-desktop-build.log, exit 0, 34 warnings. Core configuration tests: a1-core-tests.log, 15/15 PASS. Neither proves live game or Agent protocol acceptance. SDK absence entry above is superseded by DEPENDENCY_BASELINE.md.
+
+Native runtime: tools/native_smoke.py + a1-native-smoke.log OFFLINE_PASS for loaded runtime v5.14.3 and same-process resource-bound Agent handshake/cleanup. First failure retained separately. No game controller constructed. Official ABI/source: https://github.com/MaaXYZ/MaaFramework/tree/v5.14.3/include and source/MaaAgentServer/Server/AgentServer.cpp.

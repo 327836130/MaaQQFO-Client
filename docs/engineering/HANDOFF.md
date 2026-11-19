@@ -1,14 +1,12 @@
 # MaaQQFO handoff
 - Updated: 2026-11-19 +08:00
-- Phase: A0 IN_PROGRESS; A1 IN_PROGRESS
-- Branch: phase/A0-inventory, based on official v2.16.4 edfb87ac7a049a50b7921658cc206265c8b9e4e5.
-- First resume action: git status; read ROADMAP/PROGRESS/BLOCKERS/EVIDENCE_MATRIX, then poll build session 79089 or inspect terminal state and docs/validation/a1-build.log.
-- Build command: ../17.MaaQQFantasy/debug/dotnet-sdk/dotnet.exe build MFAAvalonia/MFAAvalonia.csproj -c Release -r win-x64 -p:RestorePackagesWithLockFile=true
-- Completed: upstream checkout preserving history; P8.3 historical movement and four binary hashes verified by tools/verify_p83_evidence.py.
-- Pending: finish build and lock files, audit C1/C2 and legacy sources, improve inventory coverage, establish GitHub fork/PR and CI.
-- No game injection, no persistent automation, no old repository changes.
-- Generated lock files/build log may remain uncommitted while build runs. No live PASS claimed.
-
-Latest: desktop build and core tests succeeded. 15 tests cover configuration/screenshot options only. CI file added but not run remotely. Locked build session pending; inspect docs/validation/a1-locked-build.log. Next primary task: native/runtime startup verification and portable GitHub CLI authentication check to establish fork/PR. No permission to create credentials or enable persistent automation.
-
-Latest next action: review scene-assets.json raw snapshots and verify native library loading. gh is .tmp-sdk/gh/bin/gh.exe; auth status not logged in, user response pending. Locked build finished successfully (a1-locked-build.log). No active build sessions remain. New manifests cover all P8.3 and scene-object file types; original legacy-assets.json remains the earlier selected-file inventory.
+- Phase: A0 IN_PROGRESS / A1 IN_PROGRESS.
+- Branch: phase/A0-inventory; upstream v2.16.4 edfb87ac7a049a50b7921658cc206265c8b9e4e5.
+- Resume first: git status, then ROADMAP/PROGRESS/BLOCKERS/EVIDENCE_MATRIX.
+- Completed: core/desktop/locked builds, 15 configuration tests, historical P8.3 verification, native v5.14.3 Agent resource binding/connect/disconnect/cleanup smoke. No active build process.
+- Next primary task: complete C1/C2 raw snapshot checks and startup verification. Query user-provided corrected MFAAvalonia Fork when available, then publish review branch/PR without modifying existing repositories.
+- Remote finding: 327836130/MaaQQFO exists but parent is MaaXYZ/MaaFramework (repository ID 1418945258); not MFAAvalonia. User asked to create a separate MFAAvalonia Fork, suggested MaaQQFO-Client. Do not overwrite or rename wrong-parent fork.
+- Validation: native_smoke.py requires x64 Python. Local usable interpreter ../17.MaaQQFantasy/.venv/Scripts/python.exe. SDK ../17.MaaQQFantasy/debug/dotnet-sdk/dotnet.exe.
+- First smoke failed due to missing resource binding and timeout; preserved in a1-native-smoke-first-failure.log. Fixed test binds a resource and avoids redundant Join (ShutDown already joins in official source).
+- Remaining: clean-room build, GUI startup, independent review, remote CI/PR, complete migration/license audit. Native same-process handshake does not prove custom C++ Agent business behavior or live controller.
+- User bootstrap copies at workspace root remain untracked and preserved. No game injection, persistent automation or credential changes authorized.

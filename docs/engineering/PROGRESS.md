@@ -9,3 +9,5 @@ No client build, PR or live validation completed yet.
 2026-11-19: desktop build exit 0 (34 warnings); Core.Tests 15 passed, 0 failed/skipped. Added pull-request Windows build/test workflow and resolved package locks. Locked desktop build executing; native Agent and UI startup not yet accepted. Remote Fork creation still pending.
 
 2026-11-19: gh 2.105.0 downloaded from official release, SHA256 verified. auth status: not logged in. User login/Fork choice requested; local work continues. Inventory upgraded to all file types, streaming hashes, mutation detection, explicit errors and source/output separation. P8.3 and scene-object manifests generated successfully after fixing Python 3.8 compatibility.
+
+2026-11-19: Native smoke fixed after missing-resource failure. Actual packaged v5.14.3 runtime and Agent client/server connected, disconnected and cleaned up successfully. Added this smoke to Windows CI. Source confirms ShutDown already joins; removed redundant Join. Same-process smoke is not C++ custom module or live game acceptance. Remote metadata confirms MaaQQFO parent MaaXYZ/MaaFramework; user notified to create correct MFAAvalonia fork separately.

@@ -1,7 +1,5 @@
 # Blockers and pending gates
-- Remote: connector cannot create a Fork. No gh executable found in PATH or standard locations; next try portable official CLI and inspect existing login without printing credentials.
-- Authorization: persistent Automation not enabled; first live injection/admin components need explicit authorization per P9 §7.
-- Release risk: upstream NuGet vulnerability warnings retained in build logs; assess before release.
-- Not blockers: SDK 10.0.402 and CMake found; P8.3 and C1/C2 artifacts located. Evidence review and baseline startup are outstanding engineering work.
-
-Remote action now requires user CLI login or manual Fork. Portable CLI: .tmp-sdk/gh/bin/gh.exe auth login. Connector authentication does not authenticate CLI. Do not access credential stores or create new credentials without approval.
+- GitHub: 327836130/MaaQQFO is a Fork of MaaXYZ/MaaFramework, not MaaXYZ/MFAAvalonia. User selected manual Fork; corrected source requested, pending response. Existing remote untouched.
+- Persistent Automation and first game injection/admin components require explicit authorization under P9 §7.
+- Upstream NuGet vulnerability warnings retained in build logs; assess before release.
+- Remaining engineering work: C1/C2 raw evidence validation, complete source/license audit, clean build, UI startup and release packaging. No need to reinstall SDK or CMake.
