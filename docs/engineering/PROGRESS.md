@@ -19,3 +19,5 @@ No client build, PR or live validation completed yet.
 2026-11-19: Verified main window v2.16.4 and exit 0 on isolated desktop build. Set origin to verified MaaQQFO-Client Fork. Pushed stable baseline and phase branch, opened draft PR #1 via GitHub REST using the existing local Git credential after connector returned 403. No new credentials created.
 
 2026-11-19: Historical C1 raw registry and three object records verified. PR #1 triggered Windows baseline Actions run 44520529533.
+
+2026-11-19: Verified 335 P3 archive hashes and ran D1 evidence verifier successfully. Updated migration inventory with actual sources, old MPE import limitation and D1 live-read denial.

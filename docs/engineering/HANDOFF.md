@@ -18,3 +18,5 @@ Latest: C2-B raw verification now PASS (four historical captures), evidence a0-c
 Latest checkpoint: origin 327836130/MaaQQFO-Client forks MaaXYZ/MFAAvalonia. Draft PR #1 targets qqfo/stable-v2.16.4 from phase/A0-inventory. GUI startup evidence in docs/validation/a1-desktop-startup.md. Next primary task is check CI and finish C1 verification.
 
 C1 raw verification complete. Resume by checking the latest PR #1 Windows run against current branch HEAD and completing legacy route/editor provenance review. Existing bootstrap files remain untracked.
+
+Legacy P3/D1 checkers passed. See docs/validation/a0-legacy-checks.txt. Remote Windows run 44520788470 observed in progress on 26c80f6. Check the latest head run after the updated evidence commit.

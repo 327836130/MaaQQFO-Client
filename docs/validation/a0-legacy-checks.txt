@@ -1,0 +1,4 @@
+P3 historical release checksum utility: 335 files verified, exit 0.
+D1 historical check_evidence.py: CE reference, map, player, slot identities, names, positions, categories, distances, resource ID, historical NPCs, missing fields and source hashes passed, exit 0.
+Interpreter: ../17.MaaQQFantasy/.venv/Scripts/python.exe. P3 checker requires Python 3.9+ pathlib APIs.
+Scope: archived artifact checks. No game process was opened.
