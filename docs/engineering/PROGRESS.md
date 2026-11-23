@@ -35,3 +35,5 @@ A1 baseline CI now checks project code whitespace, compiles Python verification 
 A0 historical inventory scope accepted by independent review of b2402a7. B1 pins SDK 10.0.402 with roll-forward disabled and checks actual selection. B2 validates PR merge parents and embeds shared run/build provenance in development and test artifacts. B3 is tracked in the A12 NuGet security gate.
 
 B1/B2 passed in CI 45190167862. Downloaded ZIP and TRX, checked SHA256 and actual SDK 10.0.402, all three source SHAs and 15/15 passing tests. A1 stays VERIFY_PENDING for independent review.
+
+A2 native Custom Controller owned-window fixture passed GDI and FramePool, four screenshot modes, 800x600 to 720x480 resize and 8 observed clicks per backend at physical 120 DPI. Reconnection required a new HWND after invalidating the old one.

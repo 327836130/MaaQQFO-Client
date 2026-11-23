@@ -2,8 +2,8 @@
 | Stage | Status | Next acceptance gate |
 |---|---|---|
 | A0 | PASS | Independent acceptance of historical asset inventory and evidence classification only. |
-| A1 | VERIFY_PENDING | Rerun SDK pin and artifact provenance checks for independent review of the corrected PR head. |
-| A2 | IN_PROGRESS | Native offline screenshot/Click scaling verified on one fixture. Controller lifecycle and Windows test window remain. |
+| A1 | VERIFY_PENDING | B1/B2 Windows CI passed and artifacts verified. Independent re-review pending. |
+| A2 | IN_PROGRESS | Native offline and owned-window GDI/FramePool callbacks passed. Production factory/IPC and a cross-DPI transition remain. |
 | A3 | NOT_STARTED | Proto Input integration and native Click live test |
 | A4 | NOT_STARTED | Role selection and shared test pages |
 | A5 | NOT_STARTED | Editor integration |

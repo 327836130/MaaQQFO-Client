@@ -12,3 +12,5 @@ The two queued commits were pushed to PR #1 through the user-provided per-comman
 A1 additional gates: synthetic resource load and PE architecture checks passed locally. Check latest PR Windows CI jobs and artifact before stage sign-off. Independent review still has no submission.
 
 Independent review dated 2026-11-23 accepted A0 historical inventory only. A1 B1/B2 remediation uses global.json plus tools/record_windows_build.ps1 and needs clean build/CI and independent re-review. A12_NUGET_SECURITY_GATE.md tracks B3. Keep PR #1 draft.
+
+B1/B2 CI passed in run 45190167862. See a1-review-corrections.md and A12_NUGET_SECURITY_GATE.md. A1 remains VERIFY_PENDING. Reproduce A2 with both commands in STAGE_A2_REVIEW.md. Next: production factory/IPC and verified DPI transition. Do not schedule game input until integrated controller is ready for a one-session acceptance plan.

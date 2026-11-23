@@ -1,0 +1,8 @@
+Owned window client=800x600 DPI=120
+gdi raw: screenshot=800x600
+gdi long side: screenshot=640x480
+gdi expand: screenshot=640x480
+gdi short side: screenshot=640x480
+Owned window client=720x480 DPI=120
+Owned window client=720x480 DPI=120
+OWNED_WINDOW_PASS custom/gdi: create/connect/capture, resize, release/destroy/recreate/connect on a new HWND and 8 observed click releases
