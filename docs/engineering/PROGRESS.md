@@ -23,3 +23,5 @@ No client build, PR or live validation completed yet.
 2026-11-19: Verified 335 P3 archive hashes and ran D1 evidence verifier successfully. Updated migration inventory with actual sources, old MPE import limitation and D1 live-read denial.
 
 2026-11-19: A0/A1 review reports checked in. Built isolated Windows x64 development ZIP with embedded commit, verified its SHA256 and enabled CI artifact publication.
+
+Verified remote Windows run 44521355518 for 2f5340f and both published artifacts. Added a simulated native Custom Controller coordinate smoke using MaaFramework 5.14.3, with UUID callback, four screenshot modes and 16 click mappings.

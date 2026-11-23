@@ -20,6 +20,8 @@ jobs:
           architecture: x64
       - name: Native runtime and Agent handshake
         run: python tools/native_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native
+      - name: Check native screenshot scaling and simulated Click coordinates
+        run: python tools/controller_coordinate_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native
       - name: Test configuration and screenshot options
         run: dotnet test MFAAvalonia.Core.Tests/MFAAvalonia.Core.Tests.csproj -c Release --logger "trx;LogFileName=core.trx"
       - name: Archive validated Windows development build

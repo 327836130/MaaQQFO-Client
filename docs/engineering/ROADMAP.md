@@ -2,8 +2,8 @@
 | Stage | Status | Next acceptance gate |
 |---|---|---|
 | A0 | VERIFY_PENDING | Inventory and historical evidence review record ready. Independent PR review pending. |
-| A1 | IN_PROGRESS | Local baseline passed. Verify current PR CI, development archive and independent review. |
-| A2 | NOT_STARTED | Controller and coordinate contracts |
+| A1 | VERIFY_PENDING | Windows baseline, CI package, and local launch verified. Independent PR review remains. |
+| A2 | IN_PROGRESS | Native offline screenshot/Click scaling verified on one fixture. Controller lifecycle and Windows test window remain. |
 | A3 | NOT_STARTED | Proto Input integration and native Click live test |
 | A4 | NOT_STARTED | Role selection and shared test pages |
 | A5 | NOT_STARTED | Editor integration |

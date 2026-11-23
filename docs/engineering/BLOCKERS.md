@@ -1,5 +1,6 @@
 # Blockers and pending gates
-- GitHub: correct MFAAvalonia Fork is 327836130/MaaQQFO-Client. Draft PR #1 opened. Remote Actions and independent review remain pending.
+
+- Independent review of [draft PR #1](https://github.com/327836130/MaaQQFO-Client/pull/1) remains open. Windows baseline CI and development archive passed on `2f5340f`.
+- A2 still needs a production controller adapter and owned test-window checks with resize and DPI changes. The simulated callback fixture covers native scaling only.
 - Persistent Automation and first game injection/admin components require explicit authorization under P9 §7.
-- Upstream NuGet vulnerability warnings retained in build logs; assess before release.
-- Remaining engineering work: C1/C2 raw evidence validation, complete source/license audit, clean build, UI startup and release packaging. No need to reinstall SDK or CMake.
+- Upstream NuGet vulnerability warnings remain in the build logs. Assess before release.
