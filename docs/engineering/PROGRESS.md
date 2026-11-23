@@ -31,3 +31,5 @@ A0 metadata census ran across nine relevant legacy roots and recorded 26,878 ent
 Per-command HTTP proxy and HTTP/1.1 restored GitHub connectivity. Pushed b50f8b0 and 8fcf630, cloned the Fork branch into a clean directory, and passed locked build, 15 tests and native checks. Cross-process Agent smoke passed against the fresh build.
 
 A1 baseline CI now checks project code whitespace, compiles Python verification scripts and runs synthetic Pipeline resource loading before the separate-process Agent handshake. Package script verified four x64 PE files and rejected an x86 fixture.
+
+A0 historical inventory scope accepted by independent review of b2402a7. B1 pins SDK 10.0.402 with roll-forward disabled and checks actual selection. B2 validates PR merge parents and embeds shared run/build provenance in development and test artifacts. B3 is tracked in the A12 NuGet security gate.

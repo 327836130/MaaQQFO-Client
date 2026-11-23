@@ -1,6 +1,7 @@
 """Archive the Windows baseline from a fresh, unlaunched desktop build directory."""
 import argparse
 import hashlib
+import json
 from pathlib import Path
 import re
 import struct
@@ -23,10 +24,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('build', type=Path)
     parser.add_argument('output', type=Path)
-    parser.add_argument('commit')
+    parser.add_argument('provenance', type=Path)
     args = parser.parse_args()
-    if not re.fullmatch('[0-9a-f]{40}', args.commit):
-        parser.error('a full Git commit SHA is required')
+    metadata = args.provenance.read_text(encoding='utf-8-sig')
+    provenance = json.loads(metadata)
+    commit = provenance['checkout_sha']
+    kind = provenance['source_kind']
+    if not re.fullmatch('[0-9a-f]{40}', commit) or kind not in {'pr_test_merge', 'branch_commit'}:
+        parser.error('expected a full checkout SHA and a supported source kind')
     build, output = args.build.resolve(), args.output.resolve()
     if output == build or build in output.parents:
         parser.error('output must be outside build tree')
@@ -44,7 +49,8 @@ def main():
                 parser.error(f'{name}: expected x64 PE, got machine 0x{machine:04x}')
     print('Desktop executable and three native runtime/Agent DLLs verified as x64 PE')
     output.mkdir(parents=True, exist_ok=True)
-    archive = output / f'MaaQQFO-win-x64-dev-{args.commit[:12]}.zip'
+    label = 'pr-merge' if kind == 'pr_test_merge' else 'commit'
+    archive = output / f'MaaQQFO-win-x64-dev-{label}-{commit[:12]}.zip'
     digest_file = archive.with_suffix('.zip.sha256')
     if digest_file.exists():
         parser.error(f'checksum already exists: {digest_file}')
@@ -52,7 +58,7 @@ def main():
         for path in sorted(build.rglob('*')):
             if path.is_file():
                 package.write(path, path.relative_to(build).as_posix())
-        package.writestr('MaaQQFO-build.txt', f'commit={args.commit}\nplatform=win-x64\nconfiguration=Release\n')
+        package.writestr('MaaQQFO-build-provenance.json', metadata)
     with ZipFile(archive) as package:
         invalid = package.testzip()
         if invalid:

@@ -10,3 +10,5 @@
 The two queued commits were pushed to PR #1 through the user-provided per-command parameters `-c http.proxy=http://127.0.0.1:7890 -c http.version=HTTP/1.1`. Use these with `git` if direct GitHub HTTPS is unreachable and the proxy is running. Fresh Fork clone build and tests at `8fcf630` passed. Cross-process Agent smoke subsequently passed against the same build. See `docs/validation/a1-fork-clone.md` and check the newest PR run.
 
 A1 additional gates: synthetic resource load and PE architecture checks passed locally. Check latest PR Windows CI jobs and artifact before stage sign-off. Independent review still has no submission.
+
+Independent review dated 2026-11-23 accepted A0 historical inventory only. A1 B1/B2 remediation uses global.json plus tools/record_windows_build.ps1 and needs clean build/CI and independent re-review. A12_NUGET_SECURITY_GATE.md tracks B3. Keep PR #1 draft.
