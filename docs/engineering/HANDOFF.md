@@ -6,3 +6,5 @@
 - [Draft PR #1](https://github.com/327836130/MaaQQFO-Client/pull/1) targets `qqfo/stable-v2.16.4`. [Windows CI](https://github.com/327836130/MaaQQFO-Client/actions/runs/44521355518) passed on `2f5340f`, with development bundle artifact 14527309277 and test results artifact 14527329931. Check the latest PR run for subsequent changes. Independent review remains pending.
 - A2: run `python tools/controller_coordinate_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native` using 64-bit Python. Real 5.14.3 DLL with offline callbacks verifies four screenshot modes and 16 mappings. Next: owned Windows test window, resize/DPI and lifecycle, then connect the production Custom Controller factory. Current fixture contains no game integration.
 - Local pinned SDK: `../17.MaaQQFantasy/debug/dotnet-sdk/dotnet.exe`. Local x64 Python: `../17.MaaQQFantasy/.venv/Scripts/python.exe`.
+
+Local coordinate smoke commit b50f8b0 and later commits await push. The latest HTTPS push could not connect to github.com:443; the GitHub API still shows PR head 2f5340f. Retry a normal non-force push after connectivity recovers. A0 file census and A1 QQFO extension root / issue-PR templates added.

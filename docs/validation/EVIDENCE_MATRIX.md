@@ -3,6 +3,7 @@ Updated 2026-11-19. All current QQ幻想 live acceptance remains pending.
 
 | Area | Evidence | Result and exact scope |
 |---|---|---|
+| Metadata census | a0-file-census.md | 26,878 records across nine roots; 340 explicit skip entries; 0 errors |
 | Legacy inventory | ../migration/legacy-assets.json | PARTIAL; selected extensions, 7067 files; not source migration or functional proof |
 | Proto Input inventory | ../migration/p83-assets.json | 43 files hashed, including source/license/logs/binaries |
 | Scene inventory | ../migration/scene-assets.json | 43 files hashed; C1/C2 reports and raw snapshots |
