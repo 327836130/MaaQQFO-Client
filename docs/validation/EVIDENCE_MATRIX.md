@@ -25,6 +25,7 @@ Updated 2026-11-19. All current QQ幻想 live acceptance remains pending.
 | A1 independent review corrections | a1-review-corrections.md | SDK 10.0.402 and PR merge provenance verified on run 45190167862, 15/15 tests, A1 independent re-review pending |
 | Native coordinate contract | a2-coordinate-smoke.log | OFFLINE_PASS: four screenshot modes and 16 simulated callback mappings on a 1600×900 raw fixture |
 | Owned Windows test window | STAGE_A2_REVIEW.md | 120 DPI, GDI and FramePool, all four screenshot modes, resize, HWND replacement and 8 received clicks per backend through native Custom callbacks |
+| Managed QQFO factory | a2-managed-controller.log | OFFLINE_PASS: C# adapter on bundled native runtime, two created/released sessions, raw screenshot and typed client click. 18 core tests pass. |
 | Controller / route / game | none | No current live PASS |
 
 The first native smoke failed (missing bound resource); a1-native-smoke-first-failure.log preserves it. Fixed implementation passed; the later cross-process smoke verifies the native protocol separately. C++ custom business modules remain unverified. Tools require Windows/x64 where stated. SDK 10.0.402 and CMake were found outside PATH; the earlier SDK-absent diagnosis is resolved.

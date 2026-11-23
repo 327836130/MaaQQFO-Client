@@ -37,3 +37,5 @@ A0 historical inventory scope accepted by independent review of b2402a7. B1 pins
 B1/B2 passed in CI 45190167862. Downloaded ZIP and TRX, checked SHA256 and actual SDK 10.0.402, all three source SHAs and 15/15 passing tests. A1 stays VERIFY_PENDING for independent review.
 
 A2 native Custom Controller owned-window fixture passed GDI and FramePool, four screenshot modes, 800x600 to 720x480 resize and 8 observed clicks per backend at physical 120 DPI. Reconnection required a new HWND after invalidating the old one.
+
+A2 managed skeleton compiled in the desktop app. Added typed client-point callbacks, per-session backend ownership, three QQFO tests (18 total) and native managed factory smoke. Locked desktop build and factory connect/capture/click/release passed locally.
