@@ -16,9 +16,11 @@ Updated 2026-11-19. All current QQ幻想 live acceptance remains pending.
 | Core tests | a1-core-tests.log | OFFLINE_PASS: 15 configuration/screenshot-option tests |
 | Native runtime | a1-native-smoke.log; tools/native_smoke.py | OFFLINE_PASS: actual v5.14.3 DLL and resource-bound same-process Agent connect/disconnect/cleanup |
 | Clean source build | a1-clean-result.json; a1-clean-run.txt | OFFLINE_PASS: committed 0b1ab07 archive, no old bin/obj; existing SDK/NuGet cache reused; build, 15 tests, native smoke |
+| Clean Fork clone | a1-fork-clone.md | OFFLINE_PASS: remote clone at 8fcf630, locked build, 15 tests, native Agent and coordinate smokes |
+| Native Agent across processes | a1-agent-cross-process.log | OFFLINE_PASS: shipped v5.14.3 client and server DLLs handshake, disconnect and exit in separate processes |
 | GUI startup | a1-desktop-startup.md | OFFLINE_PASS: main window title v2.16.4, exit code 0 |
 | Remote PR/CI/review | https://github.com/327836130/MaaQQFO-Client/pull/1 | Draft opened on verified MFAAvalonia Fork. Windows run 44521355518 passed and uploaded development ZIP and TRX. Independent review pending. |
 | Native coordinate contract | a2-coordinate-smoke.log | OFFLINE_PASS: four screenshot modes and 16 simulated callback mappings on a 1600×900 raw fixture |
 | Controller / route / game | none | No current live PASS |
 
-The first native smoke failed (missing bound resource); a1-native-smoke-first-failure.log preserves it. Fixed implementation passed; it does not prove C++ custom business modules or cross-process Agent behavior. Tools require Windows/x64 where stated. SDK 10.0.402 and CMake were found outside PATH; the earlier SDK-absent diagnosis is resolved.
+The first native smoke failed (missing bound resource); a1-native-smoke-first-failure.log preserves it. Fixed implementation passed; the later cross-process smoke verifies the native protocol separately. C++ custom business modules remain unverified. Tools require Windows/x64 where stated. SDK 10.0.402 and CMake were found outside PATH; the earlier SDK-absent diagnosis is resolved.

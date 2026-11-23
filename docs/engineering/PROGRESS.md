@@ -27,3 +27,5 @@ No client build, PR or live validation completed yet.
 Verified remote Windows run 44521355518 for 2f5340f and both published artifacts. Added a simulated native Custom Controller coordinate smoke using MaaFramework 5.14.3, with UUID callback, four screenshot modes and 16 click mappings.
 
 A0 metadata census ran across nine relevant legacy roots and recorded 26,878 entries including 340 skips and zero errors. Tracked workspace count at b50f8b0 was 969. Added QQFO extension root and GitHub phase templates for A1.
+
+Per-command HTTP proxy and HTTP/1.1 restored GitHub connectivity. Pushed b50f8b0 and 8fcf630, cloned the Fork branch into a clean directory, and passed locked build, 15 tests and native checks. Cross-process Agent smoke passed against the fresh build.
