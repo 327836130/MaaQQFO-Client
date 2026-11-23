@@ -3,7 +3,20 @@ import argparse
 import hashlib
 from pathlib import Path
 import re
+import struct
 from zipfile import ZIP_DEFLATED, ZipFile
+
+
+def pe_machine(path):
+    with path.open('rb') as stream:
+        dos = stream.read(64)
+        if len(dos) != 64 or dos[:2] != b'MZ':
+            raise ValueError(f'{path.name}: missing DOS header')
+        stream.seek(struct.unpack_from('<I', dos, 0x3c)[0])
+        pe = stream.read(6)
+        if len(pe) != 6 or pe[:4] != b'PE\0\0':
+            raise ValueError(f'{path.name}: missing PE header')
+        return struct.unpack_from('<H', pe, 4)[0]
 
 
 def main():
@@ -22,8 +35,14 @@ def main():
                 'runtimes/win-x64/native/MaaAgentClient.dll',
                 'runtimes/win-x64/native/MaaAgentServer.dll')
     for name in required:
-        if not (build / name).is_file():
+        path = build / name
+        if not path.is_file():
             parser.error(f'missing build output: {name}')
+        if path.suffix in {'.exe', '.dll'}:
+            machine = pe_machine(path)
+            if machine != 0x8664:
+                parser.error(f'{name}: expected x64 PE, got machine 0x{machine:04x}')
+    print('Desktop executable and three native runtime/Agent DLLs verified as x64 PE')
     output.mkdir(parents=True, exist_ok=True)
     archive = output / f'MaaQQFO-win-x64-dev-{args.commit[:12]}.zip'
     digest_file = archive.with_suffix('.zip.sha256')

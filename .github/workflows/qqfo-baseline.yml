@@ -9,6 +9,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Check changed project code whitespace
+        if: github.event_name == 'pull_request'
+        run: git diff --check HEAD~1 HEAD -- .github tools QQFO
       - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 10.0.402
@@ -18,6 +23,8 @@ jobs:
         with:
           python-version: '3.13'
           architecture: x64
+      - name: Compile Python verification tools
+        run: python -m compileall -q tools
       - name: Native runtime and Agent handshake
         run: python tools/native_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native
       - name: Check native screenshot scaling and simulated Click coordinates

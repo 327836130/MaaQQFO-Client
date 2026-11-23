@@ -18,6 +18,8 @@ Updated 2026-11-19. All current QQ幻想 live acceptance remains pending.
 | Clean source build | a1-clean-result.json; a1-clean-run.txt | OFFLINE_PASS: committed 0b1ab07 archive, no old bin/obj; existing SDK/NuGet cache reused; build, 15 tests, native smoke |
 | Clean Fork clone | a1-fork-clone.md | OFFLINE_PASS: remote clone at 8fcf630, locked build, 15 tests, native Agent and coordinate smokes |
 | Native Agent across processes | a1-agent-cross-process.log | OFFLINE_PASS: shipped v5.14.3 client and server DLLs handshake, disconnect and exit in separate processes |
+| Resource load and Agent | a1-resource-agent-smoke.log | OFFLINE_PASS: synthetic Pipeline loaded and node found before separate-process Agent handshake |
+| Development package architecture | a1-package-architecture.md | Four x64 PE headers validated; non-x64 fixture rejected before archive creation |
 | GUI startup | a1-desktop-startup.md | OFFLINE_PASS: main window title v2.16.4, exit code 0 |
 | Remote PR/CI/review | https://github.com/327836130/MaaQQFO-Client/pull/1 | Draft opened on verified MFAAvalonia Fork. Windows run 44521355518 passed and uploaded development ZIP and TRX. Independent review pending. |
 | Native coordinate contract | a2-coordinate-smoke.log | OFFLINE_PASS: four screenshot modes and 16 simulated callback mappings on a 1600×900 raw fixture |

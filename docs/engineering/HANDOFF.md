@@ -8,3 +8,5 @@
 - Local pinned SDK: `../17.MaaQQFantasy/debug/dotnet-sdk/dotnet.exe`. Local x64 Python: `../17.MaaQQFantasy/.venv/Scripts/python.exe`.
 
 The two queued commits were pushed to PR #1 through the user-provided per-command parameters `-c http.proxy=http://127.0.0.1:7890 -c http.version=HTTP/1.1`. Use these with `git` if direct GitHub HTTPS is unreachable and the proxy is running. Fresh Fork clone build and tests at `8fcf630` passed. Cross-process Agent smoke subsequently passed against the same build. See `docs/validation/a1-fork-clone.md` and check the newest PR run.
+
+A1 additional gates: synthetic resource load and PE architecture checks passed locally. Check latest PR Windows CI jobs and artifact before stage sign-off. Independent review still has no submission.

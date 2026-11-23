@@ -4,6 +4,7 @@ Run with Windows x64 Python. Parent enforces a 30-second process deadline.
 """
 import argparse
 import ctypes as c
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -54,12 +55,24 @@ def smoke(root):
         disconnect = bind(client, 'MaaAgentClientDisconnect', boolean, ptr)
         make_resource = bind(fw, 'MaaResourceCreate', ptr)
         free_resource = bind(fw, 'MaaResourceDestroy', None, ptr)
+        post_bundle = bind(fw, 'MaaResourcePostBundle', c.c_int64, ptr, c.c_char_p)
+        wait_resource = bind(fw, 'MaaResourceWait', c.c_int32, ptr, c.c_int64)
+        get_node = bind(fw, 'MaaResourceGetNodeData', boolean, ptr, c.c_char_p, ptr)
         bind_resource = bind(client, 'MaaAgentClientBindResource', boolean, ptr, ptr)
         resource = make_resource()
         handle, buffer = make_client(None), make_buffer()
         server_process = None
         try:
             assert handle and buffer and resource
+            pipeline = Path('smoke-bundle/pipeline')
+            pipeline.mkdir(parents=True)
+            (pipeline / 'baseline.json').write_text(
+                json.dumps({'QQFOBaselineSmoke': {'action': 'DoNothing'}}), encoding='utf-8'
+            )
+            bundle = post_bundle(resource, str(pipeline.parent.resolve()).encode('utf-8'))
+            assert wait_resource(resource, bundle) == 3000
+            assert get_node(resource, b'QQFOBaselineSmoke', buffer)
+            print('OFFLINE_PASS: loaded synthetic Pipeline resource', flush=True)
             assert bind_resource(handle, resource)
             assert identify(handle, buffer)
             assert timeout(handle, 5000)
@@ -109,5 +122,3 @@ if __name__ == '__main__':
         with tempfile.TemporaryDirectory(prefix='qqfo-smoke-') as directory:
             result = subprocess.run([sys.executable, str(Path(__file__).resolve()), str(args.runtime.resolve()), '--child'], cwd=directory, timeout=30)
             raise SystemExit(result.returncode)
-
-
