@@ -22,6 +22,7 @@ Updated 2026-11-19. All current QQ幻想 live acceptance remains pending.
 | Development package architecture | a1-package-architecture.md | Four x64 PE headers validated; non-x64 fixture rejected before archive creation |
 | GUI startup | a1-desktop-startup.md | OFFLINE_PASS: main window title v2.16.4, exit code 0 |
 | Remote PR/CI/review | https://github.com/327836130/MaaQQFO-Client/pull/1 | Draft opened on verified MFAAvalonia Fork. Windows run 44521355518 passed and uploaded development ZIP and TRX. Independent review pending. |
+| A1 independent review corrections | a1-review-corrections.md | SDK 10.0.402 and PR merge provenance verified on run 45190167862, 15/15 tests, A1 independent re-review pending |
 | Native coordinate contract | a2-coordinate-smoke.log | OFFLINE_PASS: four screenshot modes and 16 simulated callback mappings on a 1600×900 raw fixture |
 | Controller / route / game | none | No current live PASS |
 

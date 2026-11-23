@@ -33,3 +33,5 @@ Per-command HTTP proxy and HTTP/1.1 restored GitHub connectivity. Pushed b50f8b0
 A1 baseline CI now checks project code whitespace, compiles Python verification scripts and runs synthetic Pipeline resource loading before the separate-process Agent handshake. Package script verified four x64 PE files and rejected an x86 fixture.
 
 A0 historical inventory scope accepted by independent review of b2402a7. B1 pins SDK 10.0.402 with roll-forward disabled and checks actual selection. B2 validates PR merge parents and embeds shared run/build provenance in development and test artifacts. B3 is tracked in the A12 NuGet security gate.
+
+B1/B2 passed in CI 45190167862. Downloaded ZIP and TRX, checked SHA256 and actual SDK 10.0.402, all three source SHAs and 15/15 passing tests. A1 stays VERIFY_PENDING for independent review.

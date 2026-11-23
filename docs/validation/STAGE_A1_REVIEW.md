@@ -10,3 +10,5 @@ The Windows x64 development baseline uses MFAAvalonia v2.16.4 with the native 5.
 The CI packaging step creates a framework-dependent development ZIP and SHA256 from a fresh build. The embedded SHA identifies the Git tree actually checked out and built by Actions. The package uses the installed .NET 10 runtime. It is intended for baseline review. A fresh remote clone passed the locked build and tests. A separate-process smoke verified the bundled native Agent protocol. Custom C++ QQFO Agent, game integration, vulnerability remediation and independent review remain open. See [clone evidence](a1-fork-clone.md).
 
 Independent review of b2402a7 found that CI actually selected SDK 11.0.100 and the development ZIP named the Actions test merge SHA without complete PR provenance. Superseding evidence must verify the exact SDK assertion, both PR merge parents and checkout SHA, and matching build/test artifact metadata. See the dependency baseline for reproduction. A1 remains VERIFY_PENDING until independent re-review.
+
+Correction CI run 45190167862 passed. See [B1/B2/B3 verification](a1-review-corrections.md) for the exact source and artifact identifiers.

@@ -26,7 +26,7 @@ def main():
     parser.add_argument('output', type=Path)
     parser.add_argument('provenance', type=Path)
     args = parser.parse_args()
-    metadata = args.provenance.read_text(encoding='utf-8-sig')
+    metadata = args.provenance.read_bytes()
     provenance = json.loads(metadata)
     commit = provenance['checkout_sha']
     kind = provenance['source_kind']
