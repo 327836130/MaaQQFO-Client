@@ -1,10 +1,29 @@
 #include "InputProtocol.hpp"
+#include "InputHostSession.hpp"
+#include "LocalInputPipe.hpp"
 #include <cassert>
 #include <iostream>
 #include <string>
 #include <windows.h>
 
 using namespace qqfo::input;
+
+class FixtureEndpoint final : public InputEndpoint {
+public:
+    bool bind_ok = true;
+    bool click_ok = true;
+    unsigned releases = 0;
+    unsigned clicks = 0;
+    std::optional<ClientExtent> extent = ClientExtent{1600, 900};
+
+    bool bind(const Target&) noexcept override { return bind_ok; }
+    std::optional<ClientExtent> current_client(const Target&) noexcept override { return extent; }
+    bool click(const Target&, std::uint32_t x, std::uint32_t y) noexcept override {
+        ++clicks;
+        return click_ok && x == 800 && y == 450;
+    }
+    void release() noexcept override { ++releases; }
+};
 
 int wire_smoke() {
     // Wire bytes emitted by the managed client for a fixed target and session.
@@ -36,7 +55,45 @@ int wire_smoke() {
     assert(!connection.accept(click));
     assert(acknowledgement(click, true)[52] == 1);
     assert(acknowledgement(click, false) == click);
-    std::cout << "OFFLINE_PASS " << sizeof(void*) * 8 << "-bit native wire validation and replay rejection\n";
+
+    FixtureEndpoint endpoint;
+    {
+        HostSession host(target, endpoint);
+        assert(host.handle(bind)->at(52) == 1);
+        endpoint.extent = ClientExtent{720, 480};
+        assert(host.handle(click)->at(52) == 0 && endpoint.clicks == 0 && !host.closed());
+        endpoint.extent = ClientExtent{1600, 900};
+        click[8] = 3;
+        assert(host.handle(click)->at(52) == 1 && endpoint.clicks == 1);
+        endpoint.extent = std::nullopt;
+        click[8] = 4;
+        assert(host.handle(click)->at(52) == 0 && host.closed() && endpoint.clicks == 1);
+    }
+    assert(endpoint.releases == 1);
+    endpoint.bind_ok = false;
+    {
+        HostSession host(target, endpoint);
+        assert(host.handle(bind)->at(52) == 0 && host.closed());
+    }
+    assert(endpoint.releases == 2);
+    endpoint.bind_ok = true;
+    endpoint.click_ok = false;
+    endpoint.extent = ClientExtent{1600, 900};
+    {
+        HostSession host(target, endpoint);
+        assert(host.handle(bind)->at(52) == 1);
+        assert(host.handle(click)->at(52) == 0 && host.closed() && endpoint.clicks == 2);
+        assert(!host.handle(click));
+    }
+    assert(endpoint.releases == 3);
+    const auto timeout_name = L"\\\\.\\pipe\\MaaQQFO.Input.Timeout." + std::to_wstring(GetCurrentProcessId());
+    const auto timeout_pipe = create_local_input_pipe(timeout_name.c_str());
+    assert(timeout_pipe != INVALID_HANDLE_VALUE);
+    const auto time_started = GetTickCount64();
+    assert(!connect_local_pipe(timeout_pipe, 50));
+    assert(GetTickCount64() - time_started < 5000);
+    CloseHandle(timeout_pipe);
+    std::cout << "OFFLINE_PASS " << sizeof(void*) * 8 << "-bit wire, host bounds, failure, cleanup and timeout checks\n";
     return 0;
 }
 
@@ -48,34 +105,26 @@ int pipe_fixture(const std::wstring& name, const std::wstring& wire_session) {
     for (std::size_t i = 0; i < target.session.size(); ++i)
         target.session[i] = static_cast<std::uint8_t>(std::stoul(wire_session.substr(i * 2, 2), nullptr, 16));
     const auto path = L"\\\\.\\pipe\\MaaQQFO.Input." + name;
-    const HANDLE pipe = CreateNamedPipeW(path.c_str(), PIPE_ACCESS_DUPLEX | FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE | PIPE_REJECT_REMOTE_CLIENTS, 1, 56, 56, 2000, nullptr);
+    const HANDLE pipe = create_local_input_pipe(path.c_str());
     if (pipe == INVALID_HANDLE_VALUE)
         return 3;
     const auto transact = [&] {
-        if (!ConnectNamedPipe(pipe, nullptr) && GetLastError() != ERROR_PIPE_CONNECTED)
+        if (!connect_local_pipe(pipe, 5000))
             return 4;
-        RequestSequence sequence(target);
-        for (auto operation : {Operation::Bind, Operation::Click}) {
+        FixtureEndpoint endpoint;
+        HostSession session(target, endpoint);
+        for (unsigned request_index = 0; request_index < 2; ++request_index) {
             Frame frame{};
-            DWORD offset = 0;
-            const auto size = static_cast<DWORD>(frame.size());
-            while (offset < size) {
-                DWORD bytes = 0;
-                if (!ReadFile(pipe, frame.data() + offset, size - offset, &bytes, nullptr) || bytes == 0)
-                    return 5;
-                offset += bytes;
-            }
-            const auto request = sequence.accept(frame);
-            if (!request || request->operation != operation ||
-                (operation == Operation::Click && (request->x != 800 || request->y != 450)))
+            if (!read_input_frame(pipe, frame, 5000))
+                return 5;
+            const auto reply = session.handle(frame);
+            if (!reply || reply->at(52) != 1 || endpoint.clicks != request_index)
                 return 6;
-            const auto reply = acknowledgement(frame, true);
-            DWORD written = 0;
-            if (!WriteFile(pipe, reply.data(), size, &written, nullptr) || written != size)
+            if (!write_input_frame(pipe, *reply, 5000))
                 return 7;
         }
-        return FlushFileBuffers(pipe) ? 0 : 8;
+        Frame unexpected{};
+        return read_input_frame(pipe, unexpected, 5000) ? 8 : 0;
     };
     const auto result = transact();
     CloseHandle(pipe);

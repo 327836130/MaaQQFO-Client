@@ -22,3 +22,5 @@ A2 production path uses qqfo_input_session on a Win32 resource profile. Build Ma
 A3 has native frame validation and replay rejection. Run tools/verify_native_input_protocol.cmd x86 and x64. Next wire the native pipe host and validate a cross-process test peer before game-side input.
 
 Native x86 and x64 fixtures now run end-to-end over Windows named pipes. Reproduce with tools/verify_native_input_protocol.cmd for each architecture, then run the managed smoke with --pipe-fixture artifacts/a3-native/x86.exe or x64.exe. Production host/Proto Input still pending.
+
+A3 reusable InputHostSession.hpp and LocalInputPipe.hpp now handle cleanup, bounds, identity and bounded I/O. The smoke scripts exercise the same code using fixture endpoints. Next connect the reviewed P8.3 backend to InputEndpoint and verify its reset path without a game target before requesting P9 live authorization.

@@ -45,3 +45,5 @@ A2 managed skeleton compiled in the desktop app. Added typed client-point callba
 A3 native wire decoder compiled and passed under MSVC x86 and x64. CI invokes the reproducible verification script for each target.
 
 A3 managed x64 client -> isolated native x86 and x64 pipe fixture round trips passed. Both peer processes acknowledged Bind and Click and exited.
+
+A3 added native host session and same-account pipe transport. Verified resize-bound rejection, stale window and failure cleanup, bounded I/O cancellation and x86/x64 separate-process interoperability.

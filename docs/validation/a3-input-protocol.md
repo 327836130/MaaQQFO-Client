@@ -7,3 +7,9 @@
 Native pipe host and Proto Input dispatch remain open. This evidence covers decoding and connection sequencing.
 
 An x64 managed client subsequently opened a real Windows named pipe to each native fixture process and completed Bind plus one (800,450) Click acknowledgement. The fixture validates frames and exits without dispatching input. The cross-process check runs in the same CI step as the native decoder checks.
+
+## 2026-11-24 host session and transport
+
+`InputHostSession.hpp` supplies the lifecycle around the backend interface. It verifies requests against the provisioned target, rechecks client bounds before each click and releases the endpoint once on disconnect, partial bind failure, stale target or uncertain dispatch. A rejected out-of-bounds point does not invoke the backend. `LocalInputPipe.hpp` creates a local first-instance named pipe with a protected DACL granting access to the host account. It uses bounded overlapped connect/read/write and cancels outstanding I/O on timeout.
+
+MSVC `/W4 /WX` x86 and x64 smoke runs passed bound, resized and stale-client checks, partial bind cleanup, failed click cleanup and idle-connect cancellation. The x64 managed client completed Bind and Click acknowledgements with each native fixture over the hardened transport. Fixture endpoints receive and validate requests without dispatching clicks. The P8.3 adapter and authorized game validation remain pending.

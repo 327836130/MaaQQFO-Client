@@ -70,9 +70,11 @@ internal static class Program
         using var host = Process.Start(info) ?? throw new InvalidOperationException("Cannot start native pipe fixture.");
         try
         {
-            using var client = new QqfoInputPipe(session, 123, 456);
-            Check(client.Connect(), "Native fixture handshake failed.");
-            Check(client.Click(new ClientPosition(800, 450)), "Native fixture click acknowledgement failed.");
+            using (var client = new QqfoInputPipe(session, 123, 456))
+            {
+                Check(client.Connect(), "Native fixture handshake failed.");
+                Check(client.Click(new ClientPosition(800, 450)), "Native fixture click acknowledgement failed.");
+            }
             Check(host.WaitForExit(5000) && host.ExitCode == 0, "Native fixture did not exit cleanly.");
             Console.WriteLine($"OFFLINE_PASS: managed client -> native {Path.GetFileName(executable)} pipe peer, bind and Click acknowledgement");
         }

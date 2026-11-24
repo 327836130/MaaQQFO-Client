@@ -35,3 +35,5 @@ Independent review of b2402a7 accepted A0 historical inventory and found B1/B2 d
 A2 production client readiness: [owned-window capture and test pipe peer](a2-production-ipc.md) passed at 120 DPI. Locked build and 21 core tests passed. Awaiting native host and cross-DPI evidence.
 
 A3 [native wire verification](a3-input-protocol.md) passed on x86 and x64. Proto Input dispatch and game validation remain pending.
+
+A3 x86/x64 [host lifecycle and Windows IPC](a3-input-protocol.md) passed offline, including invalid client bounds, cleanup and timeout cancellation.

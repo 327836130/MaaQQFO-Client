@@ -7,7 +7,7 @@ call "%QQFO_VS_INSTALL%\VC\Auxiliary\Build\vcvarsall.bat" %arch% >nul
 if errorlevel 1 exit /b 1
 cd /d "%~dp0.."
 if not exist artifacts\a3-native mkdir artifacts\a3-native
-cl /nologo /W4 /WX /std:c++17 /EHsc QQFO\Controller\Native\InputProtocolSmoke.cpp /Foartifacts\a3-native\%arch%.obj /Feartifacts\a3-native\%arch%.exe
+cl /nologo /W4 /WX /std:c++17 /EHsc QQFO\Controller\Native\InputProtocolSmoke.cpp /Foartifacts\a3-native\%arch%.obj /Feartifacts\a3-native\%arch%.exe /link Advapi32.lib
 if errorlevel 1 exit /b 1
 artifacts\a3-native\%arch%.exe
 exit /b %errorlevel%
