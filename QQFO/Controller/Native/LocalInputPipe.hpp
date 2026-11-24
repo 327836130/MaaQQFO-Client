@@ -9,6 +9,23 @@
 
 namespace qqfo::input {
 
+inline std::vector<unsigned char> token_information(HANDLE token, TOKEN_INFORMATION_CLASS kind) {
+    DWORD needed = 0;
+    GetTokenInformation(token, kind, nullptr, 0, &needed);
+    std::vector<unsigned char> storage(needed);
+    if (needed == 0 || !GetTokenInformation(token, kind, storage.data(), needed, &needed))
+        return {};
+    return storage;
+}
+
+inline std::wstring sid_text(PSID value) {
+    LPWSTR text = nullptr;
+    if (!ConvertSidToStringSidW(value, &text))
+        return {};
+    const std::unique_ptr<void, decltype(&LocalFree)> owner(text, &LocalFree);
+    return text;
+}
+
 // The caller provides a provisioned, local endpoint name. Restrict it to the host account.
 inline HANDLE create_local_input_pipe(const wchar_t* name) {
     HANDLE token = nullptr;
@@ -16,20 +33,18 @@ inline HANDLE create_local_input_pipe(const wchar_t* name) {
         return INVALID_HANDLE_VALUE;
     const std::unique_ptr<void, decltype(&CloseHandle)> token_owner(token, &CloseHandle);
 
-    DWORD needed = 0;
-    GetTokenInformation(token, TokenUser, nullptr, 0, &needed);
-    std::vector<unsigned char> storage(needed);
-    const bool got_user = needed != 0 && GetTokenInformation(token, TokenUser, storage.data(), needed, &needed);
-    if (!got_user)
+    const auto users = token_information(token, TokenUser);
+    const auto owners = token_information(token, TokenOwner);
+    if (users.empty() || owners.empty())
         return INVALID_HANDLE_VALUE;
 
-    LPWSTR sid = nullptr;
-    const auto user = reinterpret_cast<const TOKEN_USER*>(storage.data());
-    if (!ConvertSidToStringSidW(user->User.Sid, &sid))
+    // .NET's CurrentUserOnly checks TokenOwner, which can differ from TokenUser.
+    // Only the user SID is granted read/write access by the DACL.
+    const auto user = sid_text(reinterpret_cast<const TOKEN_USER*>(users.data())->User.Sid);
+    const auto owner = sid_text(reinterpret_cast<const TOKEN_OWNER*>(owners.data())->Owner);
+    if (user.empty() || owner.empty())
         return INVALID_HANDLE_VALUE;
-    const std::unique_ptr<void, decltype(&LocalFree)> sid_owner(sid, &LocalFree);
-    const std::wstring owner(sid);
-    const auto sddl = L"O:" + owner + L"D:P(A;;GA;;;" + owner + L")";
+    const auto sddl = L"O:" + owner + L"D:P(A;;GA;;;" + user + L")";
     PSECURITY_DESCRIPTOR descriptor = nullptr;
     if (!ConvertStringSecurityDescriptorToSecurityDescriptorW(sddl.c_str(), SDDL_REVISION_1, &descriptor, nullptr))
         return INVALID_HANDLE_VALUE;
