@@ -31,3 +31,5 @@ Updated 2026-11-19. All current QQ幻想 live acceptance remains pending.
 The first native smoke failed (missing bound resource); a1-native-smoke-first-failure.log preserves it. Fixed implementation passed; the later cross-process smoke verifies the native protocol separately. C++ custom business modules remain unverified. Tools require Windows/x64 where stated. SDK 10.0.402 and CMake were found outside PATH; the earlier SDK-absent diagnosis is resolved.
 
 Independent review of b2402a7 accepted A0 historical inventory and found B1/B2 defects in the prior CI toolchain and provenance. Treat older evidence as historical. The replacement CI must assert SDK 10.0.402 and match the checkout, head and base SHAs. B3 remains tracked in docs/engineering/A12_NUGET_SECURITY_GATE.md.
+
+A2 production client readiness: [owned-window capture and test pipe peer](a2-production-ipc.md) passed at 120 DPI. Locked build and 21 core tests passed. Awaiting native host and cross-DPI evidence.

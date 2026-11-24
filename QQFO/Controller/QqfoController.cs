@@ -91,7 +91,7 @@ internal static class QqfoControllerFactory
         var callbacks = new QqfoControllerCallbacks(sessionId, backend);
         try
         {
-            return new MaaCustomController(callbacks);
+            return new MaaCustomController(callbacks, LinkOption.None);
         }
         catch
         {

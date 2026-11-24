@@ -5,6 +5,7 @@ using MaaFramework.Binding;
 using MaaFramework.Binding.Buffers;
 using MaaFramework.Binding.Notification;
 using MaaFramework.Binding.Custom;
+using MaaQQFO.Controller;
 using MFAAvalonia.Configuration;
 using MFAAvalonia.Helper;
 using MFAAvalonia.Helper.ValueType;
@@ -2287,6 +2288,15 @@ public class MaaProcessor
     private MaaController InitializeController(MaaControllerTypes controllerType, bool logConfig, AdbControllerSnapshot? adbSnapshot = null)
     {
         ConnectToMAA(logConfig);
+
+        if (GetCurrentInterfaceController()?.QqfoInputSession is { } qqfoSession)
+        {
+            if (!OperatingSystem.IsWindows() || controllerType != MaaControllerTypes.Win32 ||
+                !Guid.TryParseExact(qqfoSession, "N", out var session) || session == Guid.Empty)
+                throw new MaaException("QQFO 输入会话要求 Win32 控制器和有效的会话标识");
+            return QqfoControllerFactory.Create($"qqfo-{session:N}",
+                new QqfoWindowsBackend(Config.DesktopWindow.HWnd, session, Config.DesktopWindow.ScreenCap));
+        }
 
         var platformController = PlatformControllerFactory.TryCreate(controllerType);
         if (platformController != null)

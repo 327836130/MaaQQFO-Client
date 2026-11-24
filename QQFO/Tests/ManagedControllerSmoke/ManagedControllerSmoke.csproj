@@ -6,7 +6,7 @@
     <MaaDesktopBuild Condition="'$(MaaDesktopBuild)' == ''">$(MSBuildThisFileDirectory)../../../bin/AnyCPU/Release</MaaDesktopBuild>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../Controller/QqfoController.cs" Link="QqfoController.cs" />
+    <Compile Include="../../Controller/*.cs" Link="%(Filename)%(Extension)" />
     <Reference Include="MaaFramework.Binding" HintPath="$(MaaDesktopBuild)/MaaFramework.Binding.dll" />
     <Reference Include="MaaFramework.Binding.Native" HintPath="$(MaaDesktopBuild)/MaaFramework.Binding.Native.dll" />
   </ItemGroup>

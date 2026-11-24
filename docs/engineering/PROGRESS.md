@@ -39,3 +39,5 @@ B1/B2 passed in CI 45190167862. Downloaded ZIP and TRX, checked SHA256 and actua
 A2 native Custom Controller owned-window fixture passed GDI and FramePool, four screenshot modes, 800x600 to 720x480 resize and 8 observed clicks per backend at physical 120 DPI. Reconnection required a new HWND after invalidating the old one.
 
 A2 managed skeleton compiled in the desktop app. Added typed client-point callbacks, per-session backend ownership, three QQFO tests (18 total) and native managed factory smoke. Locked desktop build and factory connect/capture/click/release passed locally.
+
+2026-11-24 A2 production Win32 selection, capture and bounded same-user IPC compiled. 21 core tests and owned-window production client/peer smoke passed. Resolved duplicate constructor connecting and virtualized GetClientRect.

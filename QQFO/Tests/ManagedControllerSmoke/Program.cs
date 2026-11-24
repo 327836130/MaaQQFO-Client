@@ -2,13 +2,21 @@ using MaaFramework.Binding;
 using MaaFramework.Binding.Buffers;
 using MaaQQFO.Controller;
 using System;
+using System.Buffers.Binary;
 using System.IO;
+using System.IO.Pipes;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 internal static class Program
 {
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     private static extern bool SetDllDirectory(string path);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    private static extern int GetClassName(nint hwnd, StringBuilder className, int size);
 
     private static void Check(bool condition, string operation)
     {
@@ -18,10 +26,15 @@ internal static class Program
 
     private static void Main(string[] args)
     {
-        Check(args.Length == 1, "Pass the Windows x64 native runtime directory.");
+        Check(args.Length is 1 or 2, "Pass the Windows x64 native runtime directory and optional owned fixture HWND.");
         var runtime = Path.GetFullPath(args[0]);
         Check(File.Exists(Path.Combine(runtime, "MaaFramework.dll")), "Native runtime missing.");
         Check(SetDllDirectory(runtime), "Cannot set the native runtime search directory.");
+        if (args.Length == 2 && OperatingSystem.IsWindows())
+        {
+            CheckOwnedWindowBridge((nint)long.Parse(args[1]));
+            return;
+        }
         for (var session = 0; session < 2; ++session)
         {
             var backend = new TestBackend();
@@ -38,6 +51,44 @@ internal static class Program
             Check(backend.DisposeCount == 1, "Backend release failed.");
         }
         Console.WriteLine("OFFLINE_PASS: managed QQFO factory, native callbacks, raw screenshot, client click and session release/recreate");
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static void CheckOwnedWindowBridge(nint hwnd)
+    {
+        var className = new StringBuilder(80);
+        Check(GetClassName(hwnd, className, className.Capacity) > 0 && className.ToString() == "MaaQQFOControllerSmoke",
+            "Expected the owned test window class.");
+        var session = Guid.NewGuid();
+        using var deadline = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+        using var pipe = new NamedPipeServerStream(QqfoInputPipe.PipeName(session), PipeDirection.InOut, 1,
+            PipeTransmissionMode.Byte, PipeOptions.CurrentUserOnly | PipeOptions.Asynchronous);
+        var host = Task.Run(async () =>
+        {
+            await pipe.WaitForConnectionAsync(deadline.Token);
+            var frame = new byte[QqfoInputPipe.FrameSize];
+            for (ushort operation = 1; operation <= 2; ++operation)
+            {
+                await pipe.ReadExactlyAsync(frame, deadline.Token);
+                Check(BinaryPrimitives.ReadUInt16LittleEndian(frame.AsSpan(6)) == operation, "Unexpected pipe operation.");
+                Check(BinaryPrimitives.ReadUInt64LittleEndian(frame.AsSpan(32)) == (ulong)hwnd, "Wrong window binding.");
+                if (operation == 2)
+                    Check(BinaryPrimitives.ReadInt32LittleEndian(frame.AsSpan(44)) == 400 &&
+                          BinaryPrimitives.ReadInt32LittleEndian(frame.AsSpan(48)) == 300, "Wrong client click coordinates.");
+                BinaryPrimitives.WriteInt32LittleEndian(frame.AsSpan(52), 1);
+                await pipe.WriteAsync(frame, deadline.Token);
+            }
+        });
+        using var controller = QqfoControllerFactory.Create($"owned-{session:N}",
+            new QqfoWindowsBackend(hwnd, session, Win32ScreencapMethods.GDI));
+        Check(controller.SetOption(ControllerOption.ScreenshotTargetShortSide, 480), "Scale option failed.");
+        Check(controller.LinkStart().Wait() == MaaJobStatus.Succeeded, "Owned-window pipe connection failed.");
+        Check(controller.Screencap().Wait() == MaaJobStatus.Succeeded, "Owned-window capture failed.");
+        using var picture = new MaaImageBuffer();
+        Check(controller.GetCachedImage(picture) && picture.Width == 640 && picture.Height == 480, "Wrong scaled screenshot.");
+        Check(controller.Click(320, 240).Wait() == MaaJobStatus.Succeeded, "Owned-window pipe click failed.");
+        host.GetAwaiter().GetResult();
+        Console.WriteLine("OWNED_WINDOW_PASS: managed production capture + pipe backend, 640x480 image point (320,240) -> client (400,300)");
     }
 
     private sealed class TestBackend : IQqfoControllerBackend

@@ -1198,6 +1198,10 @@ public partial class MaaInterface
         [JsonProperty("display_expand")]
         public List<int>? DisplayExpand { get; set; }
 
+        // Explicit opt-in for a session provisioned by the QQFO input host.
+        [JsonProperty("qqfo_input_session", NullValueHandling = NullValueHandling.Ignore)]
+        public string? QqfoInputSession { get; set; }
+
         [JsonProperty("permission_required")]
         public bool? PermissionRequired { get; set; }
         
