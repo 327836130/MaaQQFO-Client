@@ -24,3 +24,5 @@ A3 has native frame validation and replay rejection. Run tools/verify_native_inp
 Native x86 and x64 fixtures now run end-to-end over Windows named pipes. Reproduce with tools/verify_native_input_protocol.cmd for each architecture, then run the managed smoke with --pipe-fixture artifacts/a3-native/x86.exe or x64.exe. Production host/Proto Input still pending.
 
 A3 reusable InputHostSession.hpp and LocalInputPipe.hpp now handle cleanup, bounds, identity and bounded I/O. The smoke scripts exercise the same code using fixture endpoints. Next connect the reviewed P8.3 backend to InputEndpoint and verify its reset path without a game target before requesting P9 live authorization.
+
+Historical P8.3 fixture recheck is incomplete. Two selftests in artifacts/a3-p83-fixture-8dae84fd82484803b38af035554ecaf3 exited 1 at the desktop stability guard. Preserve the guard and rerun only when the desktop is stable. Current code CI run 45412178095 covers the native host changes.
