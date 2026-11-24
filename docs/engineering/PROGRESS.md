@@ -49,3 +49,5 @@ A3 managed x64 client -> isolated native x86 and x64 pipe fixture round trips pa
 A3 added native host session and same-account pipe transport. Verified resize-bound rejection, stale window and failure cleanup, bounded I/O cancellation and x86/x64 separate-process interoperability.
 
 P8.3 archived fixture SHA256 verified. Two 2026-11-24 selftest attempts aborted on physical desktop movement. Host lifecycle/IPC tests passed independently.
+
+A3 P8.3 sequence endpoint and reusable local connection loop passed x86/x64 tests, including release after missing Down acknowledgement, desktop changes, coordinate overflow, and process disconnect.

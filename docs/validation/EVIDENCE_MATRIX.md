@@ -37,3 +37,5 @@ A2 production client readiness: [owned-window capture and test pipe peer](a2-pro
 A3 [native wire verification](a3-input-protocol.md) passed on x86 and x64. Proto Input dispatch and game validation remain pending.
 
 A3 x86/x64 [host lifecycle and Windows IPC](a3-input-protocol.md) passed offline, including invalid client bounds, cleanup and timeout cancellation.
+
+A3 [P8.3 sequence and connection loop](a3-input-protocol.md) passed x86/x64 fixture replay, release and disconnect cases. The concrete historical backend remains pending.

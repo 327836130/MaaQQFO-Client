@@ -28,3 +28,5 @@ A3 reusable InputHostSession.hpp and LocalInputPipe.hpp now handle cleanup, boun
 Historical P8.3 fixture recheck is incomplete. Two selftests in artifacts/a3-p83-fixture-8dae84fd82484803b38af035554ecaf3 exited 1 at the desktop stability guard. Preserve the guard and rerun only when the desktop is stable. Current code CI run 45412178095 covers the native host changes.
 
 CI caught an owner mismatch in 45412178095. LocalInputPipe now distinguishes TokenOwner for the .NET owner check and TokenUser for DACL access. Verify the updated PR Windows run on the hosted account.
+
+A3 dispatch sequence now sits in P83InputEndpoint.hpp and uses a provisioned P83Bridge. LocalInputSession.hpp runs the named pipe protocol through that endpoint and is exercised by the managed/native cross-process tests. Next concrete work is to connect the historical P8.3 session, including activation and detach, to P83Bridge. Game execution remains subject to P9.

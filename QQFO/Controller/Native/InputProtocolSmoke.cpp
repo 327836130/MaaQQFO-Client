@@ -1,6 +1,8 @@
 #include "InputProtocol.hpp"
 #include "InputHostSession.hpp"
 #include "LocalInputPipe.hpp"
+#include "LocalInputSession.hpp"
+#include "P83InputEndpoint.hpp"
 #include <cassert>
 #include <iostream>
 #include <string>
@@ -24,6 +26,83 @@ public:
     }
     void release() noexcept override { ++releases; }
 };
+
+class P83FixtureBridge final : public P83Bridge {
+public:
+    enum Step { Open, Position, Move, VirtualDown, DeliverDown, Hold, VirtualUp, DeliverUp, Close };
+    std::array<Step, 16> steps{};
+    std::size_t count = 0;
+    bool fail_down_ack = false;
+    bool move_desktop_during_hold = false;
+    unsigned clicks = 0;
+
+    bool open(const Target&) noexcept override { return record(Open); }
+    std::optional<ClientExtent> client(const Target&) noexcept override { return ClientExtent{65536, 900}; }
+    bool begin_desktop_check() noexcept override { return true; }
+    bool desktop_unchanged() noexcept override { return desktop_unchanged_; }
+    bool position(std::uint16_t x, std::uint16_t y) noexcept override {
+        return x == 800 && y == 450 && record(Position);
+    }
+    bool move(std::uint16_t, std::uint16_t) noexcept override { return record(Move); }
+    bool virtual_left(bool pressed) noexcept override { return record(pressed ? VirtualDown : VirtualUp); }
+    bool deliver_left(bool pressed, std::uint16_t x, std::uint16_t y) noexcept override {
+        if (x != 800 || y != 450 || !record(pressed ? DeliverDown : DeliverUp))
+            return false;
+        if (pressed)
+            ++clicks;
+        return !pressed || !fail_down_ack;
+    }
+    bool hold_left() noexcept override {
+        desktop_unchanged_ = !move_desktop_during_hold;
+        return record(Hold);
+    }
+    void close() noexcept override { record(Close); }
+
+private:
+    bool desktop_unchanged_ = true;
+    bool record(Step step) noexcept {
+        if (count == steps.size())
+            return false;
+        steps[count++] = step;
+        return true;
+    }
+};
+
+void p83_sequence_smoke(const Target& target, const Frame& bind, const Frame& click) {
+    using Step = P83FixtureBridge::Step;
+    for (unsigned scenario = 0; scenario < 4; ++scenario) {
+        P83FixtureBridge bridge;
+        bridge.fail_down_ack = scenario == 1;
+        bridge.move_desktop_during_hold = scenario == 2;
+        P83InputEndpoint endpoint(bridge);
+        {
+            HostSession session(target, endpoint);
+            assert(session.handle(bind)->at(52) == 1);
+            auto request = click;
+            if (scenario == 3) {
+                request[44] = 0;
+                request[45] = 0x80;
+            }
+            assert(session.handle(request)->at(52) == (scenario == 0 ? 1 : 0));
+            assert(session.closed() == (scenario != 0));
+            if (scenario != 0)
+                assert(!session.handle(request));
+        }
+        const std::array<Step, 9> full{Step::Open, Step::Position, Step::Move, Step::VirtualDown,
+            Step::DeliverDown, Step::Hold, Step::VirtualUp, Step::DeliverUp, Step::Close};
+        const std::array<Step, 8> unacknowledged{Step::Open, Step::Position, Step::Move, Step::VirtualDown,
+            Step::DeliverDown, Step::VirtualUp, Step::DeliverUp, Step::Close};
+        if (scenario == 3) {
+            assert(bridge.count == 2 && bridge.steps[0] == Step::Open && bridge.steps[1] == Step::Close);
+            assert(bridge.clicks == 0);
+        } else if (scenario == 1) {
+            assert(bridge.count == unacknowledged.size() &&
+                std::equal(unacknowledged.begin(), unacknowledged.end(), bridge.steps.begin()));
+        } else {
+            assert(bridge.count == full.size() && std::equal(full.begin(), full.end(), bridge.steps.begin()));
+        }
+    }
+}
 
 int wire_smoke() {
     // Wire bytes emitted by the managed client for a fixed target and session.
@@ -86,6 +165,7 @@ int wire_smoke() {
         assert(!host.handle(click));
     }
     assert(endpoint.releases == 3);
+    p83_sequence_smoke(target, bind, click);
     const auto timeout_name = L"\\\\.\\pipe\\MaaQQFO.Input.Timeout." + std::to_wstring(GetCurrentProcessId());
     const auto timeout_pipe = create_local_input_pipe(timeout_name.c_str());
     assert(timeout_pipe != INVALID_HANDLE_VALUE);
@@ -93,7 +173,7 @@ int wire_smoke() {
     assert(!connect_local_pipe(timeout_pipe, 50));
     assert(GetTickCount64() - time_started < 5000);
     CloseHandle(timeout_pipe);
-    std::cout << "OFFLINE_PASS " << sizeof(void*) * 8 << "-bit wire, host bounds, failure, cleanup and timeout checks\n";
+    std::cout << "OFFLINE_PASS " << sizeof(void*) * 8 << "-bit wire, host, P8.3 sequence, cleanup and timeout checks\n";
     return 0;
 }
 
@@ -108,27 +188,12 @@ int pipe_fixture(const std::wstring& name, const std::wstring& wire_session) {
     const HANDLE pipe = create_local_input_pipe(path.c_str());
     if (pipe == INVALID_HANDLE_VALUE)
         return 3;
-    const auto transact = [&] {
-        if (!connect_local_pipe(pipe, 5000))
-            return 4;
-        FixtureEndpoint endpoint;
-        HostSession session(target, endpoint);
-        for (unsigned request_index = 0; request_index < 2; ++request_index) {
-            Frame frame{};
-            if (!read_input_frame(pipe, frame, 5000))
-                return 5;
-            const auto reply = session.handle(frame);
-            if (!reply || reply->at(52) != 1 || endpoint.clicks != request_index)
-                return 6;
-            if (!write_input_frame(pipe, *reply, 5000))
-                return 7;
-        }
-        Frame unexpected{};
-        return read_input_frame(pipe, unexpected, 5000) ? 8 : 0;
-    };
-    const auto result = transact();
+    P83FixtureBridge bridge;
+    P83InputEndpoint endpoint(bridge);
+    const auto result = serve_local_session(pipe, target, endpoint, {5000, 5000, 5000});
     CloseHandle(pipe);
-    return result;
+    return result == TransportResult::EndOfSession && bridge.clicks == 1 && bridge.count == 9 &&
+        bridge.steps[8] == P83FixtureBridge::Close ? 0 : 4;
 }
 
 int wmain(int argc, wchar_t** argv) {
