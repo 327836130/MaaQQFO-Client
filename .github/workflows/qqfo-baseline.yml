@@ -38,6 +38,11 @@ jobs:
           cmd /c tools\verify_native_input_protocol.cmd x86
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           cmd /c tools\verify_native_input_protocol.cmd x64
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          foreach ($arch in 'x86', 'x64') {
+            dotnet run --project QQFO/Tests/ManagedControllerSmoke/ManagedControllerSmoke.csproj -c Release -- bin/AnyCPU/Release/runtimes/win-x64/native --pipe-fixture "artifacts/a3-native/$arch.exe"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
       - name: Test configuration and screenshot options
         run: dotnet test MFAAvalonia.Core.Tests/MFAAvalonia.Core.Tests.csproj -c Release --logger "trx;LogFileName=core.trx"
       - name: Archive validated Windows development build

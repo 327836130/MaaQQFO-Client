@@ -20,3 +20,5 @@ Managed factory smoke added to CI. Continue with a versioned and bounded IPC bac
 A2 production path uses qqfo_input_session on a Win32 resource profile. Build ManagedControllerSmoke then run tools/owned_window_ipc_smoke.py with SDK executable, built smoke DLL and native directory. 21 core tests passed. Compatible native input host remains A3 work. Keep game-side validation pending P9 authorization.
 
 A3 has native frame validation and replay rejection. Run tools/verify_native_input_protocol.cmd x86 and x64. Next wire the native pipe host and validate a cross-process test peer before game-side input.
+
+Native x86 and x64 fixtures now run end-to-end over Windows named pipes. Reproduce with tools/verify_native_input_protocol.cmd for each architecture, then run the managed smoke with --pipe-fixture artifacts/a3-native/x86.exe or x64.exe. Production host/Proto Input still pending.

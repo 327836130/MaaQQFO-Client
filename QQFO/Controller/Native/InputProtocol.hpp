@@ -48,8 +48,8 @@ public:
         const auto id = read_le(frame, 8, 8);
         const auto x = read_le(frame, 44, 4);
         const auto y = read_le(frame, 48, 4);
-        if (id <= last_id_ || x > std::numeric_limits<std::int32_t>::max() ||
-            y > std::numeric_limits<std::int32_t>::max())
+        constexpr auto max_coordinate = (std::numeric_limits<std::int32_t>::max)();
+        if (id <= last_id_ || x > max_coordinate || y > max_coordinate)
             return std::nullopt;
         if (last_id_ == 0 ? operation != Operation::Bind || x != 0 || y != 0 : operation != Operation::Click)
             return std::nullopt;

@@ -3,6 +3,7 @@ using MaaFramework.Binding.Buffers;
 using MaaQQFO.Controller;
 using System;
 using System.Buffers.Binary;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
 using System.Runtime.InteropServices;
@@ -26,10 +27,16 @@ internal static class Program
 
     private static void Main(string[] args)
     {
-        Check(args.Length is 1 or 2, "Pass the Windows x64 native runtime directory and optional owned fixture HWND.");
+        Check(args.Length is 1 or 2 or 3, "Pass the native runtime directory and optional fixture arguments.");
         var runtime = Path.GetFullPath(args[0]);
         Check(File.Exists(Path.Combine(runtime, "MaaFramework.dll")), "Native runtime missing.");
         Check(SetDllDirectory(runtime), "Cannot set the native runtime search directory.");
+        if (args.Length == 3)
+        {
+            Check(args[1] == "--pipe-fixture", "Unknown fixture option.");
+            CheckNativePipeFixture(args[2]);
+            return;
+        }
         if (args.Length == 2 && OperatingSystem.IsWindows())
         {
             CheckOwnedWindowBridge((nint)long.Parse(args[1]));
@@ -51,6 +58,32 @@ internal static class Program
             Check(backend.DisposeCount == 1, "Backend release failed.");
         }
         Console.WriteLine("OFFLINE_PASS: managed QQFO factory, native callbacks, raw screenshot, client click and session release/recreate");
+    }
+
+    private static void CheckNativePipeFixture(string executable)
+    {
+        var session = Guid.NewGuid();
+        var info = new ProcessStartInfo(Path.GetFullPath(executable)) { UseShellExecute = false, CreateNoWindow = true };
+        info.ArgumentList.Add("--pipe-fixture");
+        info.ArgumentList.Add(session.ToString("N"));
+        info.ArgumentList.Add(Convert.ToHexStringLower(session.ToByteArray()));
+        using var host = Process.Start(info) ?? throw new InvalidOperationException("Cannot start native pipe fixture.");
+        try
+        {
+            using var client = new QqfoInputPipe(session, 123, 456);
+            Check(client.Connect(), "Native fixture handshake failed.");
+            Check(client.Click(new ClientPosition(800, 450)), "Native fixture click acknowledgement failed.");
+            Check(host.WaitForExit(5000) && host.ExitCode == 0, "Native fixture did not exit cleanly.");
+            Console.WriteLine($"OFFLINE_PASS: managed client -> native {Path.GetFileName(executable)} pipe peer, bind and Click acknowledgement");
+        }
+        finally
+        {
+            if (!host.HasExited)
+            {
+                host.Kill();
+                host.WaitForExit();
+            }
+        }
     }
 
     [SupportedOSPlatform("windows")]
