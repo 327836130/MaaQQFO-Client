@@ -33,6 +33,11 @@ jobs:
         run: python tools/controller_coordinate_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native
       - name: Check managed QQFO factory against native runtime
         run: dotnet run --project QQFO/Tests/ManagedControllerSmoke/ManagedControllerSmoke.csproj -c Release -- bin/AnyCPU/Release/runtimes/win-x64/native
+      - name: Check native input protocol on x86 and x64
+        run: |
+          cmd /c tools\verify_native_input_protocol.cmd x86
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmd /c tools\verify_native_input_protocol.cmd x64
       - name: Test configuration and screenshot options
         run: dotnet test MFAAvalonia.Core.Tests/MFAAvalonia.Core.Tests.csproj -c Release --logger "trx;LogFileName=core.trx"
       - name: Archive validated Windows development build

@@ -18,3 +18,5 @@ B1/B2 CI passed in run 45190167862. See a1-review-corrections.md and A12_NUGET_S
 Managed factory smoke added to CI. Continue with a versioned and bounded IPC backend, then register the QQFO factory in MaaProcessor.InitializeController using an explicit controller selection. Test adapter is never selected automatically. Cross-monitor DPI coverage is not available on the current one-monitor setup.
 
 A2 production path uses qqfo_input_session on a Win32 resource profile. Build ManagedControllerSmoke then run tools/owned_window_ipc_smoke.py with SDK executable, built smoke DLL and native directory. 21 core tests passed. Compatible native input host remains A3 work. Keep game-side validation pending P9 authorization.
+
+A3 has native frame validation and replay rejection. Run tools/verify_native_input_protocol.cmd x86 and x64. Next wire the native pipe host and validate a cross-process test peer before game-side input.

@@ -33,3 +33,5 @@ The first native smoke failed (missing bound resource); a1-native-smoke-first-fa
 Independent review of b2402a7 accepted A0 historical inventory and found B1/B2 defects in the prior CI toolchain and provenance. Treat older evidence as historical. The replacement CI must assert SDK 10.0.402 and match the checkout, head and base SHAs. B3 remains tracked in docs/engineering/A12_NUGET_SECURITY_GATE.md.
 
 A2 production client readiness: [owned-window capture and test pipe peer](a2-production-ipc.md) passed at 120 DPI. Locked build and 21 core tests passed. Awaiting native host and cross-DPI evidence.
+
+A3 [native wire verification](a3-input-protocol.md) passed on x86 and x64. Proto Input dispatch and game validation remain pending.

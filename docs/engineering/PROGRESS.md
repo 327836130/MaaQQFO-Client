@@ -41,3 +41,5 @@ A2 native Custom Controller owned-window fixture passed GDI and FramePool, four 
 A2 managed skeleton compiled in the desktop app. Added typed client-point callbacks, per-session backend ownership, three QQFO tests (18 total) and native managed factory smoke. Locked desktop build and factory connect/capture/click/release passed locally.
 
 2026-11-24 A2 production Win32 selection, capture and bounded same-user IPC compiled. 21 core tests and owned-window production client/peer smoke passed. Resolved duplicate constructor connecting and virtualized GetClientRect.
+
+A3 native wire decoder compiled and passed under MSVC x86 and x64. CI invokes the reproducible verification script for each target.
