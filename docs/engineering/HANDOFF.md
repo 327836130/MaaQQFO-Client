@@ -38,3 +38,5 @@ A4 Screenshot Test now uses the current QQFO tasker and shares its image coordin
 A5 pinned editor bridge read a synthetic Pipeline project from a loopback workspace. Rerun with `tools/verify_mpe_workspace.ps1 -Bridge <verified-mpelb.exe>`. Review `docs/validation/STAGE_A5_REVIEW.md` for the bundled runtime and controller gap before wiring editor debugging.
 
 A3 distinguishes idle clients from partial requests; reproduce with both native smoke architectures and managed `--pipe-fixture` checks. Continue with the concrete P8.3 bridge and owned-window attachment/detach verification. The real-client preparation checklist is in `docs/validation/A2_A3_LIVE_ACCEPTANCE.md`.
+
+The archived P8.3 owned-window run now passes. Use the hash, local log and scope in `docs/validation/a3-input-protocol.md` as a retest baseline for the concrete bridge.

@@ -26,4 +26,15 @@ The fixture tests passed the normal sequence, missing down acknowledgement clean
 
 The native session now distinguishes an idle connection from a partial frame. An authenticated bound client may stay idle while the target remains available. The host checks the target after each idle interval, terminates a stalled partial frame and releases on disconnect. The x86 and x64 cross-process tests wait 800 ms against a 500 ms partial-frame budget before sending Click, then verify clean host exit. Run the native smoke for each architecture to reproduce idle and partial-frame classification.
 
+The archived P8.3 `selftest` subsequently passed in an isolated copy with the three binary hashes rechecked. The run exercised two owned receiver processes with 144 DPI and 96 DPI awareness, window movement, disable/restore of physical cursor reads, detach and reattach. Four clicks matched the receiver screen coordinates, and the sampled physical cursor and foreground HWND stayed constant.
+
+| Receiver DPI | Client point | Expected and reported screen point |
+|---|---|---|
+| 144 | (300, 450) | (320, 480) |
+| 96 | (1250, 450) | (1270, 480) |
+| 144 after movement | (1250, 450) | (1320, 540) |
+| 144 after reattach | (300, 450) | (370, 540) |
+
+Local log: `artifacts/a3-p83-retest-3ea75236ef6345499777288e9acf24b7/logs/selftest-9604-5693890.jsonl`. SHA256 `f3885d02fb9836d8dd393fbc344ff8dfe329aae4753a916611b8ad27d54bd4c3`. The result covers the archived backend on owned windows. Cross-monitor DPI, the production host/bridge connection and actual game actions still require separate evidence.
+
 [Windows CI 45420020488](https://github.com/327836130/MaaQQFO-Client/actions/runs/45420020488) passed. The extracted TRX reports 21/21 tests. Test artifact `14933084438` and development package artifact `14933074736` contain byte-identical provenance, with SDK `10.0.402`, PR head `f9ec0ddeb1c1c1cb03b643977579d4c0f39084d0`, base `edfb87ac7a049a50b7921658cc206265c8b9e4e5` and PR test merge checkout `85f0f02316fff112b34ed9ba58154d4c104a589f`. The ZIP CRC and published SHA256 `f09038ab7a20777e1eca59e13b5f0c1be02b58e6a23f72c2c4cbefe95c8e158c` matched.
