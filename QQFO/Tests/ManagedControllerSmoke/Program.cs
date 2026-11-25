@@ -43,8 +43,8 @@ internal static class Program
         Check(SetDllDirectory(runtime), "Cannot set the native runtime search directory.");
         if (args.Length == 3)
         {
-            Check(args[1] == "--pipe-fixture", "Unknown fixture option.");
-            CheckNativePipeFixture(args[2]);
+            Check(args[1] is "--pipe-fixture" or "--p83-owned-fixture", "Unknown fixture option.");
+            CheckNativePipeFixture(args[2], args[1] == "--p83-owned-fixture" ? 2 : 1);
             return;
         }
         if (args.Length == 2 && OperatingSystem.IsWindows())
@@ -70,7 +70,7 @@ internal static class Program
         Console.WriteLine("OFFLINE_PASS: managed QQFO factory, native callbacks, raw screenshot, client click and session release/recreate");
     }
 
-    private static void CheckNativePipeFixture(string executable)
+    private static void CheckNativePipeFixture(string executable, int connectionCount)
     {
         var session = Guid.NewGuid();
         var info = new ProcessStartInfo(Path.GetFullPath(executable))
@@ -85,23 +85,29 @@ internal static class Program
         using var host = Process.Start(info) ?? throw new InvalidOperationException("Cannot start native pipe fixture.");
         try
         {
-            var identity = host.StandardOutput.ReadLineAsync().WaitAsync(TimeSpan.FromSeconds(5)).GetAwaiter().GetResult();
-            Check(ulong.TryParse(identity, out var hwnd) && hwnd != 0, "Native fixture did not create a window.");
-            using (var client = new QqfoInputPipe(session, checked((uint)host.Id), hwnd))
+            for (var connection = 0; connection < connectionCount; connection++)
             {
+                var identity = host.StandardOutput.ReadLineAsync().WaitAsync(TimeSpan.FromSeconds(10)).GetAwaiter().GetResult()?.Split(' ');
+                if (identity is not { Length: 2 } || !uint.TryParse(identity[0], out var pid) ||
+                    !ulong.TryParse(identity[1], out var hwnd) || pid == 0 || hwnd == 0)
+                    throw new InvalidOperationException("Native fixture did not announce an owned window.");
+                using var client = new QqfoInputPipe(session, pid, hwnd);
                 Check(client.Connect(), "Native fixture handshake failed.");
                 Thread.Sleep(800); // Exceed the native partial-frame budget while sending no bytes.
-                Check(!client.Click(new ClientPosition(1300, 450)), "Native host accepted a point outside the actual client window.");
+                Check(!client.Click(new ClientPosition(1400, 450)), "Native host accepted a point outside the actual client window.");
                 Check(client.Click(new ClientPosition(800, 450)), "Native fixture click acknowledgement failed.");
             }
-            Check(host.WaitForExit(5000) && host.ExitCode == 0, "Native fixture did not exit cleanly.");
-            Console.WriteLine($"OFFLINE_PASS: managed client -> native {Path.GetFileName(executable)} pipe peer, bind, idle and Click acknowledgement");
+            var exited = host.WaitForExit(10000);
+            Check(exited && host.ExitCode == 0, exited
+                ? $"Native fixture exited with code {host.ExitCode}."
+                : "Native fixture did not exit cleanly.");
+            Console.WriteLine($"OFFLINE_PASS: managed client -> native {Path.GetFileName(executable)}, {connectionCount} bind, idle, Click and release cycles");
         }
         finally
         {
             if (!host.HasExited)
             {
-                host.Kill();
+                host.Kill(entireProcessTree: true);
                 host.WaitForExit();
             }
         }

@@ -65,3 +65,5 @@ A3 archived P8.3 owned-window selftest passed at 144 and 96 DPI awareness, inclu
 A2 display scaling retested at 150% and 125%. The same QQ幻想 HWND returned raw GDI frames of 2400×1350 and 2000×1125, each matching its physical client rectangle. Owned GDI, FramePool and production IPC fixture checks passed at both scales.
 
 A3 native transport now validates an actual provisioned Windows target. Local x86/x64 checks passed for stale HWND, resize and out-of-bounds rejection through cross-process IPC.
+
+A3 integrated the archived P8.3 backend into the x86 owned-window host. The managed client passed two bind/idle/click/detach cycles on the same receiver, including screen-coordinate and restored-cursor reads.

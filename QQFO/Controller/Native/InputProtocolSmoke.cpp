@@ -232,7 +232,7 @@ int pipe_fixture(const std::wstring& name, const std::wstring& wire_session) {
         DestroyWindow(window);
         return 3;
     }
-    std::cout << target.hwnd << std::endl;
+    std::cout << target.pid << ' ' << target.hwnd << std::endl;
     P83FixtureBridge bridge;
     P83InputEndpoint endpoint(bridge);
     const auto result = serve_local_session(pipe, target, endpoint, {5000, 500, 5000});

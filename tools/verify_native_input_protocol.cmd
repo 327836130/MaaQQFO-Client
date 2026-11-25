@@ -10,4 +10,8 @@ if not exist artifacts\a3-native mkdir artifacts\a3-native
 cl /nologo /W4 /WX /std:c++17 /EHsc QQFO\Controller\Native\InputProtocolSmoke.cpp /Foartifacts\a3-native\%arch%.obj /Feartifacts\a3-native\%arch%.exe /link Advapi32.lib User32.lib
 if errorlevel 1 exit /b 1
 artifacts\a3-native\%arch%.exe
+if errorlevel 1 exit /b 1
+if /i "%arch%"=="x86" (
+    cl /nologo /W4 /WX /std:c++17 /EHsc QQFO\Controller\Native\P83OwnedHostSmoke.cpp /Foartifacts\a3-native\p83-owned.obj /Feartifacts\a3-native\p83-owned.exe /link Advapi32.lib User32.lib
+)
 exit /b %errorlevel%

@@ -51,3 +51,5 @@ A3 [input protocol](a3-input-protocol.md) passed idle, partial-frame and disconn
 A2 [same-monitor scale retest](a2-display-scale-retest.md) verified read-only live raw GDI dimensions and owned-window lifecycle/coordinate checks at 150% and 125%.
 
 A3 [native target checks](a3-input-protocol.md) passed with real owned Windows HWNDs on x86 and x64, including physical bounds and window replacement.
+
+A3 [archived P8.3 backend through the native host](a3-input-protocol.md#archived-backend-through-the-native-host) passed two real owned-window IPC/Click/detach cycles on Windows. Game-mode activation and input remain pending.

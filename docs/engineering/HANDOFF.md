@@ -44,3 +44,5 @@ The archived P8.3 owned-window run now passes. Use the hash, local log and scope
 A2 same-monitor 150% and 125% results are in `docs/validation/a2-display-scale-retest.md`. Keep live Click, connected DPI transition and cross-monitor acceptance open.
 
 A3 transport now pins its provisioned Win32 target and checks actual client dimensions before dispatch. Run both native verification architectures and managed `--pipe-fixture` checks. The next production dependency remains the concrete P8.3 attach/detach bridge.
+
+A3 owned-only concrete P8.3 bridge now passes through the native transport. Reproduce via `tools/verify_p83_owned_host.ps1` and the local archive. Continue with production provisioning and game-specific activation behavior. Keep actual game attachment subject to P9.
