@@ -47,6 +47,14 @@ jobs:
           }
       - name: Test configuration and screenshot options
         run: dotnet test MFAAvalonia.Core.Tests/MFAAvalonia.Core.Tests.csproj -c Release --logger "trx;LogFileName=core.trx"
+      - name: Check pinned MPE Pipeline workspace access
+        shell: pwsh
+        run: |
+          $bridge = Join-Path $env:RUNNER_TEMP 'mpelb-2.1.3.exe'
+          Invoke-WebRequest -Uri 'https://github.com/kqcoxn/MaaPipelineEditor/releases/download/v2.1.3/mpelb-windows-amd64.exe' -OutFile $bridge -TimeoutSec 60
+          $expected = 'E19CA120E29ECE046EF7F99675949F1049316366AEE72490E7214EE9EE9D1162'
+          if ((Get-FileHash -LiteralPath $bridge -Algorithm SHA256).Hash -ne $expected) { throw 'MPE Local Bridge archive pin did not match.' }
+          ./tools/verify_mpe_workspace.ps1 -Bridge $bridge
       - name: Archive validated Windows development build
         run: python tools/package_windows_baseline.py bin/AnyCPU/Release artifacts/baseline artifacts/build-provenance.json
       - uses: actions/upload-artifact@v4
@@ -61,3 +69,5 @@ jobs:
           path: |
             **/TestResults/*.trx
             artifacts/build-provenance.json
+            artifacts/a5-workspace-*/stdout.log
+            artifacts/a5-workspace-*/stderr.log
