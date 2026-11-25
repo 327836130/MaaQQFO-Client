@@ -27,6 +27,16 @@ internal static class Program
 
     private static void Main(string[] args)
     {
+        if (args is ["--window-identity-fixture"] && OperatingSystem.IsWindows())
+        {
+            QqfoWindowIdentitySmoke.RunFixture();
+            return;
+        }
+        if (args is ["--window-identity"] && OperatingSystem.IsWindows())
+        {
+            QqfoWindowIdentitySmoke.Verify();
+            return;
+        }
         Check(args.Length is 1 or 2 or 3, "Pass the native runtime directory and optional fixture arguments.");
         var runtime = Path.GetFullPath(args[0]);
         Check(File.Exists(Path.Combine(runtime, "MaaFramework.dll")), "Native runtime missing.");

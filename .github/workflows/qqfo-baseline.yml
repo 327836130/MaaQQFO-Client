@@ -33,6 +33,8 @@ jobs:
         run: python tools/controller_coordinate_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native
       - name: Check managed QQFO factory against native runtime
         run: dotnet run --project QQFO/Tests/ManagedControllerSmoke/ManagedControllerSmoke.csproj -c Release -- bin/AnyCPU/Release/runtimes/win-x64/native
+      - name: Check owned QQFO window identities
+        run: dotnet run --project QQFO/Tests/ManagedControllerSmoke/ManagedControllerSmoke.csproj -c Release -- --window-identity
       - name: Check native input protocol on x86 and x64
         run: |
           cmd /c tools\verify_native_input_protocol.cmd x86
