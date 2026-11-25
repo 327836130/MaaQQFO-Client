@@ -57,7 +57,8 @@ inline HANDLE create_local_input_pipe(const wchar_t* name) {
 
 // The event and buffer remain alive until the requested I/O (including cancellation) finishes.
 template <typename Begin>
-inline bool bounded_pipe_io(HANDLE pipe, DWORD timeout, Begin begin, DWORD& transferred) noexcept {
+inline bool bounded_pipe_io(HANDLE pipe, DWORD timeout, Begin begin, DWORD& transferred,
+                            bool* timed_out = nullptr) noexcept {
     const HANDLE event = CreateEventW(nullptr, TRUE, FALSE, nullptr);
     if (event == nullptr)
         return false;
@@ -68,10 +69,14 @@ inline bool bounded_pipe_io(HANDLE pipe, DWORD timeout, Begin begin, DWORD& tran
         return true;
     if (GetLastError() != ERROR_IO_PENDING)
         return false;
-    if (WaitForSingleObject(event, timeout) == WAIT_OBJECT_0)
+    const auto wait = WaitForSingleObject(event, timeout);
+    if (wait == WAIT_OBJECT_0)
         return GetOverlappedResult(pipe, &operation, &transferred, FALSE) != FALSE;
     CancelIoEx(pipe, &operation);
-    GetOverlappedResult(pipe, &operation, &transferred, TRUE);
+    if (GetOverlappedResult(pipe, &operation, &transferred, TRUE))
+        return true; // Completion can race the deadline and consume bytes.
+    if (timed_out)
+        *timed_out = wait == WAIT_TIMEOUT && GetLastError() == ERROR_OPERATION_ABORTED;
     return false;
 }
 
@@ -82,22 +87,32 @@ inline bool connect_local_pipe(HANDLE pipe, DWORD timeout) noexcept {
     }, unused);
 }
 
-inline bool read_input_frame(HANDLE pipe, Frame& frame, DWORD timeout) noexcept {
+enum class FrameRead { Complete, Idle, Failed };
+
+inline FrameRead read_input_frame(HANDLE pipe, Frame& frame, DWORD timeout) noexcept {
+    // An idle client has not sent a request. Once a byte arrives, bound the remaining frame assembly.
+    DWORD first_byte = 0;
+    bool idle = false;
+    if (!bounded_pipe_io(pipe, timeout, [&](OVERLAPPED& operation) {
+        return ReadFile(pipe, frame.data(), 1, &first_byte, &operation) != FALSE;
+    }, first_byte, &idle) || first_byte != 1)
+        return idle ? FrameRead::Idle : FrameRead::Failed;
+
     const auto deadline = GetTickCount64() + timeout;
     const auto size = static_cast<DWORD>(frame.size());
-    DWORD offset = 0;
+    DWORD offset = first_byte;
     while (offset < size) {
         const auto now = GetTickCount64();
         if (now >= deadline)
-            return false;
+            return FrameRead::Failed;
         DWORD transferred = 0;
         if (!bounded_pipe_io(pipe, static_cast<DWORD>(deadline - now), [&](OVERLAPPED& operation) {
             return ReadFile(pipe, frame.data() + offset, size - offset, &transferred, &operation) != FALSE;
         }, transferred) || transferred == 0)
-            return false;
+            return FrameRead::Failed;
         offset += transferred;
     }
-    return true;
+    return FrameRead::Complete;
 }
 
 inline bool write_input_frame(HANDLE pipe, const Frame& frame, DWORD timeout) noexcept {

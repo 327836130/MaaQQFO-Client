@@ -57,3 +57,5 @@ A3 P8.3 sequence endpoint and reusable local connection loop passed x86/x64 test
 A4 reused the existing Screenshot page for fresh capture from the selected QQFO Pipeline controller, guarded publication across target changes, and added image size and preview-pixel inspection. Local locked Windows build and 27 core tests passed.
 
 A5 verified the v2.1.3 release ZIP hash and Local Bridge version. The loopback smoke read the synthetic Pipeline fixture. The bundled MaaFramework 5.16.1 and the generic Win32 controller path are recorded as compatibility items.
+
+A3 native IPC handles idle clients without expiring healthy sessions and still rejects partial frames on their deadline. x86/x64 managed/native integration passed. A2/A3 live acceptance preparation is documented.

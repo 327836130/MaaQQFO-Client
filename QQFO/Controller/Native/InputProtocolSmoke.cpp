@@ -138,13 +138,16 @@ int wire_smoke() {
     FixtureEndpoint endpoint;
     {
         HostSession host(target, endpoint);
+        assert(!host.can_wait_for_request());
         assert(host.handle(bind)->at(52) == 1);
+        assert(host.can_wait_for_request());
         endpoint.extent = ClientExtent{720, 480};
         assert(host.handle(click)->at(52) == 0 && endpoint.clicks == 0 && !host.closed());
         endpoint.extent = ClientExtent{1600, 900};
         click[8] = 3;
         assert(host.handle(click)->at(52) == 1 && endpoint.clicks == 1);
         endpoint.extent = std::nullopt;
+        assert(!host.can_wait_for_request());
         click[8] = 4;
         assert(host.handle(click)->at(52) == 0 && host.closed() && endpoint.clicks == 1);
     }
@@ -172,6 +175,16 @@ int wire_smoke() {
     const auto time_started = GetTickCount64();
     assert(!connect_local_pipe(timeout_pipe, 50));
     assert(GetTickCount64() - time_started < 5000);
+    const auto client = CreateFileW(timeout_name.c_str(), GENERIC_READ | GENERIC_WRITE, 0,
+        nullptr, OPEN_EXISTING, 0, nullptr);
+    assert(client != INVALID_HANDLE_VALUE);
+    assert(connect_local_pipe(timeout_pipe, 500));
+    Frame partial{};
+    assert(read_input_frame(timeout_pipe, partial, 50) == FrameRead::Idle);
+    DWORD written = 0;
+    assert(WriteFile(client, bind.data(), 1, &written, nullptr) && written == 1);
+    assert(read_input_frame(timeout_pipe, partial, 50) == FrameRead::Failed);
+    CloseHandle(client);
     CloseHandle(timeout_pipe);
     std::cout << "OFFLINE_PASS " << sizeof(void*) * 8 << "-bit wire, host, P8.3 sequence, cleanup and timeout checks\n";
     return 0;
@@ -190,7 +203,7 @@ int pipe_fixture(const std::wstring& name, const std::wstring& wire_session) {
         return 3;
     P83FixtureBridge bridge;
     P83InputEndpoint endpoint(bridge);
-    const auto result = serve_local_session(pipe, target, endpoint, {5000, 5000, 5000});
+    const auto result = serve_local_session(pipe, target, endpoint, {5000, 500, 5000});
     CloseHandle(pipe);
     return result == TransportResult::EndOfSession && bridge.clicks == 1 && bridge.count == 9 &&
         bridge.steps[8] == P83FixtureBridge::Close ? 0 : 4;

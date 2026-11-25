@@ -83,10 +83,11 @@ internal static class Program
             using (var client = new QqfoInputPipe(session, 123, 456))
             {
                 Check(client.Connect(), "Native fixture handshake failed.");
+                Thread.Sleep(800); // Exceed the native partial-frame budget while sending no bytes.
                 Check(client.Click(new ClientPosition(800, 450)), "Native fixture click acknowledgement failed.");
             }
             Check(host.WaitForExit(5000) && host.ExitCode == 0, "Native fixture did not exit cleanly.");
-            Console.WriteLine($"OFFLINE_PASS: managed client -> native {Path.GetFileName(executable)} pipe peer, bind and Click acknowledgement");
+            Console.WriteLine($"OFFLINE_PASS: managed client -> native {Path.GetFileName(executable)} pipe peer, bind, idle and Click acknowledgement");
         }
         finally
         {

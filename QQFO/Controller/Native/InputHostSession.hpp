@@ -59,6 +59,9 @@ public:
     }
 
     bool closed() const noexcept { return closed_; }
+    bool can_wait_for_request() noexcept {
+        return release_needed_ && !closed_ && endpoint_.current_client(target_).has_value();
+    }
 
     void close() noexcept {
         closed_ = true;

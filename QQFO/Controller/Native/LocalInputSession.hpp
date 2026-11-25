@@ -22,7 +22,10 @@ inline TransportResult serve_local_session(HANDLE pipe, Target target, InputEndp
     HostSession session(target, endpoint);
     while (!session.closed()) {
         Frame frame{};
-        if (!read_input_frame(pipe, frame, timeouts.read_ms))
+        const auto read = read_input_frame(pipe, frame, timeouts.read_ms);
+        if (read == FrameRead::Idle && session.can_wait_for_request())
+            continue;
+        if (read != FrameRead::Complete)
             return TransportResult::EndOfSession;
         const auto reply = session.handle(frame);
         if (!reply)

@@ -45,3 +45,5 @@ A4 [window selection checkpoint](STAGE_A4_REVIEW.md) covers unresolved candidate
 A4 [shared screenshot test](STAGE_A4_REVIEW.md#shared-screenshot-test) compiles into the desktop client. Preview coordinate regressions passed within the 27-test core suite. Live validation remains pending.
 
 A5 [MPE workspace checkpoint](STAGE_A5_REVIEW.md) passed the v2.1.3 loopback Pipeline JSON read. Runtime, recognition and input alignment remain pending.
+
+A3 [input protocol](a3-input-protocol.md) passed idle, partial-frame and disconnect coverage on x86 and x64. [A2/A3 live checklist](A2_A3_LIVE_ACCEPTANCE.md) records pending real-client gates.
