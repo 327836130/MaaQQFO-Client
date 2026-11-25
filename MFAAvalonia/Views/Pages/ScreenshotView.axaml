@@ -37,7 +37,9 @@
         </Grid>
         <Grid Grid.Row="0">
             <Image x:Name="image" Margin="20" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Source="{Binding ScreenshotImage}" />
+                   Source="{Binding ScreenshotImage}" PointerPressed="InspectImagePosition" />
+            <TextBlock x:Name="ImagePositionText" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+            <TextBlock Text="{Binding ScreenshotPixelSize}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
 
             <TextBlock Text="{Binding TaskName}" FontWeight="Bold"
                        HorizontalAlignment="Center"

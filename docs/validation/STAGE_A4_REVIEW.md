@@ -8,4 +8,10 @@ Run `dotnet test MFAAvalonia.Core.Tests/MFAAvalonia.Core.Tests.csproj -c Release
 
 Run `dotnet run --project QQFO/Tests/ManagedControllerSmoke/ManagedControllerSmoke.csproj -c Release -- --window-identity` on Windows after building the desktop project. The local smoke validated that two same-title windows owned by a fixture process resolve to distinct window identities and that both stop resolving after the process exits. The workflow runs this same smoke. It uses only windows created by the fixture process.
 
-Live role names, map, stable IDs and multi-window validation remain pending. The shared test pages and profile migration checks are also pending.
+## Shared screenshot test
+
+Connect a QQFO window and leave its Pipeline idle. Open the Screenshot page and choose Screenshot Test. This requests a fresh frame through the current Pipeline controller. A frame from an old controller/target is discarded if the selection changes during capture. The preview reports its image dimensions. Press a point on the preview to see the corresponding MaaImage pixel. Saving exports the tested PNG frame.
+
+SDK 10.0.402 locked Windows desktop build succeeded. All 27 core tests passed, including center, edge and letterbox cases. The interactive page with a live QQ幻想 controller remains unverified.
+
+Live role fields, the remaining shared test pages, multi-window validation and profile migration checks remain pending.

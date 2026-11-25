@@ -9,6 +9,7 @@ using MFAAvalonia.Helper;
 using MFAAvalonia.Helper.ValueType;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Bitmap = Avalonia.Media.Imaging.Bitmap;
 
 namespace MFAAvalonia.ViewModels.Pages;
@@ -16,22 +17,51 @@ namespace MFAAvalonia.ViewModels.Pages;
 public partial class ScreenshotViewModel : ViewModelBase
 {
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-    [ObservableProperty] private Bitmap? _screenshotImage;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ScreenshotPixelSize))]
+    private Bitmap? _screenshotImage;
+    public string? ScreenshotPixelSize => ScreenshotImage is { PixelSize: var pixels }
+        ? $"{pixels.Width} × {pixels.Height} px"
+        : null;
     [ObservableProperty] private string _taskName = string.Empty;
     [RelayCommand]
-    private void Screenshot()
+    private async Task Screenshot()
     {
-        // if (Instances.TaskQueueViewModel.Processor.MaaTasker == null)
-        // {
-        //     ToastHelper.Warn(LangKeys.Warning.ToLocalization(), (Instances.TaskQueueViewModel.CurrentController == MaaControllerTypes.Adb
-        //         ? LangKeys.Emulator.ToLocalization()
-        //         : LangKeys.Window.ToLocalization()) + LangKeys.Unconnected.ToLocalization() + "!");
-        //     return;
-        // }
         try
         {
             var vm = Instances.InstanceTabBarViewModel.ActiveTab?.TaskQueueViewModel;
             if (vm == null) return;
+            if (vm.Processor.UsesQqfoInputSession)
+            {
+                var target = vm.Processor.Config.DesktopWindow.QqfoTarget;
+                var tasker = vm.Processor.MaaTasker;
+                var previous = ScreenshotImage;
+                ScreenshotImage = null;
+                previous?.Dispose();
+                TaskName = string.Empty;
+                if (target == null || tasker == null || !vm.IsConnected)
+                {
+                    ToastHelper.Warn(LangKeys.Window.ToLocalization(), LangKeys.Unconnected.ToLocalization());
+                    return;
+                }
+                var image = await Task.Run(vm.Processor.CaptureQqfoTestScreenshot);
+                if (Instances.InstanceTabBarViewModel.ActiveTab?.TaskQueueViewModel != vm
+                    || vm.Processor.Config.DesktopWindow.QqfoTarget != target
+                    || !ReferenceEquals(tasker, vm.Processor.MaaTasker))
+                {
+                    image?.Dispose();
+                    return;
+                }
+                if (image == null)
+                    ToastHelper.Warn(LangKeys.ScreenshotFailed.ToLocalization());
+                else
+                {
+                    var replaced = ScreenshotImage;
+                    ScreenshotImage = image;
+                    replaced?.Dispose();
+                }
+                return;
+            }
 
             if (vm.Processor.MaaTasker is not { IsInitialized: true })
             {
@@ -89,9 +119,9 @@ public partial class ScreenshotViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void SaveScreenshot()
+    private async Task SaveScreenshot()
     {
-        if (ScreenshotImage == null)
+        if (ScreenshotImage is not { } image)
         {
             ToastHelper.Warn(LangKeys.Warning.ToLocalization(), LangKeys.ScreenshotEmpty.ToLocalization());
             return;
@@ -115,10 +145,13 @@ public partial class ScreenshotViewModel : ViewModelBase
             return;
         }
 
-        if (storageProvider.SaveFilePickerAsync(options).Result is { } result && result.TryGetLocalPath() is { } path)
-        {
-            using var stream = File.Create(path);
-            ScreenshotImage.Save(stream);
-        }
+        using var png = new MemoryStream();
+        image.Save(png);
+        png.Position = 0;
+        if (await storageProvider.SaveFilePickerAsync(options) is not { } result || result.TryGetLocalPath() is not { } path)
+            return;
+
+        await using var stream = File.Create(path);
+        await png.CopyToAsync(stream);
     }
 }

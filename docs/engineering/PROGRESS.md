@@ -53,3 +53,5 @@ P8.3 archived fixture SHA256 verified. Two 2026-11-24 selftest attempts aborted 
 A3 P8.3 sequence endpoint and reusable local connection loop passed x86/x64 tests, including release after missing Down acknowledgement, desktop changes, coordinate overflow, and process disconnect.
 
 2026-11-25 A3 Windows CI 45420020488 passed at `f9ec0dd`. Development ZIP checksum and provenance matched test artifacts. A4 QQFO Win32 discovery lists unresolved QQ幻想 candidates and keeps selection only for the same window and process instance. Local core suite passed 23 tests.
+
+A4 reused the existing Screenshot page for fresh capture from the selected QQFO Pipeline controller, guarded publication across target changes, and added image size and preview-pixel inspection. Local locked Windows build and 27 core tests passed.
