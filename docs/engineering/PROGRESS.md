@@ -51,3 +51,5 @@ A3 added native host session and same-account pipe transport. Verified resize-bo
 P8.3 archived fixture SHA256 verified. Two 2026-11-24 selftest attempts aborted on physical desktop movement. Host lifecycle/IPC tests passed independently.
 
 A3 P8.3 sequence endpoint and reusable local connection loop passed x86/x64 tests, including release after missing Down acknowledgement, desktop changes, coordinate overflow, and process disconnect.
+
+2026-11-25 A3 Windows CI 45420020488 passed at `f9ec0dd`. Development ZIP checksum and provenance matched test artifacts. A4 QQFO Win32 discovery lists unresolved QQ幻想 candidates and keeps selection only for the same window and process instance. Local core suite passed 23 tests.

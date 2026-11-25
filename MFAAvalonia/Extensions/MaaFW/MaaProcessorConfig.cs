@@ -1,4 +1,5 @@
 using MaaFramework.Binding;
+using MaaQQFO.Controller;
 
 namespace MFAAvalonia.Extensions.MaaFW;
 
@@ -21,6 +22,7 @@ public class MaaFWConfiguration
 /// </summary>
 public class DesktopWindowCoreConfig
 {
+    internal QqfoWindowIdentity? QqfoTarget { get; set; }
     public string Name { get; set; } = string.Empty;
     public nint HWnd { get; set; }
     public Win32InputMethod Mouse { get; set; } = Win32InputMethod.SendMessage;

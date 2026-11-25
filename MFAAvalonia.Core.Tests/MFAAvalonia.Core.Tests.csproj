@@ -15,6 +15,7 @@
   <ItemGroup>
     <Compile Include="../QQFO/Controller/QqfoController.cs" Link="QqfoController.cs" />
     <Compile Include="../QQFO/Controller/QqfoInputPipe.cs" Link="QqfoInputPipe.cs" />
+    <Compile Include="../QQFO/Controller/QqfoWindowIdentity.cs" Link="QqfoWindowIdentity.cs" />
     <Compile Include="../MFAAvalonia/Extensions/MaaFW/MaaProcessorConfig.cs" Link="MaaProcessorConfig.cs" />
     <Compile Include="../MFAAvalonia/Extensions/MaaFW/MaaControllerScreenshotOptions.cs" Link="MaaControllerScreenshotOptions.cs" />
   </ItemGroup>

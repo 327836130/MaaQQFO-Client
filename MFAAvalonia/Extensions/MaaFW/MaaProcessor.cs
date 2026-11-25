@@ -1098,6 +1098,8 @@ public class MaaProcessor
                    string.Equals(controller.Type, controllerType.ToJsonKey(), StringComparison.OrdinalIgnoreCase));
     }
 
+    internal bool UsesQqfoInputSession => GetCurrentInterfaceController()?.QqfoInputSession is not null;
+
     private bool UseSeparateScreenshotTasker =>
         !PlatformControllerFactory.CanInitializeWithoutDevice
         // Win32 controllers must share the owner of pseudo-minimized window state.
@@ -2294,8 +2296,11 @@ public class MaaProcessor
             if (!OperatingSystem.IsWindows() || controllerType != MaaControllerTypes.Win32 ||
                 !Guid.TryParseExact(qqfoSession, "N", out var session) || session == Guid.Empty)
                 throw new MaaException("QQFO 输入会话要求 Win32 控制器和有效的会话标识");
+            var target = Config.DesktopWindow.QqfoTarget;
+            if (target is null || target != QqfoWindowIdentity.Read(target.Handle))
+                throw new MaaException("请刷新并选择当前的 QQ幻想窗口");
             return QqfoControllerFactory.Create($"qqfo-{session:N}",
-                new QqfoWindowsBackend(Config.DesktopWindow.HWnd, session, Config.DesktopWindow.ScreenCap));
+                new QqfoWindowsBackend(target.Handle, session, Config.DesktopWindow.ScreenCap, target));
         }
 
         var platformController = PlatformControllerFactory.TryCreate(controllerType);

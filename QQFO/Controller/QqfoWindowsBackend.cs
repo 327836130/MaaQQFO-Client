@@ -11,23 +11,27 @@ internal sealed class QqfoWindowsBackend : IQqfoControllerBackend
 {
     private readonly nint _hwnd;
     private readonly uint _pid;
+    private readonly QqfoWindowIdentity? _target;
     private readonly MaaWin32Controller _capture;
     private readonly QqfoInputPipe _input;
     private bool _linked;
     private int _width;
     private int _height;
 
-    internal QqfoWindowsBackend(nint hwnd, Guid session, Win32ScreencapMethods captureMethod)
+    internal QqfoWindowsBackend(nint hwnd, Guid session, Win32ScreencapMethods captureMethod, QqfoWindowIdentity? target = null)
     {
         if (session == Guid.Empty || hwnd == 0 || GetWindowThreadProcessId(hwnd, out _pid) == 0)
             throw new ArgumentException("QQFO requires a live target window and an explicit IPC session.");
         _hwnd = hwnd;
+        _target = target;
         _capture = new MaaWin32Controller(hwnd, captureMethod, Win32InputMethod.PostMessage,
             Win32InputMethod.PostMessage, LinkOption.None);
         _input = new QqfoInputPipe(session, _pid, unchecked((ulong)hwnd));
     }
 
-    private bool SameWindow => GetWindowThreadProcessId(_hwnd, out var pid) != 0 && pid == _pid;
+    private bool SameWindow => _target is { } target
+        ? target == QqfoWindowIdentity.Read(_hwnd)
+        : GetWindowThreadProcessId(_hwnd, out var pid) != 0 && pid == _pid;
     public bool Connected => _linked && _input.Connected && SameWindow;
 
     public bool Connect()

@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MaaFramework.Binding;
 using MaaFramework.Binding.Buffers;
+using MaaQQFO.Controller;
 using MFAAvalonia.Configuration;
 using MFAAvalonia.Extensions;
 using MFAAvalonia.Extensions.MaaFW;
@@ -1427,7 +1428,10 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
     }
 
     private static bool IsSelectableDevice(object? value) =>
-        value is AdbDeviceInfo or DesktopWindowInfo or MacOSWindowInfo or WlRootsSocketInfo;
+        value is AdbDeviceInfo or DesktopWindowInfo or QqfoWindowCandidate or MacOSWindowInfo or WlRootsSocketInfo;
+
+    private bool UsesQqfoWindowSelection => CurrentController == MaaControllerTypes.Win32
+        && Processor.UsesQqfoInputSession;
 
     private static EmptyDevicePlaceholder CreateEmptyDevicePlaceholder(MaaControllerTypes controllerType) =>
         controllerType == MaaControllerTypes.Adb
@@ -1538,6 +1542,7 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
             // Keep the saved class/title matching rules, but never let a stale
             // HWND reach MaaWin32Controller when discovery found no window.
             Processor.Config.DesktopWindow.HWnd = IntPtr.Zero;
+            Processor.Config.DesktopWindow.QqfoTarget = null;
         }
 
         var placeholder = CreateEmptyDevicePlaceholder(resolvedControllerType);
@@ -1613,6 +1618,8 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
     public void ChangedDevice(object? value)
     {
         if (_isSyncing) return;
+        if (value is not QqfoWindowCandidate)
+            Processor.Config.DesktopWindow.QqfoTarget = null;
         var igoreToast = _suppressDeviceSelectionToast;
         if (value != null)
         {
@@ -1644,6 +1651,20 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
             Processor.InstanceConfiguration.SetValue(ConfigurationKeys.DesktopWindowName, macOSWindow.Name);
             if (!Processor.IsConnecting && !isSameWindow)
                 ResetTaskerInBackground();
+        }
+        else if (value is QqfoWindowCandidate candidate)
+        {
+            var config = Processor.Config.DesktopWindow;
+            var isSameWindow = config.QqfoTarget == candidate.Identity;
+            config.Name = candidate.Title;
+            config.HWnd = candidate.Identity.Handle;
+            config.QqfoTarget = candidate.Identity;
+            if (!isSameWindow)
+            {
+                SetConnected(false);
+                if (!Processor.IsConnecting)
+                    ResetTaskerInBackground();
+            }
         }
         else if (value is DesktopWindowInfo window)
         {
@@ -1948,6 +1969,14 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
     /// </summary>
     public bool IsCurrentWin32WindowValid()
     {
+        if (UsesQqfoWindowSelection)
+        {
+            return OperatingSystem.IsWindows()
+                && CurrentDevice is QqfoWindowCandidate candidate
+                && Processor.Config.DesktopWindow.QqfoTarget == candidate.Identity
+                && QqfoWindowIdentity.Read(candidate.Identity.Handle) == candidate.Identity;
+        }
+
         if (CurrentController != MaaControllerTypes.Win32
             || CurrentDevice is not DesktopWindowInfo selectedWindow
             || selectedWindow.Handle == IntPtr.Zero)
@@ -1995,6 +2024,7 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
             try
             {
                 Processor.Config.DesktopWindow.HWnd = IntPtr.Zero;
+                Processor.Config.DesktopWindow.QqfoTarget = null;
                 CurrentDevice = null;
             }
             finally
@@ -2008,7 +2038,7 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
     private async Task<bool> RefreshConnectionTargetIfNeededAsync()
     {
         var staleWin32Window = CurrentController == MaaControllerTypes.Win32
-            && CurrentDevice is DesktopWindowInfo
+            && CurrentDevice is (DesktopWindowInfo or QqfoWindowCandidate)
             && !IsCurrentWin32WindowValid();
         if (!NeedsRefreshBeforeReconnect())
             return false;
@@ -2146,7 +2176,7 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
         var isAdb = controllerType == MaaControllerTypes.Adb;
 
         if (controllerType == MaaControllerTypes.Win32
-            && CurrentDevice is DesktopWindowInfo
+            && CurrentDevice is (DesktopWindowInfo or QqfoWindowCandidate)
             && !IsCurrentWin32WindowValid())
         {
             InvalidateCurrentWin32Window();
@@ -2304,7 +2334,19 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
     private (ObservableCollection<object> devices, int index) DetectDesktopWindows(MaaControllerTypes controllerType)
     {
         Thread.Sleep(500);
-        var windows = MaaProcessor.Toolkit.Desktop.Window.Find().Where(win => !string.IsNullOrWhiteSpace(win.Name)).ToList();
+        var windows = MaaProcessor.Toolkit.Desktop.Window.Find().ToList();
+        if (controllerType == MaaControllerTypes.Win32 && UsesQqfoWindowSelection && OperatingSystem.IsWindows())
+        {
+            var previous = (CurrentDevice as QqfoWindowCandidate)?.Identity;
+            var candidates = new List<QqfoWindowCandidate>();
+            foreach (var window in windows.DistinctBy(window => window.Handle))
+            {
+                if (QqfoWindowIdentity.Read(window.Handle) is { } identity)
+                    candidates.Add(new(identity, window.Name ?? string.Empty));
+            }
+            return (new(candidates), QqfoWindowCandidate.FindSelection(candidates, previous));
+        }
+        windows.RemoveAll(window => string.IsNullOrWhiteSpace(window.Name));
         var (index, filtered) = CalculateWindowIndex(windows, controllerType);
         return (new(filtered), index);
     }
@@ -2546,6 +2588,11 @@ public partial class TaskQueueViewModel : ViewModelBase, IDisposable
                 else
                 {
                     Devices = devices;
+                    if (UsesQqfoWindowSelection && (index < 0 || index >= devices.Count))
+                    {
+                        Processor.Config.DesktopWindow.HWnd = IntPtr.Zero;
+                        Processor.Config.DesktopWindow.QqfoTarget = null;
+                    }
                     if (CurrentController == MaaControllerTypes.Adb && _lockCurrentAdbSelectionDuringRecovery)
                     {
                         LoggerHelper.Info("恢复已保存模拟器期间仅刷新设备列表，保留当前选中目标不变。");
