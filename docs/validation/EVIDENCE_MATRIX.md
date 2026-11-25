@@ -49,3 +49,5 @@ A5 [MPE workspace checkpoint](STAGE_A5_REVIEW.md) passed the v2.1.3 loopback Pip
 A3 [input protocol](a3-input-protocol.md) passed idle, partial-frame and disconnect coverage on x86 and x64. [A2/A3 live checklist](A2_A3_LIVE_ACCEPTANCE.md) records pending real-client gates.
 
 A2 [same-monitor scale retest](a2-display-scale-retest.md) verified read-only live raw GDI dimensions and owned-window lifecycle/coordinate checks at 150% and 125%.
+
+A3 [native target checks](a3-input-protocol.md) passed with real owned Windows HWNDs on x86 and x64, including physical bounds and window replacement.

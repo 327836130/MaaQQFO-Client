@@ -42,3 +42,5 @@ A3 distinguishes idle clients from partial requests; reproduce with both native 
 The archived P8.3 owned-window run now passes. Use the hash, local log and scope in `docs/validation/a3-input-protocol.md` as a retest baseline for the concrete bridge.
 
 A2 same-monitor 150% and 125% results are in `docs/validation/a2-display-scale-retest.md`. Keep live Click, connected DPI transition and cross-monitor acceptance open.
+
+A3 transport now pins its provisioned Win32 target and checks actual client dimensions before dispatch. Run both native verification architectures and managed `--pipe-fixture` checks. The next production dependency remains the concrete P8.3 attach/detach bridge.

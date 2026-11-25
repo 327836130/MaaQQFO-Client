@@ -104,7 +104,33 @@ void p83_sequence_smoke(const Target& target, const Frame& bind, const Frame& cl
     }
 }
 
+static HWND fixture_window() {
+    return CreateWindowExW(WS_EX_NOACTIVATE, L"STATIC", L"MaaQQFO host fixture", WS_POPUP,
+        0, 0, 1200, 700, nullptr, nullptr, GetModuleHandleW(nullptr), nullptr);
+}
+
+static void windows_target_smoke() {
+    const auto old = fixture_window();
+    assert(old);
+    const auto handle = reinterpret_cast<std::uintptr_t>(old);
+    const auto pid = GetCurrentProcessId();
+    const WindowsInputTarget wrong_pid(Target{{}, handle, pid + 1});
+    assert(!wrong_pid.current());
+    const WindowsInputTarget target(Target{{}, handle, pid});
+    assert(target.current());
+    assert(target.client()->width == 1200 && target.client()->height == 700);
+    assert(SetWindowPos(old, nullptr, 0, 0, 900, 600, SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER));
+    assert(target.client()->width == 900 && target.client()->height == 600);
+    assert(DestroyWindow(old));
+    const auto replacement = fixture_window();
+    assert(replacement && replacement != old && !target.current() && !target.client());
+    const WindowsInputTarget fresh(Target{{}, reinterpret_cast<std::uintptr_t>(replacement), pid});
+    assert(fresh.current());
+    assert(DestroyWindow(replacement));
+}
+
 int wire_smoke() {
+    windows_target_smoke();
     // Wire bytes emitted by the managed client for a fixed target and session.
     Frame bind{0x51,0x4f,0x46,0x31,1,0,1,0,1,0,0,0,0,0,0,0,
         0x33,0x22,0x11,0x00,0x55,0x44,0x77,0x66,0x88,0x99,0xaa,0xbb,0xcc,0xdd,0xee,0xff,
@@ -194,22 +220,31 @@ int pipe_fixture(const std::wstring& name, const std::wstring& wire_session) {
     if (wire_session.size() != 32 || wire_session.find_first_not_of(L"0123456789abcdef") != std::wstring::npos ||
         name.size() != 32 || name.find_first_not_of(L"0123456789abcdef") != std::wstring::npos)
         return 2;
-    Target target{{}, 456, 123};
+    const auto window = fixture_window();
+    if (!window)
+        return 3;
+    Target target{{}, reinterpret_cast<std::uintptr_t>(window), GetCurrentProcessId()};
     for (std::size_t i = 0; i < target.session.size(); ++i)
         target.session[i] = static_cast<std::uint8_t>(std::stoul(wire_session.substr(i * 2, 2), nullptr, 16));
     const auto path = L"\\\\.\\pipe\\MaaQQFO.Input." + name;
     const HANDLE pipe = create_local_input_pipe(path.c_str());
-    if (pipe == INVALID_HANDLE_VALUE)
+    if (pipe == INVALID_HANDLE_VALUE) {
+        DestroyWindow(window);
         return 3;
+    }
+    std::cout << target.hwnd << std::endl;
     P83FixtureBridge bridge;
     P83InputEndpoint endpoint(bridge);
     const auto result = serve_local_session(pipe, target, endpoint, {5000, 500, 5000});
     CloseHandle(pipe);
+    DestroyWindow(window);
     return result == TransportResult::EndOfSession && bridge.clicks == 1 && bridge.count == 9 &&
         bridge.steps[8] == P83FixtureBridge::Close ? 0 : 4;
 }
 
 int wmain(int argc, wchar_t** argv) {
+    if (!SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2))
+        return 5;
     if (argc == 1)
         return wire_smoke();
     if (argc == 4 && std::wstring(argv[1]) == L"--pipe-fixture")

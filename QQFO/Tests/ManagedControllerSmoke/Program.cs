@@ -73,17 +73,25 @@ internal static class Program
     private static void CheckNativePipeFixture(string executable)
     {
         var session = Guid.NewGuid();
-        var info = new ProcessStartInfo(Path.GetFullPath(executable)) { UseShellExecute = false, CreateNoWindow = true };
+        var info = new ProcessStartInfo(Path.GetFullPath(executable))
+        {
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            RedirectStandardOutput = true,
+        };
         info.ArgumentList.Add("--pipe-fixture");
         info.ArgumentList.Add(session.ToString("N"));
         info.ArgumentList.Add(Convert.ToHexStringLower(session.ToByteArray()));
         using var host = Process.Start(info) ?? throw new InvalidOperationException("Cannot start native pipe fixture.");
         try
         {
-            using (var client = new QqfoInputPipe(session, 123, 456))
+            var identity = host.StandardOutput.ReadLineAsync().WaitAsync(TimeSpan.FromSeconds(5)).GetAwaiter().GetResult();
+            Check(ulong.TryParse(identity, out var hwnd) && hwnd != 0, "Native fixture did not create a window.");
+            using (var client = new QqfoInputPipe(session, checked((uint)host.Id), hwnd))
             {
                 Check(client.Connect(), "Native fixture handshake failed.");
                 Thread.Sleep(800); // Exceed the native partial-frame budget while sending no bytes.
+                Check(!client.Click(new ClientPosition(1300, 450)), "Native host accepted a point outside the actual client window.");
                 Check(client.Click(new ClientPosition(800, 450)), "Native fixture click acknowledgement failed.");
             }
             Check(host.WaitForExit(5000) && host.ExitCode == 0, "Native fixture did not exit cleanly.");

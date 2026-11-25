@@ -27,7 +27,7 @@ public:
     HostSession& operator=(const HostSession&) = delete;
     ~HostSession() { close(); }
 
-    std::optional<Frame> handle(const Frame& frame) noexcept {
+    std::optional<Frame> handle(const Frame& frame, std::optional<ClientExtent> window_extent = std::nullopt) noexcept {
         if (closed_)
             return std::nullopt;
         const auto request = sequence_.accept(frame);
@@ -49,7 +49,8 @@ public:
             close();
             return acknowledgement(frame, false);
         }
-        if (request->x >= extent->width || request->y >= extent->height)
+        if (request->x >= extent->width || request->y >= extent->height ||
+            (window_extent && (request->x >= window_extent->width || request->y >= window_extent->height)))
             return acknowledgement(frame, false);
 
         const bool delivered = endpoint_.click(target_, request->x, request->y);
