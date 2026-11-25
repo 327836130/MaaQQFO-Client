@@ -61,3 +61,5 @@ A5 verified the v2.1.3 release ZIP hash and Local Bridge version. The loopback s
 A3 native IPC handles idle clients without expiring healthy sessions and still rejects partial frames on their deadline. x86/x64 managed/native integration passed. A2/A3 live acceptance preparation is documented.
 
 A3 archived P8.3 owned-window selftest passed at 144 and 96 DPI awareness, including cursor isolation, moved-window coordinates, detach and reattach.
+
+A2 display scaling retested at 150% and 125%. The same QQ幻想 HWND returned raw GDI frames of 2400×1350 and 2000×1125, each matching its physical client rectangle. Owned GDI, FramePool and production IPC fixture checks passed at both scales.

@@ -40,3 +40,5 @@ A5 pinned editor bridge read a synthetic Pipeline project from a loopback worksp
 A3 distinguishes idle clients from partial requests; reproduce with both native smoke architectures and managed `--pipe-fixture` checks. Continue with the concrete P8.3 bridge and owned-window attachment/detach verification. The real-client preparation checklist is in `docs/validation/A2_A3_LIVE_ACCEPTANCE.md`.
 
 The archived P8.3 owned-window run now passes. Use the hash, local log and scope in `docs/validation/a3-input-protocol.md` as a retest baseline for the concrete bridge.
+
+A2 same-monitor 150% and 125% results are in `docs/validation/a2-display-scale-retest.md`. Keep live Click, connected DPI transition and cross-monitor acceptance open.
