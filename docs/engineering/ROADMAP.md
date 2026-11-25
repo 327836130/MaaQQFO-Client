@@ -5,8 +5,8 @@
 | A1 | VERIFY_PENDING | B1/B2 Windows CI passed and artifacts verified. Independent re-review pending. |
 | A2 | IN_PROGRESS | Production client factory and IPC passed with an owned window and test peer. Cross-monitor DPI and native host integration remain. |
 | A3 | IN_PROGRESS | Native host and P8.3 dispatch sequence passed Windows fixture CI. Concrete historical bridge and native Click live validation remain. |
-| A4 | IN_PROGRESS | Unidentified window selection and restart invalidation implemented. Verified role identity, shared test pages and configuration acceptance remain. |
-| A5 | NOT_STARTED | Editor integration |
+| A4 | IN_PROGRESS | Window selection and shared screenshot test implemented. Verified role identity, remaining diagnostics and configuration acceptance remain. |
+| A5 | IN_PROGRESS | MPE v2.1.3 resource file access verified. Shared QQFO controller and recognition/debug compatibility remain. |
 | A6 | NOT_STARTED | Read-only session-scoped state |
 | A7 | NOT_STARTED | Single Agent recognition registry |
 | A8 | NOT_STARTED | Navigation |

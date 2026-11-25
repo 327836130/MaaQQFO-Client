@@ -5,3 +5,4 @@
 - Persistent Automation and first game injection/admin components require explicit authorization under P9 §7.
 - B3 remains open at the [A12 NuGet security gate](A12_NUGET_SECURITY_GATE.md).
 - A4 role name, map and stable ID need validated per-session state evidence. Window fallback and shared test entry points can proceed independently.
+- A5 upstream MPE v2.1.3 Win32 debugging constructs its own controller. Resource access passed independently; the shared QQFO controller and runtime compatibility need integration before live editor Click tests.

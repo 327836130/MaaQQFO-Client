@@ -43,3 +43,5 @@ A3 [P8.3 sequence and connection loop](a3-input-protocol.md) passed x86/x64 fixt
 A4 [window selection checkpoint](STAGE_A4_REVIEW.md) covers unresolved candidates and selection invalidation with offline regression tests.
 
 A4 [shared screenshot test](STAGE_A4_REVIEW.md#shared-screenshot-test) compiles into the desktop client. Preview coordinate regressions passed within the 27-test core suite. Live validation remains pending.
+
+A5 [MPE workspace checkpoint](STAGE_A5_REVIEW.md) passed the v2.1.3 loopback Pipeline JSON read. Runtime, recognition and input alignment remain pending.
