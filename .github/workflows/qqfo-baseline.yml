@@ -47,6 +47,8 @@ jobs:
           }
       - name: Test configuration and screenshot options
         run: dotnet test MFAAvalonia.Core.Tests/MFAAvalonia.Core.Tests.csproj -c Release --logger "trx;LogFileName=core.trx"
+      - name: Check native game state snapshot isolation
+        run: cmd /c tools\verify_game_state.cmd
       - name: Check pinned MPE Pipeline workspace access
         shell: pwsh
         run: |

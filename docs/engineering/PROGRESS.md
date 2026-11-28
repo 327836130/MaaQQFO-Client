@@ -67,3 +67,5 @@ A2 display scaling retested at 150% and 125%. The same QQ幻想 HWND returned ra
 A3 native transport now validates an actual provisioned Windows target. Local x86/x64 checks passed for stale HWND, resize and out-of-bounds rejection through cross-process IPC.
 
 A3 integrated the archived P8.3 backend into the x86 owned-window host. The managed client passed two bind/idle/click/detach cycles on the same receiver, including screen-coordinate and restored-cursor reads.
+
+A6 C++ scene reader passed archived C1 replay (8087, 1572; map resource 37) and synthetic cache, identity and scene-change checks.
