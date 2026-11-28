@@ -55,3 +55,5 @@ A3 [native target checks](a3-input-protocol.md) passed with real owned Windows H
 A3 [archived P8.3 backend through the native host](a3-input-protocol.md#archived-backend-through-the-native-host) passed two real owned-window IPC/Click/detach cycles on Windows. Game-mode activation and input remain pending.
 
 A6 [GameStateReader checkpoint](STAGE_A6_REVIEW.md) passed C1 recorded-byte player and map resource decoding and synthetic session/cache tests.
+
+A6 [Q registry](STAGE_A6_REVIEW.md) passed three-member C1 replay and synthetic stale membership, bounds and session isolation tests.

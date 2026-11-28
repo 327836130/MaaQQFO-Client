@@ -48,3 +48,5 @@ A3 transport now pins its provisioned Win32 target and checks actual client dime
 A3 owned-only concrete P8.3 bridge now passes through the native transport. Reproduce via `tools/verify_p83_owned_host.ps1` and the local archive. Continue with production provisioning and game-specific activation behavior. Keep actual game attachment subject to P9.
 
 A3 Windows run 45643470432 passed and downloaded artifacts were verified. A6 scene decoder and snapshot cache compile and pass synthetic checks plus hash-verified C1 byte replay. Continue with the qualified read-only Windows source and per-type Q registry decoding. See `docs/validation/STAGE_A6_REVIEW.md`.
+
+A6 Q registry now supplies bounded, double-read member snapshots with raw key/filter data. Use `tools/verify_game_state.cmd` and the archive extractor. Next wire the qualified read-only Windows source and verify per-type fields against C1/C2.

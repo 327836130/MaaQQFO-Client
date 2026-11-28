@@ -7,6 +7,7 @@
 #include <limits>
 #include <mutex>
 #include <optional>
+#include <vector>
 
 namespace qqfo::state {
 
@@ -30,7 +31,7 @@ public:
 
 struct WorldPosition { std::int32_t x, y; };
 struct C1Module { std::uint32_t base, size; };
-enum class ReadStatus { Ready, SessionUnavailable, ReadFailed, RoleLayoutMismatch, SceneChanged };
+enum class ReadStatus { Ready, SessionUnavailable, ReadFailed, RoleLayoutMismatch, SceneChanged, RegistryChanged };
 
 struct Snapshot {
     Session session;
@@ -39,6 +40,25 @@ struct Snapshot {
     ReadStatus status;
     std::optional<WorldPosition> player;
     std::optional<std::uint32_t> map_resource;
+};
+
+struct RegistryMember {
+    std::size_t slot;
+    std::optional<std::uint32_t> vtable_rva;
+    std::uint32_t query_key;
+    std::uint32_t query_filter;
+    bool local_role;
+
+    bool queryable() const noexcept { return query_key != 0 && query_filter != 2; }
+};
+
+struct RegistrySnapshot {
+    Session session;
+    std::uint64_t sequence;
+    std::chrono::steady_clock::time_point sampled_at;
+    ReadStatus status;
+    std::optional<std::uint32_t> map_resource;
+    std::vector<RegistryMember> members;
 };
 
 // Decode only the fields confirmed by the C1 client capture. The caller owns
@@ -85,9 +105,96 @@ public:
         identity_.reset();
     }
 
+    RegistrySnapshot sample_registry() {
+        const std::lock_guard<std::mutex> lock(mutex_);
+        RegistrySnapshot result{session_, ++sequence_, std::chrono::steady_clock::now(),
+                                ReadStatus::SessionUnavailable, std::nullopt, {}};
+        if (!source_.current(session_))
+            return result;
+        const auto initial_scene = scene();
+        const auto initial = initial_scene ? read_registry() : std::nullopt;
+        if (!initial_scene || !initial) {
+            result.status = source_.current(session_) ? ReadStatus::ReadFailed : ReadStatus::SessionUnavailable;
+            return result;
+        }
+        const auto confirm = read_registry();
+        const auto confirm_scene = scene();
+        if (!source_.current(session_))
+            return result;
+        if (confirm_scene != initial_scene) {
+            result.status = ReadStatus::SceneChanged;
+            return result;
+        }
+        if (!confirm || !(*initial == *confirm)) {
+            result.status = ReadStatus::RegistryChanged;
+            return result;
+        }
+
+        result.status = ReadStatus::Ready;
+        result.map_resource = initial_scene->resource;
+        for (std::size_t index = 0; index < initial->slots.size(); ++index) {
+            if (const auto& slot = initial->slots[index]) {
+                const auto vtable = slot->vtable;
+                const auto rva = vtable >= module_.base && vtable - module_.base < module_.size
+                    ? std::optional<std::uint32_t>(vtable - module_.base) : std::nullopt;
+                result.members.push_back({index, rva, slot->query_key, slot->query_filter, slot->address == initial_scene->role});
+            }
+        }
+        return result;
+    }
+
 private:
     static constexpr std::uint32_t manager_roots = 0x2c9110;
     static constexpr std::uint32_t role_vtable = 0x1c4220;
+    static constexpr std::uint32_t registry_root = 0x20f700;
+    static constexpr std::size_t max_registry_slots = 4096;
+
+    struct RawMember {
+        std::uint32_t address, vtable, query_key, query_filter;
+        bool operator==(const RawMember& other) const noexcept {
+            return address == other.address && vtable == other.vtable && query_key == other.query_key &&
+                query_filter == other.query_filter;
+        }
+    };
+
+    struct Registry {
+        std::uint32_t address, begin, end;
+        std::vector<std::optional<RawMember>> slots;
+        bool operator==(const Registry& other) const noexcept {
+            return address == other.address && begin == other.begin && end == other.end && slots == other.slots;
+        }
+    };
+
+    std::optional<Registry> read_registry() {
+        const auto address = read_at<std::uint32_t>(module_.base, registry_root);
+        if (!address)
+            return std::nullopt;
+        const auto range = read_at<std::array<std::uint32_t, 2>>(*address, 8);
+        if (!range)
+            return std::nullopt;
+        const auto [begin, end] = *range;
+        if (end < begin || begin % 4 || end % 4 || (end - begin) / 4 > max_registry_slots ||
+            (begin != end && begin < 0x10000))
+            return std::nullopt;
+        std::vector<std::uint32_t> addresses((end - begin) / 4);
+        if (!addresses.empty() && !source_.read(session_, begin, addresses.data(), end - begin))
+            return std::nullopt;
+        Registry result{*address, begin, end, {}};
+        result.slots.reserve(addresses.size());
+        for (const auto member : addresses) {
+            if (!member) {
+                result.slots.emplace_back();
+                continue;
+            }
+            const auto vtable = read_at<std::uint32_t>(member);
+            const auto key = read_at<std::uint32_t>(member, 0x2274);
+            const auto filter = read_at<std::uint32_t>(member, 0x241c);
+            if (!vtable || !key || !filter)
+                return std::nullopt;
+            result.slots.emplace_back(RawMember{member, *vtable, *key, *filter});
+        }
+        return result;
+    }
 
     struct Scene {
         std::array<std::uint32_t, 2> roots;

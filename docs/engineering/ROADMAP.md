@@ -7,7 +7,7 @@
 | A3 | IN_PROGRESS | Archived P8.3 backend passed owned-window IPC, click and reconnect. Production launch, activation handling and game Click remain. |
 | A4 | IN_PROGRESS | Window selection and shared screenshot test implemented. Verified role identity, remaining diagnostics and configuration acceptance remain. |
 | A5 | IN_PROGRESS | MPE v2.1.3 resource file access verified. Shared QQFO controller and recognition/debug compatibility remain. |
-| A6 | IN_PROGRESS | Session-scoped player position and map resource passed C1 replay. Live source, registry and entity readers remain. |
+| A6 | IN_PROGRESS | Player, map resource and Q membership passed C1 replay. Live source and evidence-backed entity decoders remain. |
 | A7 | NOT_STARTED | Single Agent recognition registry |
 | A8 | NOT_STARTED | Navigation |
 | A9 | NOT_STARTED | NPC and pickup |

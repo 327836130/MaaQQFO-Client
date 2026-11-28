@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 
 
@@ -17,7 +18,8 @@ def main():
                     if entry['path'] == 'snapshots/C1_qw0037_registry.json')
     if hashlib.sha256(raw).hexdigest() != expected:
         raise ValueError('C1 snapshot hash does not match the migration inventory')
-    anchor = json.loads(raw.decode('utf-8-sig'))['anchor']
+    capture = json.loads(raw.decode('utf-8-sig'))
+    anchor = capture['anchor']
     if not anchor['coherent']:
         raise ValueError('C1 scene sample is incoherent')
     ranges = {
@@ -37,6 +39,17 @@ def main():
             lines.append(f"{block['address'] + offset} {data.hex()}")
     if ranges:
         raise ValueError(f'Missing C1 blocks: {sorted(ranges)}')
+    reads = {read['tag']: read for read in capture['live_reads']}
+    registry_tags = {'registry_global', 'registry_header', 'slots'}
+    for tag in reads:
+        if re.fullmatch(r'slot\d+_(0|2274|241c)', tag):
+            registry_tags.add(tag)
+    for tag in sorted(registry_tags):
+        read = reads[tag]
+        if read['error']:
+            raise ValueError(f'Invalid C1 registry block: {tag}')
+        limit = 16 if tag == 'registry_header' else None
+        lines.append(f"{read['a']} {bytes.fromhex(read['hex'])[:limit].hex()}")
     args.replay.write_text('\n'.join(lines) + '\n', encoding='ascii')
 
 
