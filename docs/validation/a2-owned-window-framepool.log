@@ -1,0 +1,8 @@
+Owned window client=800x600 DPI=120
+framepool raw: screenshot=800x600
+framepool long side: screenshot=640x480
+framepool expand: screenshot=640x480
+framepool short side: screenshot=640x480
+Owned window client=720x480 DPI=120
+Owned window client=720x480 DPI=120
+OWNED_WINDOW_PASS custom/framepool: create/connect/capture, resize, release/destroy/recreate/connect on a new HWND and 8 observed click releases

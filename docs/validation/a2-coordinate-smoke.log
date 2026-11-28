@@ -1,0 +1,4 @@
+OFFLINE_PASS display_long_side: screenshot (1280, 720), 5 simulated click mappings
+OFFLINE_PASS display_short_side: screenshot (1280, 720), 5 simulated click mappings
+OFFLINE_PASS display_raw: screenshot (1600, 900), 1 simulated click mappings
+OFFLINE_PASS display_expand: screenshot (1280, 720), 5 simulated click mappings

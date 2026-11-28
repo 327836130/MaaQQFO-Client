@@ -5,6 +5,7 @@ using MaaFramework.Binding;
 using MaaFramework.Binding.Buffers;
 using MaaFramework.Binding.Notification;
 using MaaFramework.Binding.Custom;
+using MaaQQFO.Controller;
 using MFAAvalonia.Configuration;
 using MFAAvalonia.Helper;
 using MFAAvalonia.Helper.ValueType;
@@ -64,6 +65,7 @@ public class MaaProcessor
     public InstanceConfiguration InstanceConfiguration { get; }
     public MaaFWConfiguration Config { get; } = new();
     private readonly ConditionalWeakTable<IMaaController, AdbControllerSnapshot> _adbControllerSnapshots = new();
+    private readonly ConditionalWeakTable<IMaaController, QqfoWindowIdentity> _qqfoControllerTargets = new();
     public TaskQueueViewModel? ViewModel => MaaProcessorManager.Instance.GetViewModel(InstanceId);
 
     // public Dictionary<string, MaaNode> BaseNodes = new();
@@ -976,7 +978,7 @@ public class MaaProcessor
             if (controller == null)
                 return false;
 
-            if (!MatchesCurrentAdbSelection(controller))
+            if (!MatchesCurrentControllerSelection(controller))
                 return false;
 
             if (tasker.IsRunning || tasker.IsStopping)
@@ -995,9 +997,14 @@ public class MaaProcessor
         }
     }
 
-    private bool MatchesCurrentAdbSelection(IMaaController? controller)
+    private bool MatchesCurrentControllerSelection(IMaaController? controller)
     {
         if (controller == null)
+            return false;
+        if (_qqfoControllerTargets.TryGetValue(controller, out var target))
+            return UsesQqfoInputSession && ViewModel?.CurrentController == MaaControllerTypes.Win32
+                && Config.DesktopWindow.QqfoTarget == target;
+        if (UsesQqfoInputSession)
             return false;
         if (_adbControllerSnapshots.TryGetValue(controller, out var snapshot))
             return ViewModel?.CurrentController == MaaControllerTypes.Adb
@@ -1027,7 +1034,7 @@ public class MaaProcessor
             if (tuple.Item1 == null)
                 return tuple;
 
-            if (MatchesCurrentAdbSelection(tuple.Item1.Controller))
+            if (MatchesCurrentControllerSelection(tuple.Item1.Controller))
             {
                 if (MaaTasker == null)
                 {
@@ -1035,14 +1042,14 @@ public class MaaProcessor
                     await PrewarmScreenshotTaskerAsync(token);
                 }
 
-                if (MatchesCurrentAdbSelection(tuple.Item1.Controller))
+                if (MatchesCurrentControllerSelection(tuple.Item1.Controller))
                 {
                     ViewModel?.SetConnected(tuple.Item1.Controller?.IsConnected == true);
                     return tuple;
                 }
             }
 
-            LoggerHelper.Info("ADB 设备配置在连接期间发生变化，释放过期连接并重新初始化。");
+            LoggerHelper.Info("控制器目标在连接期间发生变化，释放过期连接并重新初始化。");
             SetTasker(tuple.Item1);
             SetTasker();
             tuple.Item1.Dispose();
@@ -1096,6 +1103,8 @@ public class MaaProcessor
                ?? Interface?.Controller?.FirstOrDefault(controller =>
                    string.Equals(controller.Type, controllerType.ToJsonKey(), StringComparison.OrdinalIgnoreCase));
     }
+
+    internal bool UsesQqfoInputSession => GetCurrentInterfaceController()?.QqfoInputSession is not null;
 
     private bool UseSeparateScreenshotTasker =>
         !PlatformControllerFactory.CanInitializeWithoutDevice
@@ -1231,7 +1240,11 @@ public class MaaProcessor
         if (test && !_isClosed)
             _ = TryConnectForLiveViewAsync();
 
-        return GetScreenshotTasker(CancellationToken.None)?.Controller;
+        var controller = GetScreenshotTasker(CancellationToken.None)?.Controller;
+        if (controller != null && (UsesQqfoInputSession || _qqfoControllerTargets.TryGetValue(controller, out _))
+            && !MatchesCurrentControllerSelection(controller))
+            return null;
+        return controller;
     }
 
     private async Task TryConnectForLiveViewAsync()
@@ -1290,6 +1303,22 @@ public class MaaProcessor
 
         using var buffer = GetImage(controller, false);
         return buffer?.ToBitmap();
+    }
+
+    internal Bitmap? CaptureQqfoTestScreenshot()
+    {
+        var tasker = MaaTasker;
+        var controller = tasker?.Controller;
+        if (tasker == null || controller?.IsConnected != true || tasker.IsRunning || tasker.IsStopping
+            || !_qqfoControllerTargets.TryGetValue(controller, out var target)
+            || !MatchesCurrentControllerSelection(controller))
+            return null;
+
+        using var buffer = GetImage(controller);
+        if (buffer == null || !ReferenceEquals(tasker, MaaTasker) || target != Config.DesktopWindow.QqfoTarget
+            || !MatchesCurrentControllerSelection(controller))
+            return null;
+        return buffer.ToBitmap();
     }
 
     public MaaJobStatus PostScreencap()
@@ -2287,6 +2316,20 @@ public class MaaProcessor
     private MaaController InitializeController(MaaControllerTypes controllerType, bool logConfig, AdbControllerSnapshot? adbSnapshot = null)
     {
         ConnectToMAA(logConfig);
+
+        if (GetCurrentInterfaceController()?.QqfoInputSession is { } qqfoSession)
+        {
+            if (!OperatingSystem.IsWindows() || controllerType != MaaControllerTypes.Win32 ||
+                !Guid.TryParseExact(qqfoSession, "N", out var session) || session == Guid.Empty)
+                throw new MaaException("QQFO 输入会话要求 Win32 控制器和有效的会话标识");
+            var target = Config.DesktopWindow.QqfoTarget;
+            if (target is null || target != QqfoWindowIdentity.Read(target.Handle))
+                throw new MaaException("请刷新并选择当前的 QQ幻想窗口");
+            var controller = QqfoControllerFactory.Create($"qqfo-{session:N}",
+                new QqfoWindowsBackend(target.Handle, session, Config.DesktopWindow.ScreenCap, target));
+            _qqfoControllerTargets.Add(controller, target);
+            return controller;
+        }
 
         var platformController = PlatformControllerFactory.TryCreate(controllerType);
         if (platformController != null)
@@ -3429,7 +3472,7 @@ public class MaaProcessor
             var task = MaaTasker?.Controller?.LinkStart();
             task?.Wait();
             ViewModel?.SetConnected(task?.Status == MaaJobStatus.Succeeded
-                && MatchesCurrentAdbSelection(MaaTasker?.Controller));
+                && MatchesCurrentControllerSelection(MaaTasker?.Controller));
         }
         finally
         {

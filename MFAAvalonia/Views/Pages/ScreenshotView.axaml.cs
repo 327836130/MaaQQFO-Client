@@ -1,12 +1,9 @@
-﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using MFAAvalonia.Extensions.MaaFW;
+using MaaQQFO.Controller;
 using MFAAvalonia.Helper;
-
 
 namespace MFAAvalonia.Views.Pages;
 
@@ -17,30 +14,21 @@ public partial class ScreenshotView : UserControl
         DataContext = Instances.ScreenshotViewModel;
         InitializeComponent();
         RenderOptions.SetBitmapInterpolationMode(image, BitmapInterpolationMode.HighQuality);
+        image.PropertyChanged += (_, change) =>
+        {
+            if (change.Property == Image.SourceProperty)
+                ImagePositionText.Text = null;
+        };
     }
-    
-    // private void UpdateImage(Bitmap bitmap)
-    // {
-    //     image.Source = bitmap;
-    //
-    //     var imageWidth = bitmap.PixelSize.Width;
-    //     var imageHeight = bitmap.PixelSize.Height;
-    //     
-    //     image.Width = imageWidth ;
-    //     image.Height = imageHeight;
-    //
-    //    
-    // }
-    //
-    // private void Screenshot(object? sender, RoutedEventArgs e)
-    // {
-    //     var imageData = Instances.TaskQueueViewModel.Processor.GetBitmapImage();
-    //     if (imageData == null)
-    //     {
-    //         ToastHelper.Error("获取图片失败");
-    //         return;
-    //     }
-    //     UpdateImage(imageData);
-    // }
-}
 
+    private void InspectImagePosition(object? sender, PointerPressedEventArgs args)
+    {
+        if (image.Source is not Bitmap bitmap)
+            return;
+
+        var pointer = args.GetPosition(image);
+        var position = MaaImagePosition.FromUniformPreview(pointer.X, pointer.Y, image.Bounds.Width, image.Bounds.Height,
+            bitmap.Size.Width, bitmap.Size.Height, bitmap.PixelSize.Width, bitmap.PixelSize.Height);
+        ImagePositionText.Text = position is { } point ? $"MaaImage ({point.X}, {point.Y})" : null;
+    }
+}

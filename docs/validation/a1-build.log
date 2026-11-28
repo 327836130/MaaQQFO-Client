@@ -1,0 +1,76 @@
+  正在确定要还原的项目…
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Tight\Markdown.Avalonia.Tight.csproj (用时 2.62 秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\ColorDocument.Avalonia\ColorDocument.Avalonia.csproj (用时 2.62 秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\ColorTextBlock.Avalonia\ColorTextBlock.Avalonia.csproj (用时 2.62 秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\SukiUI\SukiUI.csproj (用时 2.62 秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.SyntaxHigh\Markdown.Avalonia.SyntaxHigh.csproj (用时 2.62 秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Html\Markdown.Avalonia.Html.csproj (用时 2.62 秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Math\Markdown.Avalonia.Math.csproj (用时 3.97 秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Svg\Markdown.Avalonia.Svg.csproj (用时 11.28 秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\LazyStaticGenerator\LazyStaticGenerator.csproj (用时 14.58 秒)。
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia\Markdown.Avalonia.csproj (用时 16.83 秒)。
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj (用时 28.14 秒)。
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+  LazyStaticGenerator -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\LazyStaticGenerator\bin\Release\netstandard2.0\LazyStaticGenerator.dll
+  SukiUI -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\SukiUI\bin\Release\net8.0\SukiUI.dll
+  ColorTextBlock.Avalonia -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\ColorTextBlock.Avalonia\bin\Release\net10.0\ColorTextBlock.Avalonia.dll
+  ColorDocument.Avalonia -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\ColorDocument.Avalonia\bin\Release\net10.0\ColorDocument.Avalonia.dll
+  Markdown.Avalonia.Tight -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Tight\bin\Release\net10.0\Markdown.Avalonia.dll
+F:\各类脚本\2025.12.08-qq幻想脚本开发\17.MaaQQFantasy\debug\dotnet-sdk\sdk\10.0.402\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.Sdk.targets(308,5): warning NETSDK1206: 找到了特定于版本或特定于发行版的运行时标识符: win7-x64。受影响的库: Packaging.Targets。在 .NET 8.0 及更高版本中，默认情况下找不到特定于版本和特定于发行版的运行时标识符的资产。有关详细信息，请参阅 https://aka.ms/dotnet/rid-usage。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Math\Markdown.Avalonia.Math.csproj]
+  Markdown.Avalonia.Math -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Math\bin\Release\net10.0\Markdown.Avalonia.Math.dll
+  Markdown.Avalonia.Svg -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Svg\bin\Release\net10.0\Markdown.Avalonia.Svg.dll
+  Markdown.Avalonia.SyntaxHigh -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.SyntaxHigh\bin\Release\net10.0\Markdown.Avalonia.SyntaxHigh.dll
+  Markdown.Avalonia.Html -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Html\bin\Release\net10.0\Markdown.Avalonia.Html.dll
+  Markdown.Avalonia -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia\bin\Release\net10.0\Markdown.Avalonia.Full.dll
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\Custom\HeiLiuAction.cs(541,21): warning CS0219: 变量“hasSeed”已被赋值，但从未使用过它的值 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\Custom\HeiLiuAction.cs(77,17): warning CS0219: 变量“combatCount”已被赋值，但从未使用过它的值 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\AgentHelper.cs(322,17): warning CS4014: 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\AgentHelper.cs(324,17): warning CS4014: 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\AgentHelper.cs(327,17): warning CS4014: 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Views\UserControls\Settings\AboutUserControl.axaml.cs(40,8): warning CS4014: 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\ViewModels\UsersControls\Settings\ConnectSettingsUserControlModel.cs(160,123): warning CS0618: “Win32InputMethod.PostThreadMessage”已过时:“Deprecated from MaaFramework v5.9.0.” [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Helper\VersionChecker.cs(2571,19): warning CS0618: “VersionChecker.ApplySecureUpdate(string, string, string, string)”已过时:“旧的外部更新器链路，已废弃；新的本地二合一更新不应再调用此方法。” [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\ViewModels\Pages\TaskQueueViewModel.cs(2689,19): warning CS0618: “Win32InputMethod.PostThreadMessage”已过时:“Deprecated from MaaFramework v5.9.0.” [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Controls\InstanceTabsControl.cs(708,36): warning CS0067: 从不使用事件“InstanceTabsControl.SimpleActionCommand.CanExecuteChanged” [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\MaaProcessor.cs(1222,18): warning CS0414: 字段“MaaProcessor._screencapFailureLogged”已被赋值，但从未使用过它的值 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\MaaProcessorManager.cs(438,18): warning CS0414: 字段“MaaProcessorManager._isLazyLoadingComplete”已被赋值，但从未使用过它的值 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+  MFAAvalonia -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\bin\Release\net10.0\win-x64\MFAAvalonia.Core.dll
+
+已成功生成。
+
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MailKit" 4.14.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-9j88-vvj5-vhgr
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "MimeKit" 4.14.0 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-g7hc-96xr-gvvx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "SharpCompress" 0.42.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-6c8g-7p36-r338
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1902: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 中 严重性漏洞，https://github.com/advisories/GHSA-2fmv-rv2c-59x7
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj : warning NU1903: 包 "System.Security.Cryptography.Pkcs" 8.0.1 具有已知的 高 严重性漏洞，https://github.com/advisories/GHSA-846f-f764-76mx
+F:\各类脚本\2025.12.08-qq幻想脚本开发\17.MaaQQFantasy\debug\dotnet-sdk\sdk\10.0.402\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.Sdk.targets(308,5): warning NETSDK1206: 找到了特定于版本或特定于发行版的运行时标识符: win7-x64。受影响的库: Packaging.Targets。在 .NET 8.0 及更高版本中，默认情况下找不到特定于版本和特定于发行版的运行时标识符的资产。有关详细信息，请参阅 https://aka.ms/dotnet/rid-usage。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\Markdown.Avalonia.Math\Markdown.Avalonia.Math.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\Custom\HeiLiuAction.cs(541,21): warning CS0219: 变量“hasSeed”已被赋值，但从未使用过它的值 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\Custom\HeiLiuAction.cs(77,17): warning CS0219: 变量“combatCount”已被赋值，但从未使用过它的值 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\AgentHelper.cs(322,17): warning CS4014: 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\AgentHelper.cs(324,17): warning CS4014: 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\AgentHelper.cs(327,17): warning CS4014: 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Views\UserControls\Settings\AboutUserControl.axaml.cs(40,8): warning CS4014: 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\ViewModels\UsersControls\Settings\ConnectSettingsUserControlModel.cs(160,123): warning CS0618: “Win32InputMethod.PostThreadMessage”已过时:“Deprecated from MaaFramework v5.9.0.” [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Helper\VersionChecker.cs(2571,19): warning CS0618: “VersionChecker.ApplySecureUpdate(string, string, string, string)”已过时:“旧的外部更新器链路，已废弃；新的本地二合一更新不应再调用此方法。” [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\ViewModels\Pages\TaskQueueViewModel.cs(2689,19): warning CS0618: “Win32InputMethod.PostThreadMessage”已过时:“Deprecated from MaaFramework v5.9.0.” [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Controls\InstanceTabsControl.cs(708,36): warning CS0067: 从不使用事件“InstanceTabsControl.SimpleActionCommand.CanExecuteChanged” [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\MaaProcessor.cs(1222,18): warning CS0414: 字段“MaaProcessor._screencapFailureLogged”已被赋值，但从未使用过它的值 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\Extensions\MaaFW\MaaProcessorManager.cs(438,18): warning CS0414: 字段“MaaProcessorManager._isLazyLoadingComplete”已被赋值，但从未使用过它的值 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia\MFAAvalonia.csproj]
+    23 个警告
+    0 个错误
+
+已用时间 00:00:51.36

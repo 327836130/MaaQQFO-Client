@@ -1,0 +1,3 @@
+SDK 10.0.402, MFAAvalonia Windows desktop x64 locked build: 0 errors, 34 warnings retained.
+Core tests: 18 passed, 0 failed, 0 skipped (15 existing, 3 QQFO adapter tests).
+OFFLINE_PASS: managed QQFO factory, native callbacks, raw screenshot, client click and session release/recreate.

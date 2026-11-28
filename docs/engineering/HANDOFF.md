@@ -1,0 +1,52 @@
+# MaaQQFO handoff
+
+- Branch: `phase/A0-inventory`, fork `327836130/MaaQQFO-Client`, upstream MFAAvalonia tag `v2.16.4` (`edfb87ac7a049a50b7921658cc206265c8b9e4e5`).
+- Resume with `git status`, ROADMAP, PROGRESS, BLOCKERS and EVIDENCE_MATRIX. Preserve the three original untracked bootstrap documents.
+- A0: historical asset inventory, P3/D1 evidence, P8.3 and C1/C2 checks recorded. A1: locked Windows x64 build, 15 core tests, native Agent handshake, archive checksum and GUI start/exit verified. See STAGE_A0_REVIEW.md and STAGE_A1_REVIEW.md under docs/validation.
+- [Draft PR #1](https://github.com/327836130/MaaQQFO-Client/pull/1) targets `qqfo/stable-v2.16.4`. [Windows CI](https://github.com/327836130/MaaQQFO-Client/actions/runs/44521355518) passed on `2f5340f`, with development bundle artifact 14527309277 and test results artifact 14527329931. Check the latest PR run for subsequent changes. Independent review remains pending.
+- A2: run `python tools/controller_coordinate_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native` using 64-bit Python. Real 5.14.3 DLL with offline callbacks verifies four screenshot modes and 16 mappings. Next: owned Windows test window, resize/DPI and lifecycle, then connect the production Custom Controller factory. Current fixture contains no game integration.
+- Local pinned SDK: `../17.MaaQQFantasy/debug/dotnet-sdk/dotnet.exe`. Local x64 Python: `../17.MaaQQFantasy/.venv/Scripts/python.exe`.
+
+The two queued commits were pushed to PR #1 through the user-provided per-command parameters `-c http.proxy=http://127.0.0.1:7890 -c http.version=HTTP/1.1`. Use these with `git` if direct GitHub HTTPS is unreachable and the proxy is running. Fresh Fork clone build and tests at `8fcf630` passed. Cross-process Agent smoke subsequently passed against the same build. See `docs/validation/a1-fork-clone.md` and check the newest PR run.
+
+A1 additional gates: synthetic resource load and PE architecture checks passed locally. Check latest PR Windows CI jobs and artifact before stage sign-off. Independent review still has no submission.
+
+Independent review dated 2026-11-23 accepted A0 historical inventory only. A1 B1/B2 remediation uses global.json plus tools/record_windows_build.ps1 and needs clean build/CI and independent re-review. A12_NUGET_SECURITY_GATE.md tracks B3. Keep PR #1 draft.
+
+B1/B2 CI passed in run 45190167862. See a1-review-corrections.md and A12_NUGET_SECURITY_GATE.md. A1 remains VERIFY_PENDING. Reproduce A2 with both commands in STAGE_A2_REVIEW.md. Next: production factory/IPC and verified DPI transition. Do not schedule game input until integrated controller is ready for a one-session acceptance plan.
+
+Managed factory smoke added to CI. Continue with a versioned and bounded IPC backend, then register the QQFO factory in MaaProcessor.InitializeController using an explicit controller selection. Test adapter is never selected automatically. Cross-monitor DPI coverage is not available on the current one-monitor setup.
+
+A2 production path uses qqfo_input_session on a Win32 resource profile. Build ManagedControllerSmoke then run tools/owned_window_ipc_smoke.py with SDK executable, built smoke DLL and native directory. 21 core tests passed. Compatible native input host remains A3 work. Keep game-side validation pending P9 authorization.
+
+A3 has native frame validation and replay rejection. Run tools/verify_native_input_protocol.cmd x86 and x64. Next wire the native pipe host and validate a cross-process test peer before game-side input.
+
+Native x86 and x64 fixtures now run end-to-end over Windows named pipes. Reproduce with tools/verify_native_input_protocol.cmd for each architecture, then run the managed smoke with --pipe-fixture artifacts/a3-native/x86.exe or x64.exe. Production host/Proto Input still pending.
+
+A3 reusable InputHostSession.hpp and LocalInputPipe.hpp now handle cleanup, bounds, identity and bounded I/O. The smoke scripts exercise the same code using fixture endpoints. Next connect the reviewed P8.3 backend to InputEndpoint and verify its reset path without a game target before requesting P9 live authorization.
+
+Historical P8.3 fixture recheck is incomplete. Two selftests in artifacts/a3-p83-fixture-8dae84fd82484803b38af035554ecaf3 exited 1 at the desktop stability guard. Preserve the guard and rerun only when the desktop is stable. Current code CI run 45412178095 covers the native host changes.
+
+CI caught an owner mismatch in 45412178095. LocalInputPipe now distinguishes TokenOwner for the .NET owner check and TokenUser for DACL access. Verify the updated PR Windows run on the hosted account.
+
+A3 dispatch sequence now sits in P83InputEndpoint.hpp and uses a provisioned P83Bridge. LocalInputSession.hpp runs the named pipe protocol through that endpoint and is exercised by the managed/native cross-process tests. Next concrete work is to connect the historical P8.3 session, including activation and detach, to P83Bridge. Game execution remains subject to P9.
+
+A3 hosted run 45420020488 and its ZIP/TRX provenance verified. A4 uses the existing device selector and a volatile QQFO window identity (HWND, PID, thread, process creation time). Refresh requires explicit selection after window replacement. The managed `--window-identity` smoke validates same-title window identities and process exit with an owned Windows fixture. Next add the shared test entry points. Only populate role identity after validated state data is available.
+
+A4 Screenshot Test now uses the current QQFO tasker and shares its image coordinate space. Run the core suite for preview mapping and use the steps in `docs/validation/STAGE_A4_REVIEW.md` for a connected instance. Latest role-window baseline CI 45623121781 passed and artifacts were verified. Continue with the remaining A4 diagnostic entry points and the P8.3 historical session bridge recorded above.
+
+A5 pinned editor bridge read a synthetic Pipeline project from a loopback workspace. Rerun with `tools/verify_mpe_workspace.ps1 -Bridge <verified-mpelb.exe>`. Review `docs/validation/STAGE_A5_REVIEW.md` for the bundled runtime and controller gap before wiring editor debugging.
+
+A3 distinguishes idle clients from partial requests; reproduce with both native smoke architectures and managed `--pipe-fixture` checks. Continue with the concrete P8.3 bridge and owned-window attachment/detach verification. The real-client preparation checklist is in `docs/validation/A2_A3_LIVE_ACCEPTANCE.md`.
+
+The archived P8.3 owned-window run now passes. Use the hash, local log and scope in `docs/validation/a3-input-protocol.md` as a retest baseline for the concrete bridge.
+
+A2 same-monitor 150% and 125% results are in `docs/validation/a2-display-scale-retest.md`. Keep live Click, connected DPI transition and cross-monitor acceptance open.
+
+A3 transport now pins its provisioned Win32 target and checks actual client dimensions before dispatch. Run both native verification architectures and managed `--pipe-fixture` checks. The next production dependency remains the concrete P8.3 attach/detach bridge.
+
+A3 owned-only concrete P8.3 bridge now passes through the native transport. Reproduce via `tools/verify_p83_owned_host.ps1` and the local archive. Continue with production provisioning and game-specific activation behavior. Keep actual game attachment subject to P9.
+
+A3 Windows run 45643470432 passed and downloaded artifacts were verified. A6 scene decoder and snapshot cache compile and pass synthetic checks plus hash-verified C1 byte replay. Continue with the qualified read-only Windows source and per-type Q registry decoding. See `docs/validation/STAGE_A6_REVIEW.md`.
+
+A6 Q registry now supplies bounded, double-read member snapshots with raw key/filter data. Use `tools/verify_game_state.cmd` and the archive extractor. Next wire the qualified read-only Windows source and verify per-type fields against C1/C2.

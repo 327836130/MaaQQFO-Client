@@ -1,0 +1,15 @@
+[31m[2026-11-19 07:42:12.826][ERR][Px23376][Tx61686][AgentClient.cpp][L168][MaaNS::AgentNS::ClientNS::AgentClient::connect] resource is not bound [0m
+Traceback (most recent call last):
+  File "F:\����ű�\2025.12.08-qq����ű�����\22.MaaQQFO\tools\native_smoke.py", line 72, in <module>
+    result = subprocess.run([sys.executable, str(Path(__file__).resolve()), str(args.runtime.resolve()), '--child'], cwd=directory, timeout=30)
+  File "C:\Users\32783\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\32783\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\subprocess.py", line 1242, in communicate
+    sts = self.wait(timeout=self._remaining_time(endtime))
+  File "C:\Users\32783\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\subprocess.py", line 1281, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\32783\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\subprocess.py", line 1610, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['F:\\����ű�\\2025.12.08-qq����ű�����\\17.MaaQQFantasy\\.venv\\Scripts\\python.exe', 'F:\\����ű�\\2025.12.08-qq����ű�����\\22.MaaQQFO\\tools\\native_smoke.py', 'F:\\����ű�\\2025.12.08-qq����ű�����\\22.MaaQQFO\\bin\\AnyCPU\\Release\\runtimes\\win-x64\\native', '--child']' timed out after 30 seconds

@@ -1,0 +1,8 @@
+  正在确定要还原的项目…
+  已还原 F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Core.Tests\MFAAvalonia.Core.Tests.csproj (用时 10.85 秒)。
+F:\各类脚本\2025.12.08-qq幻想脚本开发\17.MaaQQFantasy\debug\dotnet-sdk\sdk\10.0.402\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.Sdk.targets(308,5): warning NETSDK1206: 找到了特定于版本或特定于发行版的运行时标识符: win7-x64。受影响的库: Packaging.Targets。在 .NET 8.0 及更高版本中，默认情况下找不到特定于版本和特定于发行版的运行时标识符的资产。有关详细信息，请参阅 https://aka.ms/dotnet/rid-usage。 [F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Core.Tests\MFAAvalonia.Core.Tests.csproj]
+  MFAAvalonia.Core.Tests -> F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Core.Tests\bin\Release\net10.0\MFAAvalonia.Core.Tests.dll
+F:\各类脚本\2025.12.08-qq幻想脚本开发\22.MaaQQFO\MFAAvalonia.Core.Tests\bin\Release\net10.0\MFAAvalonia.Core.Tests.dll (.NETCoreApp,Version=v10.0)的测试运行
+总共 1 个测试文件与指定模式相匹配。
+
+已通过! - 失败:     0，通过:    15，已跳过:     0，总计:    15，持续时间: 33 ms - MFAAvalonia.Core.Tests.dll (net10.0)

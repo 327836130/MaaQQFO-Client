@@ -1,0 +1,75 @@
+name: MaaQQFO Windows baseline
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Check changed project code whitespace
+        if: github.event_name == 'pull_request'
+        run: git diff --check HEAD~1 HEAD -- .github tools QQFO
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - name: Assert SDK and record source provenance
+        run: tools/record_windows_build.ps1 -OutputPath artifacts/build-provenance.json
+      - name: Build locked Windows desktop
+        run: dotnet build MFAAvalonia.Desktop/MFAAvalonia.Desktop.csproj -c Release -r win-x64 -p:RestorePackagesWithLockFile=true -p:RestoreLockedMode=true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          architecture: x64
+      - name: Compile Python verification tools
+        run: python -m compileall -q tools
+      - name: Native runtime and Agent handshake
+        run: python tools/native_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native
+      - name: Check native screenshot scaling and simulated Click coordinates
+        run: python tools/controller_coordinate_smoke.py bin/AnyCPU/Release/runtimes/win-x64/native
+      - name: Check managed QQFO factory against native runtime
+        run: dotnet run --project QQFO/Tests/ManagedControllerSmoke/ManagedControllerSmoke.csproj -c Release -- bin/AnyCPU/Release/runtimes/win-x64/native
+      - name: Check owned QQFO window identities
+        run: dotnet run --project QQFO/Tests/ManagedControllerSmoke/ManagedControllerSmoke.csproj -c Release -- --window-identity
+      - name: Check native input protocol on x86 and x64
+        run: |
+          cmd /c tools\verify_native_input_protocol.cmd x86
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmd /c tools\verify_native_input_protocol.cmd x64
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          foreach ($arch in 'x86', 'x64') {
+            dotnet run --project QQFO/Tests/ManagedControllerSmoke/ManagedControllerSmoke.csproj -c Release -- bin/AnyCPU/Release/runtimes/win-x64/native --pipe-fixture "artifacts/a3-native/$arch.exe"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - name: Test configuration and screenshot options
+        run: dotnet test MFAAvalonia.Core.Tests/MFAAvalonia.Core.Tests.csproj -c Release --logger "trx;LogFileName=core.trx"
+      - name: Check native game state snapshot isolation
+        run: cmd /c tools\verify_game_state.cmd
+      - name: Check pinned MPE Pipeline workspace access
+        shell: pwsh
+        run: |
+          $bridge = Join-Path $env:RUNNER_TEMP 'mpelb-2.1.3.exe'
+          Invoke-WebRequest -Uri 'https://github.com/kqcoxn/MaaPipelineEditor/releases/download/v2.1.3/mpelb-windows-amd64.exe' -OutFile $bridge -TimeoutSec 60
+          $expected = 'E19CA120E29ECE046EF7F99675949F1049316366AEE72490E7214EE9EE9D1162'
+          if ((Get-FileHash -LiteralPath $bridge -Algorithm SHA256).Hash -ne $expected) { throw 'MPE Local Bridge archive pin did not match.' }
+          ./tools/verify_mpe_workspace.ps1 -Bridge $bridge
+      - name: Archive validated Windows development build
+        run: python tools/package_windows_baseline.py bin/AnyCPU/Release artifacts/baseline artifacts/build-provenance.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64-development-build
+          path: artifacts/baseline/*
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: baseline-test-results
+          path: |
+            **/TestResults/*.trx
+            artifacts/build-provenance.json
+            artifacts/a5-workspace-*/stdout.log
+            artifacts/a5-workspace-*/stderr.log

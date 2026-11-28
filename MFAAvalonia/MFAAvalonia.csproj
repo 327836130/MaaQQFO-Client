@@ -15,6 +15,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="../QQFO/Controller/*.cs" Link="QQFO/Controller/%(Filename)%(Extension)" />
         <Folder Include="Assets\Sound\" />
         <AvaloniaResource Include="Assets\logo.ico" />
         <AvaloniaResource Include="Assets\Sound\**" />
